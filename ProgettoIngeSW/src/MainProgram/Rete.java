@@ -54,6 +54,15 @@ public class Rete {
 		System.out.println("numero posizioni" + max);
 	}
 	
+	private void stampaMatrice(int [][]m) {
+		for (int i=0; i<numPos; i++) {
+			for(int j=0; j<numTrans; j++) {
+				System.out.printf("%d", m[i][j]);
+			}
+			System.out.println();
+		}
+	}
+	
 	public void inizializzaRete() {
 		contaPosizioni();
 		contaTransizioni();
