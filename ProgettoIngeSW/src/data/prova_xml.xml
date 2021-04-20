@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<archivioReti>
+    <reti>
+        <rete>
+            <relazione>
+                <posizione>1</posizione>
+                <transizione>3</transizione>
+            </relazione>
+            <relazione>
+                <posizione>1</posizione>
+                <transizione>4</transizione>
+            </relazione>
+            <relazione>
+                <posizione>5</posizione>
+                <transizione>3</transizione>
+            </relazione>
+            <relazione>
+                <posizione>7</posizione>
+                <transizione>3</transizione>
+            </relazione>
+        </rete>
+        <rete>
+            <relazione>
+                <posizione>1</posizione>
+                <transizione>3</transizione>
+            </relazione>
+            <relazione>
+                <posizione>1</posizione>
+                <transizione>4</transizione>
+            </relazione>
+            <relazione>
+                <posizione>5</posizione>
+                <transizione>3</transizione>
+            </relazione>
+            <relazione>
+                <posizione>7</posizione>
+                <transizione>3</transizione>
+            </relazione>
+        </rete>
+    </reti>
+</archivioReti>

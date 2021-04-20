@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<archivioReti>
+    <archivio>
+        <relazioni>
+            <posizione>1</posizione>
+            <transizione>3</transizione>
+        </relazioni>
+        <relazioni>
+            <posizione>1</posizione>
+            <transizione>4</transizione>
+        </relazioni>
+        <relazioni>
+            <posizione>5</posizione>
+            <transizione>3</transizione>
+        </relazioni>
+        <relazioni>
+            <posizione>7</posizione>
+            <transizione>3</transizione>
+        </relazioni>
+    </archivio>
+</archivioReti>
