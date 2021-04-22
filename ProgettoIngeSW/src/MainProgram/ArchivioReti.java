@@ -148,8 +148,9 @@ public class ArchivioReti {
 				  if (procedi)
 				  reti.remove(elemento);
 				  }
-				  else
-				      System.out.println(MESS_NON_TROVATA);
+				  else {
+				      LeggiInput.leggiStringa(MESS_NON_TROVATA);
+				  }
 		}
 		
 		// salva nel file xml 
