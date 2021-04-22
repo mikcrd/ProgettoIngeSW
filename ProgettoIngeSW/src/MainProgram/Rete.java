@@ -12,8 +12,13 @@ import javax.xml.bind.annotation.*;
 public class Rete {
 	@XmlTransient
 	int numPos, numTrans;
+	
 	@XmlElement(name = "relazione", required = true)
 	ArrayList<RelazioneDiFlusso> relazioni;
+	
+	@XmlAttribute(name = "name", required = true)
+    String name;
+	
 	@XmlTransient
 	int [][] in;
 	int [][]out;
@@ -22,6 +27,7 @@ public class Rete {
 	public Rete (){
 		numPos=0;
 		numTrans=0;
+		name=null;
 		relazioni = new ArrayList<RelazioneDiFlusso>();
 	}
 	
@@ -31,6 +37,15 @@ public class Rete {
         }
         return this.relazioni;
     }
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String nome) {
+		this.name = nome;
+	}
+	
 	
 	//aggiunge relazioni di flusso 
 	public void aggiungiRelazione(RelazioneDiFlusso r) {
@@ -97,6 +112,7 @@ public class Rete {
 	
 	
 	public void stampaRete() {
+		System.out.println(this.name);
 		for (RelazioneDiFlusso r : relazioni) {
 			System.out.println(r.toString());
 		}

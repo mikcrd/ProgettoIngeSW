@@ -4,12 +4,29 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.*;
 
+import utility.LeggiInput;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "reti"
 })
 @XmlRootElement(name = "archivioReti")
 public class ArchivioReti {
+	
+	private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
+	private final static String MESS_DOPPIONE = "Attenzione: non si puo' inserire una rete  gia' esistente!";
+	private final static String MESS_CERCA_RETE = "Inserisci il nome della rete: ";
+	private final static String MESS_RIMOZIONE = " : confermi la rimozione di questa rete?";
+	private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
+	
+	private static final String INSERIMENTO_RELAZIONI = "Vuoi inserire un'altra relazione?";
+	private static final String POSTOTRANS_TRANSPOSTO = "Per aggiungere una coppia posto-transizione premere 'a'\n"
+			+ "Per aggiungere una coppia transizione-posto premere 'b' : ";
+	private static final String POSTO = "Inserisci un intero positivo per il posto: ";
+	private static final String TRANSIZIONE = "Inserisci un intero positivo per la transizione: ";
+	private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
+	private static final String NOME_RETE_VISUALIZZA = "Inserisci il nome della rete da visualizzare: ";
+
 	
 	@XmlElementWrapper(name= "reti")
 	@XmlElement(name="rete", required = true)
@@ -30,5 +47,129 @@ public class ArchivioReti {
 	        }
 	        return this.reti;
 		}
+
+
+		public boolean isEqual(String daConfrontare)
+		{
+			for(Rete arch: this.reti) {
+							
+				if(arch.getName().equals(daConfrontare)) {	
+					LeggiInput.leggiStringa(MESS_DOPPIONE);
+					return true;
+				}
+			}
+			return false;
+		}
+
+
+		public Rete cercaRete()
+		{
+		String net = LeggiInput.leggiStringaNonVuota(MESS_CERCA_RETE);
+				  return trovaRete(net);
+		}
+
+		public Rete trovaRete (String reteRichiesta)
+		{ 
+		 Rete elemento = null;
+
+		 for(int i = 0; i < reti.size(); i++)
+		{
+		  elemento = reti.get(i);
+		  
+		   if(elemento.getName().equalsIgnoreCase(reteRichiesta))
+		    return elemento;
+		 } 
+		   return null;  
+		 }
+/**
+		public void aggiungiRete(Rete r)
+		{
+			 String nome= LeggiInput.leggiStringaNonVuota(MESS_NOME);
+			 
+			if(cercaRete(nome)!= null)
+			 System.out.println(MESS_DOPPIONE);
+	
+			else
+			{
+			  reti.add(r);
+			}
+
+		}
+**/
+	public void aggiungiRete()	{
+		
+		Rete R = new Rete();
+		R.setName(LeggiInput.leggiStringa(MESS_NOME));
+		
+		do {
+				
+				char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
+				
+				int posto = LeggiInput.leggiInteroPositivo(POSTO);
+				int transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+				
+				RelazioneDiFlusso rf = null;
+				
+				if(aOb == 'a') {
+					rf = new RelazioneDiFlusso(posto, transizione, true);
+				}
+				
+				else if(aOb == 'b') {
+					rf = new RelazioneDiFlusso(posto, transizione, false);
+				}
+				
+				else {
+					LeggiInput.leggiStringa(ERRORE_SCELTA_AB);
+				}
+				
+				R.aggiungiRelazione(rf);
+			
+			} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
+		
+	// isCorrect ...
+	// if(isCorrect && isEqual) -> reti.add(R);
+	
+	// visualizza rete che è stata appena aggiunta: R.stampaRete();
+		
+	}	
+	
+	
+		public void eliminaRete()
+		{
+		 Rete elemento = cercaRete();
+		 if (elemento!= null)
+		  {
+		   boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
+				  if (procedi)
+				  reti.remove(elemento);
+				  }
+				  else
+				      System.out.println(MESS_NON_TROVATA);
+		}
+		
+
+		public void salvaLista() // Non so farlo
+		{
+			GestioneFile.objToXml(this);
+		}
+		
+
+		public void visualizzaArchivio()
+		{
+		 Rete elemento = null;
+		 for(int i = 0; i < reti.size(); i++)
+		 {
+		  elemento = reti.get(i);
+		  System.out.println(elemento);
+		 }
+		}
+
+		
+		public void visualizzaRete() {
+			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+			Rete daVisualizzare = this.trovaRete(nome);
+			daVisualizzare.stampaRete();		
+		}
+
 		
 }

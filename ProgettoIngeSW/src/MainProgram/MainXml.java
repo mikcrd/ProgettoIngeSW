@@ -3,7 +3,7 @@ package MainProgram;
 public class MainXml {
 
 	public static void main(String[] args) {
-		
+/**		
 		Rete r = new Rete();
 		RelazioneDiFlusso r1 = new RelazioneDiFlusso(1, 3, false);
 		RelazioneDiFlusso r2 = new RelazioneDiFlusso(1, 4, true);
@@ -33,12 +33,15 @@ public class MainXml {
 		
 		r.inizializzaRete();
 		
-	/**	ArchivioReti arch = new ArchivioReti();
+		ArchivioReti arch = new ArchivioReti();
 		arch.getArchivio().add(r);
 		arch.getArchivio().add(R2);
 		
 		GestioneFile.objToXml(arch);
     **/	
+		
+		Menu menu = new Menu();
+		menu.cicloApplicazione();
 	}
 
 }
