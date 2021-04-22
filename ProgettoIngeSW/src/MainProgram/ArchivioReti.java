@@ -147,8 +147,8 @@ public class ArchivioReti {
 		   boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
 				  if (procedi)
 				  reti.remove(elemento);
-				  }
-				  else {
+		  }
+		  else {
 				      LeggiInput.leggiStringa(MESS_NON_TROVATA);
 				  }
 		}
