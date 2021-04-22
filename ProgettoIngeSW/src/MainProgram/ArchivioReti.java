@@ -55,6 +55,7 @@ public class ArchivioReti {
 							
 				if(arch.getName().equals(daConfrontare)) {	
 					LeggiInput.leggiStringa(MESS_DOPPIONE);
+					System.out.println("La rete è già presente");
 					return true;
 				}
 			}
@@ -124,11 +125,15 @@ public class ArchivioReti {
 				
 				R.aggiungiRelazione(rf);
 			
-			} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
+		} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
 		
-	// isCorrect ...
-	// if(isCorrect && isEqual) -> reti.add(R);
-	
+		// controlliamo che la rete sia corretta e non sia uguale a una rete già esistenete 
+		if(R.isCorrect() && !isEqual(R.getName())) {
+			reti.add(R);
+			salvaLista();
+			R.stampaRete();
+		}
+		
 	// visualizza rete che è stata appena aggiunta: R.stampaRete();
 		
 	}	
@@ -147,8 +152,8 @@ public class ArchivioReti {
 				      System.out.println(MESS_NON_TROVATA);
 		}
 		
-
-		public void salvaLista() // Non so farlo
+		// salva nel file xml 
+		public void salvaLista() 
 		{
 			GestioneFile.objToXml(this);
 		}

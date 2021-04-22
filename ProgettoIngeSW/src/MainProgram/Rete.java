@@ -22,6 +22,7 @@ public class Rete {
 	@XmlTransient
 	int [][] in;
 	int [][]out;
+	int [][] inc;
 	
 	//costruttore
 	public Rete (){
@@ -46,6 +47,83 @@ public class Rete {
 		this.name = nome;
 	}
 	
+	//aggiorna matrice di incidenza 
+	public int [][] matriceIncidenza(){
+		inc = new int [numPos][numTrans];
+		
+		for (int i=0; i<numPos; i++) {
+			for(int j=0; j<numTrans; j++) {
+				inc[i][j]=out[i][j] - in[i][j]; 
+			}
+		}
+		stampaMatrice(inc);
+		return inc;
+	}
+	
+	//controlla che non ci siano posti volanti
+	public boolean controlloRighe(int [][] m) {
+		boolean neg=false;
+		boolean pos=false;
+		
+		for (int i=0; i<numPos; i++)
+		{
+			for(int j=0; j<numTrans; j++)
+			{
+				if(m[i][j]==1)
+					pos=true;
+				else if (m[i][j]==-1)
+					neg=true; 
+				else {
+					pos=false;
+					neg=false;
+				}
+					
+				
+			}
+			if(pos==false || neg==false)
+				return false;
+		}
+		return true;
+	}
+	
+	//controllo che non ci siano transizioni volanti 
+	public boolean controlloColonne(int [][] m) {
+		boolean neg=false;
+		boolean pos=false;
+		
+		for (int i=0; i<numTrans; i++)
+		{
+			for(int j=0; j<numPos; j++)
+			{
+				if(m[j][i]==1)
+					pos=true;
+				else if (m[j][i]==-1)
+					neg=true; 
+				else {
+					pos=false;
+					neg=false;
+				}
+					
+				
+			}
+			if(pos==false || neg==false)
+				return false;
+		}
+		return true;
+	}
+	
+	//controlla la correttezza complessiva 
+		public boolean isCorrect() {
+			if(controlloColonne(matriceIncidenza()) && controlloRighe(matriceIncidenza())){
+				System.out.println("La rete è corretta");
+				return true;
+			}
+			else {
+				System.out.println("La rete non è corretta");
+				return false;
+			}
+				
+		}
 	
 	//aggiunge relazioni di flusso 
 	public void aggiungiRelazione(RelazioneDiFlusso r) {
