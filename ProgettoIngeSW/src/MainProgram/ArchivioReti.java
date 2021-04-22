@@ -141,16 +141,16 @@ public class ArchivioReti {
 	
 		public void eliminaRete()
 		{
-		 Rete elemento = cercaRete();
-		 if (elemento!= null)
-		  {
-		   boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
-				  if (procedi)
-				  reti.remove(elemento);
-		  }
-		  else {
-				      LeggiInput.leggiStringa(MESS_NON_TROVATA);
-				  }
+			Rete elemento = cercaRete();
+			if (elemento!= null)
+			{
+				boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
+					if (procedi)
+						reti.remove(elemento);
+			}
+			else {
+				LeggiInput.leggiStringa(MESS_NON_TROVATA);
+			}
 		}
 		
 		// salva nel file xml 
