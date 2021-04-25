@@ -106,16 +106,20 @@ public class ArchivioReti {
 				
 				char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
 				
-				int posto = LeggiInput.leggiInteroPositivo(POSTO);
-				int transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+				int posto;
+				int transizione;
 				
 				RelazioneDiFlusso rf = null;
 				
 				if(aOb == 'a') {
+					posto = LeggiInput.leggiInteroPositivo(POSTO);
+					transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
 					rf = new RelazioneDiFlusso(posto, transizione, true);
 				}
 				
 				else if(aOb == 'b') {
+					posto = LeggiInput.leggiInteroPositivo(POSTO);
+					transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
 					rf = new RelazioneDiFlusso(posto, transizione, false);
 				}
 				
