@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <archivioReti>
     <reti>
+        <rete name="rete">
+            <relazione>
+                <posizione>1</posizione>
+                <transizione>1</transizione>
+            </relazione>
+            <relazione>
+                <posizione>2</posizione>
+                <transizione>2</transizione>
+            </relazione>
+        </rete>
         <rete name="prova">
             <relazione>
-                <posizione>1</posizione>
-                <transizione>1</transizione>
-            </relazione>
-            <relazione>
-                <posizione>2</posizione>
-                <transizione>1</transizione>
-            </relazione>
-            <relazione>
-                <posizione>2</posizione>
-                <transizione>2</transizione>
-            </relazione>
-            <relazione>
-                <posizione>3</posizione>
-                <transizione>2</transizione>
-            </relazione>
-            <relazione>
                 <posizione>3</posizione>
                 <transizione>3</transizione>
             </relazione>
             <relazione>
-                <posizione>1</posizione>
-                <transizione>3</transizione>
+                <posizione>4</posizione>
+                <transizione>4</transizione>
             </relazione>
         </rete>
     </reti>

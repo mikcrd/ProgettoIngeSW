@@ -192,6 +192,7 @@ public class Rete {
 	
 	
 	public void stampaRete() {
+		System.out.println();
 		System.out.println(this.name);
 		for (RelazioneDiFlusso r : relazioni) {
 			System.out.println(r.toString());

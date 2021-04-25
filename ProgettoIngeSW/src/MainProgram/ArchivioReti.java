@@ -170,7 +170,7 @@ public class ArchivioReti {
 		 for(int i = 0; i < reti.size(); i++)
 		 {
 		  elemento = reti.get(i);
-		  System.out.println(elemento);
+		  elemento.stampaRete();
 		 }
 		}
 
