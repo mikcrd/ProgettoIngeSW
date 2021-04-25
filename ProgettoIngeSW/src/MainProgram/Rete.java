@@ -21,7 +21,9 @@ public class Rete {
 	
 	@XmlTransient
 	int [][] in;
+	@XmlTransient
 	int [][]out;
+	@XmlTransient
 	int [][] inc;
 	
 	//costruttore

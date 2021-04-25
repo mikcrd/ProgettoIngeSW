@@ -51,7 +51,7 @@ public class ArchivioReti {
 
 		public boolean isEqual(String daConfrontare)
 		{
-			for(Rete arch: this.reti) {
+			for(Rete arch: getArchivio()) {
 							
 				if(arch.getName().equals(daConfrontare)) {	
 					LeggiInput.leggiStringa(MESS_DOPPIONE);
