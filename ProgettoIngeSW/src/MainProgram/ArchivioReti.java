@@ -118,8 +118,8 @@ public class ArchivioReti {
 				}
 				
 				else if(aOb == 'b') {
-					posto = LeggiInput.leggiInteroPositivo(POSTO);
 					transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+					posto = LeggiInput.leggiInteroPositivo(POSTO);
 					rf = new RelazioneDiFlusso(posto, transizione, false);
 				}
 				
