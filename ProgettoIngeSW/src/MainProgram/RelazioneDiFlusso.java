@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.*;
 		Integer transizione;
 		//se questo valore è vero relazione pos-trans altrimenti trans-pos
     	
-    	@XmlTransient
-		boolean inOut;
+    	@XmlAttribute(name = "posto-trans", required = true)
+    	boolean inOut;
 		
 		public RelazioneDiFlusso(Integer posizione, Integer transizione) {
 			inOut=false;
@@ -30,6 +30,11 @@ import javax.xml.bind.annotation.*;
 			this.posizione=posizione;
 			this.transizione=transizione;
 		}
+		
+		public RelazioneDiFlusso() {
+			
+		}
+		
 		
 		public int getPosizione() {
 			return posizione;

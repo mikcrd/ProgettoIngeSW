@@ -1,9 +1,13 @@
 package MainProgram;
 
+import java.io.File;
+
 import utility.MyMenu;
 
 public class Menu {
 
+	private static File file = new File("src\\data\\prova_xml.xml");
+	
 	public static final String TITOLO = "ARCHIVIO RETI \n";
 	public static final String MENU[] = {"Aggiungi rete", "Visualizza rete", 
 			"Elimina rete", "Visualizza l'archivio reti"};
@@ -14,7 +18,10 @@ public class Menu {
   		menu.stampaMenu();
   		
   		ArchivioReti archivio = new ArchivioReti();
-		
+  		if(file.length() != 0L) {
+  			archivio = GestioneFile.xmlToObj(file);
+  		}
+  		
   		do{
 			
    		   int cmd = menu.scegli();
