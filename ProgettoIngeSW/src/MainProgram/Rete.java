@@ -184,9 +184,9 @@ public class Rete {
 			}
 		}
 		//debug
-		stampaMatrice(in);
-		System.out.println();
-		stampaMatrice(out);
+		//stampaMatrice(in);
+		//System.out.println();
+		//stampaMatrice(out);
 
 	}
 	

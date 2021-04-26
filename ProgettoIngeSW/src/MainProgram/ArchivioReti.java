@@ -26,6 +26,7 @@ public class ArchivioReti {
 	private static final String TRANSIZIONE = "Inserisci un intero positivo per la transizione: ";
 	private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
 	private static final String NOME_RETE_VISUALIZZA = "Inserisci il nome della rete da visualizzare: ";
+	private static final String ERRORE_ARCHIVIO_VUOTO = "Attenzione archivio vuoto";
 
 	
 	@XmlElementWrapper(name= "reti")
@@ -131,6 +132,8 @@ public class ArchivioReti {
 			
 		} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
 		
+		R.inizializzaRete();
+		
 		// controlliamo che la rete sia corretta e non sia uguale a una rete già esistenete 
 		if(R.isCorrect() && !isEqual(R.getName())) {
 			reti.add(R);
@@ -166,12 +169,14 @@ public class ArchivioReti {
 
 		public void visualizzaArchivio()
 		{
-		 Rete elemento = null;
-		 for(int i = 0; i < reti.size(); i++)
-		 {
-		  elemento = reti.get(i);
-		  elemento.stampaRete();
-		 }
+			if(reti != null) {
+				for(Rete elem : reti) {
+					System.out.println(elem.getName());
+				}
+			}
+			else {
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			}
 		}
 
 		
