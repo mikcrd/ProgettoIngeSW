@@ -21,10 +21,22 @@
                 <transizione>6</transizione>
             </relazione>
         </rete>
-        <rete name="rete2">
+        <rete name="corretta">
             <relazione posto-trans="true">
-                <posizione>4</posizione>
-                <transizione>4</transizione>
+                <posizione>1</posizione>
+                <transizione>2</transizione>
+            </relazione>
+            <relazione posto-trans="false">
+                <posizione>2</posizione>
+                <transizione>2</transizione>
+            </relazione>
+            <relazione posto-trans="true">
+                <posizione>2</posizione>
+                <transizione>1</transizione>
+            </relazione>
+            <relazione posto-trans="false">
+                <posizione>1</posizione>
+                <transizione>1</transizione>
             </relazione>
         </rete>
     </reti>
