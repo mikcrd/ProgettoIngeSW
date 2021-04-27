@@ -66,38 +66,19 @@ public class ArchivioReti {
 
 		public Rete cercaRete()
 		{
-		String net = LeggiInput.leggiStringaNonVuota(MESS_CERCA_RETE);
-				  return trovaRete(net);
+			String net = LeggiInput.leggiStringaNonVuota(MESS_CERCA_RETE);
+			return trovaRete(net);
 		}
 
 		public Rete trovaRete (String reteRichiesta)
 		{ 
-		 Rete elemento = null;
-
-		 for(int i = 0; i < reti.size(); i++)
-		{
-		  elemento = reti.get(i);
-		  
-		   if(elemento.getName().equalsIgnoreCase(reteRichiesta))
-		    return elemento;
-		 } 
-		   return null;  
+			for(Rete elem : reti){	  
+				if(elem.getName().equalsIgnoreCase(reteRichiesta))
+					return elem;
+			} 
+			return null;  
 		 }
-/**
-		public void aggiungiRete(Rete r)
-		{
-			 String nome= LeggiInput.leggiStringaNonVuota(MESS_NOME);
-			 
-			if(cercaRete(nome)!= null)
-			 System.out.println(MESS_DOPPIONE);
-	
-			else
-			{
-			  reti.add(r);
-			}
 
-		}
-**/
 	public void aggiungiRete()	{
 		
 		Rete R = new Rete();

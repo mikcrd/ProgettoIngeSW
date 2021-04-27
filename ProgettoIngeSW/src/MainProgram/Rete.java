@@ -58,7 +58,7 @@ public class Rete {
 				inc[i][j]=out[i][j] - in[i][j]; 
 			}
 		}
-		stampaMatrice(inc);
+		//stampaMatrice(inc);
 		return inc;
 	}
 	
@@ -129,7 +129,7 @@ public class Rete {
 				max=r.getTransizione();
 		}
 		numTrans=max;
-		System.out.println("numero transizioni" + max);
+		//System.out.println("numero transizioni" + max);
 	}
 	
 	//ritorna il numero massimo della posizione
@@ -140,7 +140,7 @@ public class Rete {
 				max=r.getPosizione();
 		}
 		numPos=max;
-		System.out.println("numero posizioni" + max);
+		//System.out.println("numero posizioni" + max);
 	}
 	
 	//stampa le matrici: debug
