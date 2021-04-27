@@ -112,22 +112,27 @@ public class ArchivioReti {
 				
 				RelazioneDiFlusso rf = null;
 				
-				if(aOb == 'a') {
-					posto = LeggiInput.leggiInteroPositivo(POSTO);
-					transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
-					rf = new RelazioneDiFlusso(posto, transizione, true);
-				}
-				
-				else if(aOb == 'b') {
-					transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
-					posto = LeggiInput.leggiInteroPositivo(POSTO);
-					rf = new RelazioneDiFlusso(posto, transizione, false);
-				}
-				
-				else {
-					LeggiInput.leggiStringa(ERRORE_SCELTA_AB);
-				}
-				
+				do {
+						if(aOb == 'a') {
+							posto = LeggiInput.leggiInteroPositivo(POSTO);
+							transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+							rf = new RelazioneDiFlusso(posto, transizione, true);
+							break;
+						}
+						
+						else if(aOb == 'b') {
+							transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+							posto = LeggiInput.leggiInteroPositivo(POSTO);
+							rf = new RelazioneDiFlusso(posto, transizione, false);
+							break;
+						}
+						
+						else {
+							aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
+						}
+					
+			      } while(aOb != 'a' || aOb != 'b');
+			
 				R.aggiungiRelazione(rf);
 			
 		} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
