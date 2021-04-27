@@ -75,12 +75,6 @@ public class Rete {
 					pos=true;
 				else if (m[i][j]==-1)
 					neg=true; 
-				else {
-					pos=false;
-					neg=false;
-				}
-					
-				
 			}
 			if(pos==false || neg==false)
 				return false;
@@ -101,12 +95,7 @@ public class Rete {
 					pos=true;
 				else if (m[j][i]==-1)
 					neg=true; 
-				else {
-					pos=false;
-					neg=false;
-				}
-					
-				
+							
 			}
 			if(pos==false || neg==false)
 				return false;
