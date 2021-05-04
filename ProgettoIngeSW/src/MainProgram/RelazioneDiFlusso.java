@@ -59,4 +59,13 @@ import javax.xml.bind.annotation.*;
 			else 
 				return  "transizione " + transizione + " posizione " + posizione;
 		}
+		
+		public boolean equals(RelazioneDiFlusso relazione) {
+			if(relazione != null && this.inOut == relazione.getInOut()
+					&& this.getPosizione() == relazione.getPosizione() 
+					&& this.getTransizione() == relazione.getTransizione()) {
+				return true;
+			}
+			else return false;
+		}
 }

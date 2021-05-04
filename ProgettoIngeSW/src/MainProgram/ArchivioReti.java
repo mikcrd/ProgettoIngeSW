@@ -15,6 +15,8 @@ public class ArchivioReti {
 	
 	private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
 	private final static String MESS_DOPPIONE = "Attenzione: non si puo' inserire una rete  gia' esistente!";
+	private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
+			+ "rete con questo nome. Inserire un altro nome: ";
 	private final static String MESS_CERCA_RETE = "Inserisci il nome della rete: ";
 	private final static String MESS_RIMOZIONE = " : confermi la rimozione di questa rete?";
 	private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
@@ -49,7 +51,7 @@ public class ArchivioReti {
 	        return this.reti;
 		}
 
-
+/**
 		public boolean isEqual(String daConfrontare)
 		{
 			for(Rete arch: getArchivio()) {
@@ -62,8 +64,36 @@ public class ArchivioReti {
 			}
 			return false;
 		}
-
-
+**/
+		
+		public boolean isEqual(Rete daConfrontare) {
+					
+					for(Rete reti: getArchivio()) {
+						for(RelazioneDiFlusso relaz: reti.getRelazioni()) {
+							for(RelazioneDiFlusso relazDC: daConfrontare.getRelazioni()) {
+								if(!(relaz.equals(relazDC)) && !(reti.getName().equals(daConfrontare.getName()))) {
+									return false; 
+								}
+								
+								else if(!(relaz.equals(relazDC)) && (reti.getName().equals(daConfrontare.getName()))) {
+									String nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+									daConfrontare.setName(nuovoNome);
+									return false;
+								}
+								
+								else  {
+									System.out.println(MESS_DOPPIONE); 
+									return true;
+								}
+									
+							}
+						}
+						
+					}  
+					     return true;
+					
+				}
+		
 		public Rete cercaRete()
 		{
 			String net = LeggiInput.leggiStringaNonVuota(MESS_CERCA_RETE);
@@ -121,7 +151,7 @@ public class ArchivioReti {
 		R.inizializzaRete();
 		
 		// controlliamo che la rete sia corretta e non sia uguale a una rete già esistenete 
-		if(R.isCorrect() && !isEqual(R.getName())) {
+		if(R.isCorrect() && !isEqual(R)) {
 			reti.add(R);
 			salvaLista();
 			R.stampaRete();
