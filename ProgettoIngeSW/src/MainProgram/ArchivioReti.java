@@ -67,32 +67,31 @@ public class ArchivioReti {
 **/
 		
 		public boolean isEqual(Rete daConfrontare) {
-					
-					for(Rete reti: getArchivio()) {
-						for(RelazioneDiFlusso relaz: reti.getRelazioni()) {
-							for(RelazioneDiFlusso relazDC: daConfrontare.getRelazioni()) {
-								if(!(relaz.equals(relazDC)) && !(reti.getName().equals(daConfrontare.getName()))) {
-									return false; 
-								}
-								
-								else if(!(relaz.equals(relazDC)) && (reti.getName().equals(daConfrontare.getName()))) {
-									String nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
-									daConfrontare.setName(nuovoNome);
-									return false;
-								}
-								
-								else  {
-									System.out.println(MESS_DOPPIONE); 
-									return true;
-								}
-									
-							}
-						}
+			if(getArchivio().contains(daConfrontare)) {
+				System.out.println(MESS_DOPPIONE); 
+				return true;
+			}
+			
+			for(Rete reti: getArchivio()) {
+				for(RelazioneDiFlusso relaz: reti.getRelazioni()) {
+					if(reti.getRelazioni().containsAll(daConfrontare.getRelazioni()) 
+							&& !(reti.getName().equals(daConfrontare.getName()))) {
 						
-					}  
-					     return true;
+						return true;
+					}
+					else if(!(reti.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
+							&& (reti.getName().equals(daConfrontare.getName()))) {
+						
+						String nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+						daConfrontare.setName(nuovoNome);
+						return false;
+					}
 					
 				}
+			}
+			return false;
+		}
+		
 		
 		public Rete cercaRete()
 		{
