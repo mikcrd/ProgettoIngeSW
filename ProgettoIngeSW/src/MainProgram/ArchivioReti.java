@@ -2,6 +2,7 @@ package MainProgram;
 
 import java.util.ArrayList;
 
+import javax.sound.midi.ControllerEventListener;
 import javax.xml.bind.annotation.*;
 
 import utility.LeggiInput;
@@ -143,7 +144,10 @@ public class ArchivioReti {
 					
 			      } while(aOb != 'a' || aOb != 'b');
 			
-				R.aggiungiRelazione(rf);
+				if(!R.controllaRelazione(rf)) {
+					
+				      R.aggiungiRelazione(rf);
+				}
 			
 		} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
 		

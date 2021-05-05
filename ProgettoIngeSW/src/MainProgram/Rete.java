@@ -218,4 +218,19 @@ public class Rete {
 			return false;
 		return true;
 	}
+	
+
+	public boolean controllaRelazione(RelazioneDiFlusso rf) {
+		if(getRelazioni().contains(rf)) {
+			System.out.println("Relazione di flusso già presente");
+			return true;
+		}
+		else return false;
+	}
+	
+	
+	
+	
+	
+	
 }
