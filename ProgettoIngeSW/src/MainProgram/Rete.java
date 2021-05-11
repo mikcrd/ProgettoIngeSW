@@ -64,11 +64,13 @@ public class Rete {
 	
 	//controlla che non ci siano posti volanti
 	public boolean controlloRighe(int [][] m) {
-		boolean neg=false;
-		boolean pos=false;
+		boolean neg;
+		boolean pos;
 		
 		for (int i=0; i<numPos; i++)
 		{
+			pos=false;
+			neg=false;
 			for(int j=0; j<numTrans; j++)
 			{
 				if(m[i][j]==1)
@@ -84,11 +86,13 @@ public class Rete {
 	
 	//controllo che non ci siano transizioni volanti 
 	public boolean controlloColonne(int [][] m) {
-		boolean neg=false;
-		boolean pos=false;
+		boolean neg;
+		boolean pos;
 		
 		for (int i=0; i<numTrans; i++)
 		{
+			pos=false;
+			neg=false;
 			for(int j=0; j<numPos; j++)
 			{
 				if(m[j][i]==1)
