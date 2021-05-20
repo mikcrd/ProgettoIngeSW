@@ -73,15 +73,15 @@ public class ArchivioReti {
 				return true;
 			}
 			
-			for(Rete reti: getArchivio()) {
-				for(RelazioneDiFlusso relaz: reti.getRelazioni()) {
-					if(reti.getRelazioni().containsAll(daConfrontare.getRelazioni()) 
-							&& !(reti.getName().equals(daConfrontare.getName()))) {
+			for(Rete r: getArchivio()) {
+				for(RelazioneDiFlusso relaz: r.getRelazioni()) {
+					if(r.getRelazioni().containsAll(daConfrontare.getRelazioni()) 
+							&& !(r.getName().equals(daConfrontare.getName()))) {
 						
 						return true;
 					}
-					else if(!(reti.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
-							&& (reti.getName().equals(daConfrontare.getName()))) {
+					else if(!(r.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
+							&& (r.getName().equals(daConfrontare.getName()))) {
 						
 						String nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
 						daConfrontare.setName(nuovoNome);
