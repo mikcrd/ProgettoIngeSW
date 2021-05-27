@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 import utility.LeggiInput;
 
 
@@ -39,6 +38,13 @@ public class ArchivioReti {
 	private static final String NOME_RETE_VISUALIZZA = "Inserisci il nome della rete da visualizzare: ";
 	private static final String ERRORE_ARCHIVIO_VUOTO = "Attenzione archivio vuoto";
 
+	private static final String SCEGLI_CREA = "Scegli una rete esistente per costruirci sopra una rete di Petri (premi 'a')/n"
+			+ "Oppure crea prima una rete (premi 'b'): ";
+	private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
+	private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
+	
+	
+	
 		@XmlElementWrapper(name= "reti")
 		@XmlElement(name="rete", required = true)
 		ArrayList <AbstractRete> reti;
@@ -88,14 +94,127 @@ public class ArchivioReti {
 			}
 		}
 		
-		public void aggiungiRete(AbstractRete r) {
-			if (r instanceof Rete)
-				
-			else if (r instanceof RetePN)
-				
-		}
+		public void aggiungiRete() {
+					
+					AbstractRete r=null;
+					
+					if (r instanceof Rete)  {
+						creaRete(r);
+					}				
+					else if (r instanceof RetePN) {
+						
+					}	
+					
+					if(r.isCorrect() && !isEqual(r)) {
+						reti.add(r);
+				//		salvaLista();
+						r.stampaRete();
+					}
+				}
 	
 		
+			public Rete creaRete(AbstractRete r) {
+						
+						r = new Rete();
+						r.setName(LeggiInput.leggiStringa(MESS_NOME));
+						do {
+										
+								char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
+										
+								int posto;
+								int transizione;
+								
+								RelazioneDiFlusso rf = null;
+										
+								do {
+										if(aOb == 'a') {
+											posto = LeggiInput.leggiInteroPositivo(POSTO);									transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+											rf = new RelazioneDiFlusso(posto, transizione, true);
+											break;
+										}
+										
+										else if(aOb == 'b') {
+											transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+											posto = LeggiInput.leggiInteroPositivo(POSTO);
+											rf = new RelazioneDiFlusso(posto, transizione, false);
+											break;
+										}
+												
+										else {
+											aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
+										}
+										
+							   } while(aOb != 'a' || aOb != 'b');
+									
+								if(!((Rete) r).controllaRelazione(rf)) {
+									
+								      ((Rete) r).aggiungiRelazione(rf);
+								}
+									
+						} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
+								
+						((Rete) r).inizializzaRete();
+						return (Rete) r;
+			       }
+
+			
+			public RetePN creaRetePN(AbstractRete pn) {
+				
+				pn = new RetePN();
+				pn.setName(LeggiInput.leggiStringa(MESS_NOME));
+				visualizzaArchivio(); // prima gli faccio vedere l'archivio, poi gli faccio scegliere ...
+				// deve visualizzare solo reti -> vedi xml reti
+				
+				char aOb = LeggiInput.leggiChar(SCEGLI_CREA);
+				
+				do {
+							if(aOb == 'a') {
+								do{
+									String nomeRete = LeggiInput.leggiStringa(SCEGLI_RETE);
+									Rete r = (Rete) trovaRete(nomeRete); // se sbaglia a scrivere ...
+									r.stampaRete();
+							
+					            } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));	
+								
+								
+							}
+					
+					else if(aOb == 'b') {
+						
+					}
+						
+					else {
+						aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
+					}
+					
+					
+				} while (aOb != 'a' || aOb != 'b');
+				
+				
+			}
+			
+			
+			public void visualizzaRete() {
+				String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+				AbstractRete daVisualizzare = this.trovaRete(nome);
+				daVisualizzare.stampaRete();		
+			}
+			
+			
+			public void visualizzaArchivio()
+			{
+				if(reti != null) {
+					for(AbstractRete elem : reti) {
+						System.out.println(elem.getName());
+					}
+				}
+				else {
+					System.out.println(ERRORE_ARCHIVIO_VUOTO);
+				}
+			}
+				
+			
+			
 		public boolean isEqual(AbstractRete daConfrontare) {
 			for(AbstractRete rete: getArchivio()) {
 				if(rete.equals(rete)) 
