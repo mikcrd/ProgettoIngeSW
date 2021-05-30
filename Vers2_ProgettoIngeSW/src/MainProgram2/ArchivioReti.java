@@ -10,12 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import CopiaMainProgram2.AbstractRete;
-import CopiaMainProgram2.RelazioneDiFlusso;
-import CopiaMainProgram2.RelazionePN;
-import CopiaMainProgram2.Rete;
-import CopiaMainProgram2.RetePN;
 import utility.LeggiInput;
 
 
@@ -47,6 +41,8 @@ public class ArchivioReti {
 			+ "Oppure crea prima una rete (premi 'b'): ";
 	private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
 	private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
+	private static final String MARCATURA = "Immetti una marcatura per la relazione corrente: ";
+	private static final String PESO = "Immetti un peso per la relazione corrente: ";
 	
 	
 	
