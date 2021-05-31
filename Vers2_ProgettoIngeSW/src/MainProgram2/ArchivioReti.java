@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 import utility.LeggiInput;
 
 
@@ -95,23 +96,22 @@ public class ArchivioReti {
 			}
 		}
 		
-public void aggiungiRete() {
-			
-			AbstractRete r=null;
-			
-			if (r instanceof Rete)  {
-				creaRete(r);
-			}				
-			else if (r instanceof RetePN) {
-				
-			}	
-			
-			if(r.isCorrect() && !isEqual(r)) {
-				reti.add(r);
-		//		salvaLista();
-				r.stampaRete();
-			}
-		}
+		
+		public void aggiungiRete(AbstractRete r) {
+					
+					if (r instanceof Rete)  {
+						creaRete(r);
+					}				
+					else if (r instanceof RetePN) {
+						creaRetePN(r);
+					}	
+					
+					if(r.isCorrect() && !isEqual(r)) {
+						reti.add(r);
+				//		salvaLista();
+						r.stampaRete();
+					}
+				}
 	
 		
 		public Rete creaRete(AbstractRete r) {
@@ -169,32 +169,15 @@ public void aggiungiRete() {
 			char aOb = LeggiInput.leggiChar(SCEGLI_CREA);
 			
 			do {
-					if(aOb == 'a') {
-						Rete r;
-						do{
-							String nomeRete = LeggiInput.leggiStringa(SCEGLI_RETE);
-							r = (Rete) trovaRete(nomeRete); // se sbaglia a scrivere ...
-							if(r == null) {
-								LeggiInput.leggiStringa(MESS_NON_TROVATA);
-							}
-							else{
-								r.stampaRete();
-							}
-				       } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));	
-							
-						for(RelazioneDiFlusso rf: r.getRelazioni())	{
-							rf.toString();
-							int marcatura = LeggiInput.leggiIntero(MARCATURA);
-							int peso = LeggiInput.leggiIntero(PESO);
-							RelazionePN relPN = new RelazionePN(rf, marcatura, peso);
-							((RetePN) pn).aggiungiRelazione(relPN);
-						}
-						
+					if(aOb == 'a') {					
+						casoA_ScegliReteCostruisciPN(pn);	
 			    	}
 				
 				   else if(aOb == 'b') {
 					   Rete r = new Rete();
-					  
+					   aggiungiRete(r);
+					   RetePN nuova = new RetePN();
+					   casoA_ScegliReteCostruisciPN(nuova);
 				   }
 					
 				   else {
@@ -206,7 +189,34 @@ public void aggiungiRete() {
 			
 			return (RetePN) pn;
 		}
+		
+		
+		public void casoA_ScegliReteCostruisciPN(AbstractRete pn) {
 			
+			Rete r;
+			do{
+				String nomeRete = LeggiInput.leggiStringa(SCEGLI_RETE);
+				r = (Rete) trovaRete(nomeRete); // se sbaglia a scrivere ...
+				if(r == null) {
+					LeggiInput.leggiStringa(MESS_NON_TROVATA);
+				}
+				else{
+					r.stampaRete();
+				}
+				
+	       } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));	
+				
+			for(RelazioneDiFlusso rf: r.getRelazioni())	{
+				rf.toString();
+				int marcatura = LeggiInput.leggiIntero(MARCATURA);
+				int peso = LeggiInput.leggiIntero(PESO);
+				RelazionePN relPN = new RelazionePN(rf, marcatura, peso);
+				((RetePN) pn).aggiungiRelazione(relPN);
+			}
+			
+		}
+			
+		
 			public void visualizzaRete() {
 				String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 				AbstractRete daVisualizzare = this.trovaRete(nome);

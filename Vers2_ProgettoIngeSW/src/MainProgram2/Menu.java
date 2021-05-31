@@ -1,13 +1,12 @@
 package MainProgram2;
 
 import java.io.File;
-
 import utility.GestioneFile;
 import utility.MyMenu;
 
 public class Menu {
 
-private static File file = new File("src\\data\\prova_xml.xml");
+    private static File file = new File("src\\data\\prova_xml.xml");
 	
 	private static final String TITOLO = "MENU PRINCIPALE \n";
 	private static final String[] MENU = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
@@ -35,27 +34,28 @@ private static File file = new File("src\\data\\prova_xml.xml");
 	
 	
 	public void cicloApplicazione() {
-		
-		MyMenu menu = new MyMenu(TITOLO,MENU);
-		ArchivioReti archivio = riempiArchivio();
-		
-		do{
 			
-	  		   menu.stampaMenu();
-	   		   int cmd = menu.scegli();
-	   		   switch(cmd)
-	   		   {
-	   		       case 0: System.exit(0); break;
-	   		       case 1: menuReti(TITOLO_RETE, MENU_RETE); break;
-	   		       case 2: menuReti(TITOLO_RETEP, MENU_RETEP); break;  
-	   		   }
-	  		
-	  		}while(true);	
-  				
-	}	
+			MyMenu menu = new MyMenu(TITOLO,MENU);
+			
+			do{
+				
+		  		   menu.stampaMenu();
+		   		   int cmd = menu.scegli();
+		   		   switch(cmd)
+		   		   {
+		   		       case 0: System.exit(0); break;
+		   		       case 1: AbstractRete r = new Rete();
+		   		    	   menuReti(TITOLO_RETE, MENU_RETE, r); break;
+		   		       case 2: AbstractRete pn = new RetePN();
+		   		    	   menuReti(TITOLO_RETEP, MENU_RETEP, pn); break;  
+		   		   }
+		  		
+		  		}while(true);	
+	  				
+		}	
 
 
-	public void menuReti(String titolo, String[] scelte) {
+	public void menuReti(String titolo, String[] scelte, AbstractRete r) {
 		
 		MyMenu menu = new MyMenu(titolo,scelte);
 		ArchivioReti archivio = riempiArchivio();
@@ -67,7 +67,7 @@ private static File file = new File("src\\data\\prova_xml.xml");
 	   		   switch(cmd)
 	   		   {
 	   		       case 0: cicloApplicazione(); break;
-	   		       case 1: archivio.aggiungiRete(); break;
+	   		       case 1: archivio.aggiungiRete(r); break;
 	   		       case 2: archivio.visualizzaRete(); break;
 	   		       case 3: archivio.eliminaRete(); break;
 	   		       case 4: archivio.visualizzaArchivio(); break;
@@ -76,6 +76,7 @@ private static File file = new File("src\\data\\prova_xml.xml");
 	  		
 	  		}while(true);	
 	}	
+	
 	
 }
 
