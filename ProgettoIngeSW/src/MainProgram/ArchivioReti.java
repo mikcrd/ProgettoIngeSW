@@ -111,8 +111,8 @@ public class ArchivioReti {
 
 	public void aggiungiRete()	{
 		
-		Rete re = new Rete();
-		re.setName(LeggiInput.leggiStringa(MESS_NOME));
+		Rete R = new Rete();
+		R.setName(LeggiInput.leggiStringa(MESS_NOME));
 		
 		do {
 				
@@ -144,20 +144,20 @@ public class ArchivioReti {
 					
 			      } while(aOb != 'a' || aOb != 'b');
 			
-				if(!re.controllaRelazione(rf)) {
+				if(!R.controllaRelazione(rf)) {
 					
-				      re.aggiungiRelazione(rf);
+				      R.aggiungiRelazione(rf);
 				}
 			
 		} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
 		
-		re.inizializzaRete();
+		R.inizializzaRete();
 		
 		// controlliamo che la rete sia corretta e non sia uguale a una rete già esistenete 
-		if(re.isCorrect() && !isEqual(re)) {
-			reti.add(re);
+		if(R.isCorrect() && !isEqual(R)) {
+			reti.add(R);
 			salvaLista();
-			re.stampaRete();
+			R.stampaRete();
 		}
 		
 	// visualizza rete che è stata appena aggiunta: R.stampaRete();
