@@ -39,7 +39,8 @@ public class Menu {
 		MyMenu menu = new MyMenu(TITOLO,MENU);
 		ArchivioReti archivio = riempiArchivio(file);
 		ArchivioReti archivioPN = riempiArchivio(filepn);
-			
+	//devo togliere un archivio...
+		
 		do{
 				
 	  		   menu.stampaMenu();
