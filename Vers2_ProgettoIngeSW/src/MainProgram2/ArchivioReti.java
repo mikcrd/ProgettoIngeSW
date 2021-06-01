@@ -1,7 +1,7 @@
 package MainProgram2;
 
 
-
+import utility.*;
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 
 import utility.LeggiInput;
 
@@ -99,19 +100,19 @@ public class ArchivioReti {
 		
 		public void aggiungiRete(AbstractRete r) {
 					
-					if (r instanceof Rete)  {
-						creaRete(r);
-					}				
-					else if (r instanceof RetePN) {
-						creaRetePN(r);
-					}	
+				if (r instanceof Rete)  {
+					creaRete(r);
+				}				
+				else if (r instanceof RetePN) {
+					creaRetePN(r);
+				}	
 					
-					if(r.isCorrect() && !isEqual(r)) {
-						reti.add(r);
-				//		salvaLista();
-						r.stampaRete();
-					}
+				if(r.isCorrect() && !isEqual(r)) {
+	 				reti.add(r);
+			//		salvaLista();
+					r.stampaRete();
 				}
+		}
 	
 		
 		public Rete creaRete(AbstractRete r) {
@@ -129,7 +130,8 @@ public class ArchivioReti {
 							
 					do {
 							if(aOb == 'a') {
-								posto = LeggiInput.leggiInteroPositivo(POSTO);									transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+								posto = LeggiInput.leggiInteroPositivo(POSTO);								
+								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
 								rf = new RelazioneDiFlusso(posto, transizione, true);
 								break;
 							}
@@ -215,26 +217,31 @@ public class ArchivioReti {
 			}
 			
 		}
+		
+		public void salvaLista() 
+		{
+			GestioneFile.objToXml(this);
+		}
 			
 		
-			public void visualizzaRete() {
-				String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
-				AbstractRete daVisualizzare = this.trovaRete(nome);
-				daVisualizzare.stampaRete();		
-			}
+		public void visualizzaRete() {
+			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+			AbstractRete daVisualizzare = this.trovaRete(nome);
+			daVisualizzare.stampaRete();		
+		}
 			
 			
-			public void visualizzaArchivio()
-			{
-				if(reti != null) {
-					for(AbstractRete elem : reti) {
-						System.out.println(elem.getName());
-					}
-				}
-				else {
-					System.out.println(ERRORE_ARCHIVIO_VUOTO);
+		public void visualizzaArchivio()
+		{
+			if(reti != null) {
+				for(AbstractRete elem : reti) {
+					System.out.println(elem.getName());
 				}
 			}
+			else {
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			}
+		}
 				
 			
 			

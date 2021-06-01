@@ -7,6 +7,7 @@ import utility.MyMenu;
 public class Menu {
 
     private static File file = new File("src\\data\\prova_xml.xml");
+    private static File filepn = new File("src\\data\\prova_xml.xml");
 	
 	private static final String TITOLO = "MENU PRINCIPALE \n";
 	private static final String[] MENU = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
@@ -21,10 +22,10 @@ public class Menu {
 			"Elimina rete di Petri", "Visualizza l'archivio reti di Petri"};
 
 	
-	public ArchivioReti riempiArchivio() {
+	public ArchivioReti riempiArchivio(File f) {
 		ArchivioReti archivio = new ArchivioReti();
-  		if(file.length() != 0L) {
-  			archivio = (ArchivioReti) GestioneFile.xmlToObj(file);
+  		if(f.length() != 0L) {
+  			archivio = (ArchivioReti) GestioneFile.xmlToObj(f);
   		}
   		return archivio;
 	}
@@ -35,42 +36,43 @@ public class Menu {
 	
 	public void cicloApplicazione() {
 			
-			MyMenu menu = new MyMenu(TITOLO,MENU);
+		MyMenu menu = new MyMenu(TITOLO,MENU);
+		ArchivioReti archivio = riempiArchivio(file);
+		ArchivioReti archivioPN = riempiArchivio(filepn);
 			
-			do{
+		do{
 				
-		  		   menu.stampaMenu();
-		   		   int cmd = menu.scegli();
-		   		   switch(cmd)
-		   		   {
-		   		       case 0: System.exit(0); break;
-		   		       case 1: AbstractRete r = new Rete();
-		   		    	   menuReti(TITOLO_RETE, MENU_RETE, r); break;
-		   		       case 2: AbstractRete pn = new RetePN();
-		   		    	   menuReti(TITOLO_RETEP, MENU_RETEP, pn); break;  
-		   		   }
+	  		   menu.stampaMenu();
+	   		   int cmd = menu.scegli();
+	   		   switch(cmd)
+	   		   {
+	   		       case 0: System.exit(0); break;
+	   		       case 1: AbstractRete r = new Rete();
+	   		    	   menuReti(TITOLO_RETE, MENU_RETE, r, archivio); break;
+	   		       case 2: AbstractRete pn = new RetePN();
+	   		    	   menuReti(TITOLO_RETEP, MENU_RETEP, pn, archivioPN); break;  
+	   		   }
 		  		
-		  		}while(true);	
+	  		}while(true);	
 	  				
-		}	
+	}	
 
 
-	public void menuReti(String titolo, String[] scelte, AbstractRete r) {
+	public void menuReti(String titolo, String[] scelte, AbstractRete r, ArchivioReti a) {
 		
 		MyMenu menu = new MyMenu(titolo,scelte);
-		ArchivioReti archivio = riempiArchivio();
+		
 		
 		do{
-			
 	  		   menu.stampaMenu();
 	   		   int cmd = menu.scegli();
 	   		   switch(cmd)
 	   		   {
 	   		       case 0: cicloApplicazione(); break;
-	   		       case 1: archivio.aggiungiRete(r); break;
-	   		       case 2: archivio.visualizzaRete(); break;
-	   		       case 3: archivio.eliminaRete(); break;
-	   		       case 4: archivio.visualizzaArchivio(); break;
+	   		       case 1: a.aggiungiRete(r); break;
+	   		       case 2: a.visualizzaRete(); break;
+	   		       case 3: a.eliminaRete(); break;
+	   		       case 4: a.visualizzaArchivio(); break;
 	   		       
 	   		   }
 	  		
