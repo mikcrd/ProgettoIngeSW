@@ -1,4 +1,4 @@
-package utility;
+package MainProgram2;
 
 import java.io.File;
 
@@ -16,20 +16,20 @@ public class GestioneFile {
 	private static File file = new File("src\\data\\prova_xml.xml");
 	
 	
-	public static void salvataggioSuFile(Object obj, File file) {
-		objToXml(obj);
+	public static void salvataggioSuFile(ArchivioReti arch, File file) {
+		objToXml(arch);
 	}
 	
 	
 	
-	public  static void objToXml(Object obj) {
+	public  static void objToXml(ArchivioReti arch) {
 		
 		try {
-			contextObj = JAXBContext.newInstance(Object.class);
+			contextObj = JAXBContext.newInstance(ArchivioReti.class);
 			 Marshaller marshallerObj = contextObj.createMarshaller();  
 			 marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
 			 
-			 marshallerObj.marshal(obj, file);
+			 marshallerObj.marshal(arch, file);
 			 
 		} catch (JAXBException e) {
 			e.printStackTrace();
@@ -38,14 +38,14 @@ public class GestioneFile {
 	}
 	
 	
-	public static Object xmlToObj(File file) {
+	public static ArchivioReti xmlToObj(File file) {
 		
-		Object a = null;
+		ArchivioReti a = null;
 		
 		try {
-			 contextObj = JAXBContext.newInstance(Object.class);
+			 contextObj = JAXBContext.newInstance(ArchivioReti.class);
 			 Unmarshaller jaxbUnmarshaller = contextObj.createUnmarshaller();  
-		     a = (Object) jaxbUnmarshaller.unmarshal(file);  
+		     a = (ArchivioReti) jaxbUnmarshaller.unmarshal(file);  
 		     
  
 		} catch (JAXBException e) {

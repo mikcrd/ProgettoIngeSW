@@ -1,13 +1,13 @@
 package MainProgram2;
 
 import java.io.File;
-import utility.GestioneFile;
+
 import utility.MyMenu;
 
 public class Menu {
 
-    private static File file = new File("src\\data\\prova_xml.xml");
-    private static File filepn = new File("src\\data\\prova_xml.xml");
+    private static File file = new File("src\\data\\reti_xml.xml");
+    private static File filepn = new File("src\\data\\retip_xml.xml");
 	
 	private static final String TITOLO = "MENU PRINCIPALE \n";
 	private static final String[] MENU = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
