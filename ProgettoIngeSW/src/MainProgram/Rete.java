@@ -63,7 +63,7 @@ public class Rete {
 	}
 	
 	//controlla che non ci siano posti volanti
-	public boolean controlloRighe(int [][] m) {
+	public boolean controllaRighe(int [][] m) {
 		boolean neg;
 		boolean pos;
 		
@@ -85,7 +85,7 @@ public class Rete {
 	}
 	
 	//controllo che non ci siano transizioni volanti 
-	public boolean controlloColonne(int [][] m) {
+	public boolean controllaColonne(int [][] m) {
 		boolean neg;
 		boolean pos;
 		
@@ -109,7 +109,7 @@ public class Rete {
 	
 	//controlla la correttezza complessiva 
 		public boolean isCorrect() {
-			if(controlloColonne(matriceIncidenza()) && controlloRighe(matriceIncidenza())){
+			if(controllaColonne(matriceIncidenza()) && controllaRighe(matriceIncidenza())){
 				System.out.println("La rete è corretta");
 				return true;
 			}
