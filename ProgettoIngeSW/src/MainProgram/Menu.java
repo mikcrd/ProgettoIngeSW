@@ -1,5 +1,4 @@
 package MainProgram;
-
 import java.io.File;
 
 import utility.MyMenu;
@@ -23,17 +22,16 @@ public class Menu {
   		
   		do{
   			
-	  		   menu.stampaMenu();
-	   		   int cmd = menu.scegli();
-	   		   switch(cmd)
-	   		   {
-	   		       case 0: System.exit(0); break;
-	   		       case 1: archivio.aggiungiRete(); break;
-	   		       case 2: archivio.visualizzaRete(); break;
-	   		       case 3: archivio.eliminaRete(); break;
-	   		       case 4: archivio.visualizzaArchivio(); break;
-	   		       
-	   		   }
+  			menu.stampaMenu();
+  			int cmd = menu.scegli();
+	   		switch(cmd)
+	   		{
+	   		   case 0: System.exit(0); break;
+	   		   case 1: archivio.aggiungiRete(); break;
+	   		   case 2: archivio.visualizzaRete(); break;
+	   		   case 3: archivio.eliminaRete(); break;
+	   		   case 4: archivio.visualizzaArchivio(); break;
+	   		}
 	  		
   		}while(true);
 	

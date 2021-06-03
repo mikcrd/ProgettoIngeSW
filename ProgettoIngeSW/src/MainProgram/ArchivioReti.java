@@ -201,12 +201,12 @@ public class ArchivioReti {
 		public void visualizzaRete() {
 			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 			Rete daVisualizzare = this.trovaRete(nome);
-			  if(daVisualizzare == null){
-              LeggiInput.leggiStringa(MESS_NON_TROVATA);	
-             } 
-			  else{  
-			daVisualizzare.stampaRete();		
-		     }
+			if(daVisualizzare != null){
+				daVisualizzare.stampaRete();	
+			} 
+			else{  
+				System.out.println(MESS_NON_TROVATA);
+		    }
      }
 		
 		
