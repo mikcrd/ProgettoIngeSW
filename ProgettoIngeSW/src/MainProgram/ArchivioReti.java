@@ -197,13 +197,19 @@ public class ArchivioReti {
 				System.out.println(ERRORE_ARCHIVIO_VUOTO);
 			}
 		}
-
 		
 		public void visualizzaRete() {
 			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 			Rete daVisualizzare = this.trovaRete(nome);
-			daVisualizzare.stampaRete();		
-		}
+			if(daVisualizzare != null){
+				daVisualizzare.stampaRete();	
+			} 
+			else{  
+				System.out.println(MESS_NON_TROVATA);
+		    }
+     }
+		
+		
 
 		
 }

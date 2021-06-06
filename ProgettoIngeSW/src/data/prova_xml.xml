@@ -39,5 +39,49 @@
                 <transizione>1</transizione>
             </relazione>
         </rete>
+        <rete name="bis">
+            <relazione posto-trans="true">
+                <posizione>1</posizione>
+                <transizione>1</transizione>
+            </relazione>
+            <relazione posto-trans="false">
+                <posizione>2</posizione>
+                <transizione>1</transizione>
+            </relazione>
+            <relazione posto-trans="true">
+                <posizione>2</posizione>
+                <transizione>2</transizione>
+            </relazione>
+            <relazione posto-trans="false">
+                <posizione>1</posizione>
+                <transizione>2</transizione>
+            </relazione>
+        </rete>
+        <rete name="ter">
+            <relazione posto-trans="true">
+                <posizione>1</posizione>
+                <transizione>1</transizione>
+            </relazione>
+            <relazione posto-trans="false">
+                <posizione>2</posizione>
+                <transizione>1</transizione>
+            </relazione>
+            <relazione posto-trans="true">
+                <posizione>2</posizione>
+                <transizione>2</transizione>
+            </relazione>
+            <relazione posto-trans="false">
+                <posizione>3</posizione>
+                <transizione>2</transizione>
+            </relazione>
+            <relazione posto-trans="true">
+                <posizione>3</posizione>
+                <transizione>3</transizione>
+            </relazione>
+            <relazione posto-trans="false">
+                <posizione>1</posizione>
+                <transizione>3</transizione>
+            </relazione>
+        </rete>
     </reti>
 </archivioReti>
