@@ -6,13 +6,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
+
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Relazione", propOrder = {
+@XmlType(name = "Relazione", propOrder = { "relazione",
 	    "marcatura",
 	    "peso"
 })
 public class RelazionePN implements IRelazioneDiFlusso{
 
+	    @XmlElement(name = "relazione", required = true, type=RelazioneDiFlusso.class)
 		RelazioneDiFlusso relazione;
 		
 		@XmlElement(required = true)

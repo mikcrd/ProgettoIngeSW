@@ -2,15 +2,31 @@ package MainProgram2;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+
 import utility.LeggiInput;
 
-public abstract class AbstractRete {
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlType(name = "", propOrder = {  //name = rete
+ //   "relazioni"
+//})
+@XmlSeeAlso({Rete.class, RetePN.class})
+public abstract class AbstractRete implements IRelazioneDiFlusso{
 
 		private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
 				+ "rete con questo nome. Inserire un altro nome: ";
 	
-	
+//		@XmlAttribute(name = "name", required = true)
 		String name;
+		
+	//	@XmlElementWrapper(name= "relazioni")
+	//	@XmlElement(name = "relazione", required = true, type=IRelazioneDiFlusso.class)
 		ArrayList<IRelazioneDiFlusso> relazione;
 		
 		public AbstractRete() {
@@ -32,8 +48,11 @@ public abstract class AbstractRete {
 		public void setName(String name) {
 			this.name = name;
 		}
-
-		
+	
+//		@XmlElementWrapper(name= "relazioni")
+//		@XmlElement(name = "relazione", required = true, type=IRelazioneDiFlusso.class)
+//		abstract public ArrayList<IRelazioneDiFlusso> getRelazioni();
+	
 		abstract public boolean isCorrect();
 		
 		public void stampaRete() {

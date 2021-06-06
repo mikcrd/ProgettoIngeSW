@@ -6,20 +6,24 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import utility.LeggiInput;
 
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "rete", propOrder = {
+@XmlType(name = "", propOrder = {
     "relazioni"
 })
-public class RetePN extends AbstractRete{
+public class RetePN extends AbstractRete implements IRelazioneDiFlusso {
 	
 	    @XmlAttribute(name = "name", required = true)
 		String name;
 		
-		@XmlElement(name = "relazione", required = true)
+	    @XmlElementWrapper(name= "relazioni")
+		@XmlElement(name = "", required = true, type=RelazioneDiFlusso.class)
 		ArrayList<RelazionePN> relazioni;
 	
 		
@@ -40,8 +44,8 @@ public class RetePN extends AbstractRete{
 		public void setName(String name) {
 			this.name = name;
 		}
-
 		
+	
 		public ArrayList<RelazionePN> getRelazioni() {
 			if (relazioni == null) {
 	        	relazioni = new ArrayList<RelazionePN>();
