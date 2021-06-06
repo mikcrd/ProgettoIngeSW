@@ -16,7 +16,7 @@ import utility.LeggiInput;
 //@XmlType(name = "", propOrder = {  //name = rete
  //   "relazioni"
 //})
-@XmlSeeAlso({Rete.class, RetePN.class})
+@XmlSeeAlso({Rete.class, RetePN.class}) //aggiunto
 public abstract class AbstractRete implements IRelazioneDiFlusso{
 
 		private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
