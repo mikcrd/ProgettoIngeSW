@@ -91,8 +91,10 @@ public class ArchivioReti {
 		if (elemento!= null)
 		{
 			boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
-				if (procedi)
-					reti.remove(elemento);
+			if (procedi) {
+				reti.remove(elemento);
+				salvaLista();
+			}
 		}
 		else {
 			LeggiInput.leggiStringa(MESS_NON_TROVATA);
