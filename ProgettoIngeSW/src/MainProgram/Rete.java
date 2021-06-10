@@ -110,11 +110,11 @@ public class Rete {
 	//controlla la correttezza complessiva 
 		public boolean isCorrect() {
 			if(controllaColonne(matriceIncidenza()) && controllaRighe(matriceIncidenza())){
-				System.out.println("La rete è corretta");
+				
 				return true;
 			}
 			else {
-				System.out.println("La rete non è corretta");
+				
 				return false;
 			}
 				

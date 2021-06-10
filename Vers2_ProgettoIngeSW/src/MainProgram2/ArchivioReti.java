@@ -91,13 +91,11 @@ public class ArchivioReti {
 		if (elemento!= null)
 		{
 			boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
-			if (procedi) {
-				reti.remove(elemento);
-				salvaLista();
-			}
+				if (procedi)
+					reti.remove(elemento);
 		}
 		else {
-			LeggiInput.leggiStringa(MESS_NON_TROVATA);
+			System.out.println(MESS_NON_TROVATA);
 		}
 	}
 	
@@ -112,9 +110,14 @@ public class ArchivioReti {
 			}	
 				
 			if(r.isCorrect() && !isEqual(r)) {
- 				reti.add(r);
-		//		salvaLista();
+				System.out.println("La rete è corretta");
+				reti.add(r);
+				salvaLista();
 				r.stampaRete();
+			}else if(r.isCorrect() && isEqual(r)){
+				System.out.println("Rete con la stessa topologia già presente");			
+			}else if (!r.isCorrect()) {
+				System.out.println("La rete non è corretta");
 			}
 	}
 

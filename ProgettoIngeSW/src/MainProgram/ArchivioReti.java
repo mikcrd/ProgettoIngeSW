@@ -155,9 +155,14 @@ public class ArchivioReti {
 		
 		// controlliamo che la rete sia corretta e non sia uguale a una rete già esistenete 
 		if(re.isCorrect() && !isEqual(re)) {
+			System.out.println("La rete è corretta");
 			reti.add(re);
 			salvaLista();
 			re.stampaRete();
+		}else if(re.isCorrect() && isEqual(re)){
+			System.out.println("Rete con la stessa topologia già presente");			
+		}else if (!re.isCorrect()) {
+			System.out.println("La rete non è corretta");
 		}
 		
 	// visualizza rete che è stata appena aggiunta: R.stampaRete();
@@ -175,9 +180,9 @@ public class ArchivioReti {
 					reti.remove(elemento);
 					salvaLista();
 				}
-			}
+					}
 			else {
-				LeggiInput.leggiStringa(MESS_NON_TROVATA);
+				System.out.println(MESS_NON_TROVATA);
 			}
 		}
 		
