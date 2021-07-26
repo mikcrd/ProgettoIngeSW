@@ -20,6 +20,13 @@ import utility.LeggiInput;
 })
 public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 
+	    private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
+	    private static final String INSERIMENTO_RELAZIONI = "Vuoi inserire un'altra relazione?";
+		private static final String POSTOTRANS_TRANSPOSTO = "Per aggiungere una coppia posto-transizione premere 'a'\n"
+				+ "Per aggiungere una coppia transizione-posto premere 'b' : ";
+		private static final String POSTO = "Inserisci un intero positivo per il posto: ";
+		private static final String TRANSIZIONE = "Inserisci un intero positivo per la transizione: ";
+		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
 		
 		@XmlTransient
 		int numPos, numTrans;
@@ -210,4 +217,61 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 			}
 			else return false;
 		}
+		
+		@Override
+		public Rete creaRete() {
+			Rete r = new Rete();
+			r.setName(LeggiInput.leggiStringa(MESS_NOME));
+			do {
+							
+					char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
+							
+					int posto;
+					int transizione;
+					
+					RelazioneDiFlusso rf = null;
+							
+					do {
+							if(aOb == 'a') {
+								posto = LeggiInput.leggiInteroPositivo(POSTO);								
+								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+								rf = new RelazioneDiFlusso(posto, transizione, true);
+								break;
+							}
+							
+							else if(aOb == 'b') {
+								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+								posto = LeggiInput.leggiInteroPositivo(POSTO);
+								rf = new RelazioneDiFlusso(posto, transizione, false);
+								break;
+							}
+									
+							else {
+								aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
+							}
+							
+				   } while(aOb != 'a' || aOb != 'b');
+						
+					if(!((Rete) r).controllaRelazione(rf)) {
+						
+					      ((Rete) r).aggiungiRelazione(rf);
+					}
+						
+			} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
+					
+			((Rete) r).inizializzaRete();
+			return (Rete) r;
+		}
+
+		@Override
+		public void stampaRete() {
+			System.out.println();
+			System.out.println(this.name);
+			for (RelazioneDiFlusso r : relazioni) {
+				System.out.println(r.toString());
+			}
+		}
+		
+		
 }
+

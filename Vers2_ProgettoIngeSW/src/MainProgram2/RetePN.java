@@ -19,6 +19,16 @@ import utility.LeggiInput;
 })
 public class RetePN extends AbstractRete implements IRelazioneDiFlusso {
 	
+		private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
+		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
+		private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
+		private static final String SCEGLI_CREA = "Scegli una rete esistente per costruirci sopra una rete di Petri (premi 'a')/n"
+				+ "Oppure crea prima una rete (premi 'b'): ";
+		private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
+		private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
+		private static final String MARCATURA = "Immetti una marcatura per la relazione corrente: ";
+		private static final String PESO = "Immetti un peso per la relazione corrente: ";
+	
 	    @XmlAttribute(name = "name", required = true)
 		String name;
 		
@@ -72,9 +82,21 @@ public class RetePN extends AbstractRete implements IRelazioneDiFlusso {
    
 		   return true;  
 		}
-	
 
+	    public RetePN creaRete() {
+			RetePN pn = new RetePN();
+			return arch.creaRetePN(pn); // arch in AbstractRete da modificare, ora è null ...
+	    }
+		
+		@Override
+		public void stampaRete() {
+			System.out.println();
+			System.out.println(this.name);
+			for (RelazionePN r : relazioni) {
+				System.out.println(r.toString());
+			}			
+		}
+	
 		
 }
-
 //NOTA: i metodi hashcode e isEqual di Rete e RetePN sono uguali, considerare di fare una classe astratta?

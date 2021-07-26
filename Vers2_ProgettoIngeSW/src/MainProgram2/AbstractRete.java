@@ -16,12 +16,14 @@ import utility.LeggiInput;
 //@XmlType(name = "", propOrder = {  //name = rete
  //   "relazioni"
 //})
-@XmlSeeAlso({Rete.class, RetePN.class}) //aggiunto
+@XmlSeeAlso({Rete.class, RetePN.class})
 public abstract class AbstractRete implements IRelazioneDiFlusso{
 
 		private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
 				+ "rete con questo nome. Inserire un altro nome: ";
 	
+		ArchivioReti arch;
+		
 //		@XmlAttribute(name = "name", required = true)
 		String name;
 		
@@ -55,13 +57,17 @@ public abstract class AbstractRete implements IRelazioneDiFlusso{
 	
 		abstract public boolean isCorrect();
 		
-		public void stampaRete() {
+		abstract public void stampaRete();
+	/**	{
 			System.out.println();
 			System.out.println(this.name);
 			for (IRelazioneDiFlusso r : relazione) {
 				System.out.println(r.toString());
 			}
 		}
+	**/
+		
+		abstract public AbstractRete creaRete();
 		
 		@Override
 		public int hashCode() {
