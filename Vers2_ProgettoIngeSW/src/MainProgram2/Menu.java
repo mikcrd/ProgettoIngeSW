@@ -6,7 +6,7 @@ import utility.MyMenu;
 
 public class Menu {
 
-    private static File file = new File("src\\data\\reti_xml.xml");
+ //   private static File file = new File("src\\data\\reti_xml.xml");
     
 	private static final String TITOLO = "MENU PRINCIPALE \n";
 	private static final String[] MENU = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
@@ -20,7 +20,13 @@ public class Menu {
 	private static final String[] MENU_RETEP = {"Aggiungi rete di Petri", "Visualizza rete di Petri", 
 			"Elimina rete di Petri", "Visualizza l'archivio reti di Petri"};
 
+	ArchivioReti archivio;
 	
+	public Menu(ArchivioReti arch) {      // dependency injection
+		 this.archivio = arch;
+	}
+
+/**	
 	public ArchivioReti riempiArchivio(File f) {
 		ArchivioReti archivio = new ArchivioReti();
   		if(f.length() != 0L) {
@@ -28,7 +34,7 @@ public class Menu {
   		}
   		return archivio;
 	}
-		
+**/		
 	
 	public void cicloApplicazione() {
 			
@@ -43,7 +49,7 @@ public class Menu {
 	   		       case 0: System.exit(0); break;
 	   		       case 1: AbstractRete r = new Rete();
 	   		    	   menuReti(TITOLO_RETE, MENU_RETE, r); break;
-	   		       case 2: AbstractRete pn = new RetePN();
+	   		       case 2: AbstractRete pn = new RetePN(archivio);     //dependency injection
 	   		    	   menuReti(TITOLO_RETEP, MENU_RETEP, pn); break;  
 	   		   }
 		  		
@@ -55,7 +61,7 @@ public class Menu {
 	public void menuReti(String titolo, String[] scelte, AbstractRete r) {
 		
 		MyMenu menu = new MyMenu(titolo,scelte);
-		ArchivioReti archivio = riempiArchivio(file);
+//		ArchivioReti archivio = riempiArchivio(file);
 		
 		do{
 	  		   menu.stampaMenu();

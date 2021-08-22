@@ -47,6 +47,10 @@ public class RetePN extends AbstractRete implements IRelazioneDiFlusso {
 		}
 
 
+		public RetePN(ArchivioReti arch) { //dependency injection
+			this.arch = arch;	 
+		}
+
 		public String getName() {
 			return name;
 		}
@@ -85,7 +89,7 @@ public class RetePN extends AbstractRete implements IRelazioneDiFlusso {
 
 	    public RetePN creaRete() {
 			RetePN pn = new RetePN();
-			return arch.creaRetePN(pn); // arch in AbstractRete da modificare, ora è null ...
+			return arch.creaRetePN(pn); // risolto con dependency inj
 	    }
 		
 		@Override

@@ -35,6 +35,12 @@ public abstract class AbstractRete implements IRelazioneDiFlusso{
 			name=null;
 			relazione = new ArrayList<IRelazioneDiFlusso>();
 		}
+		
+		public AbstractRete(ArchivioReti arc) {
+			this.arch = arc;                           //dependency inj
+		}
+		
+		
 
 		public AbstractRete(String name, ArrayList<IRelazioneDiFlusso> relazioni) {
 			super();
