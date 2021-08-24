@@ -34,16 +34,17 @@ public class RetePN extends AbstractRete implements IRelazioneDiFlusso {
 		
 	    @XmlElementWrapper(name= "relazioni")
 		@XmlElement(name = "", required = true, type=RelazioneDiFlusso.class)
-		ArrayList<RelazionePN> relazioni;
+		ArrayList<IRelazioneDiFlusso> relazioni;
 	
 		
 		public RetePN() {
 			name=null;
-			relazioni = new ArrayList<RelazionePN>();
+			relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) new ArrayList<RelazionePN>();
 		}
 
-		public RetePN(String name, ArrayList<IRelazioneDiFlusso> relazioni) {
-			super(name, relazioni);
+		public RetePN(String name, ArrayList<RelazionePN> relazioni) {
+			this.name = name;
+			this.relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) relazioni;
 		}
 
 
@@ -62,11 +63,11 @@ public class RetePN extends AbstractRete implements IRelazioneDiFlusso {
 	
 		public ArrayList<RelazionePN> getRelazioni() {
 			if (relazioni == null) {
-	        	relazioni = new ArrayList<RelazionePN>();
+	        	relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) new ArrayList<RelazionePN>();
 	        }
-	        return this.relazioni;
+	        return (ArrayList<RelazionePN>) (ArrayList<? extends IRelazioneDiFlusso>)this.relazioni;
 		}
-
+ 
 		public void aggiungiRelazione(RelazionePN r) {
 			this.getRelazioni().add(r);		
 		}
@@ -96,7 +97,7 @@ public class RetePN extends AbstractRete implements IRelazioneDiFlusso {
 		public void stampaRete() {
 			System.out.println();
 			System.out.println(this.name);
-			for (RelazionePN r : relazioni) {
+			for (RelazionePN r : (ArrayList<RelazionePN>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni) {
 				System.out.println(r.toString());
 			}			
 		}

@@ -33,7 +33,7 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 		
 		@XmlElementWrapper(name= "relazioni")
 		@XmlElement(name = "relazione", required = true, type=RelazioneDiFlusso.class)
-		ArrayList<RelazioneDiFlusso> relazioni;
+		ArrayList<IRelazioneDiFlusso> relazioni;
 		
 		@XmlAttribute(name = "name", required = true)
 	    String name;
@@ -50,12 +50,12 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 			numPos=0;
 			numTrans=0;
 			name=null;
-			relazioni = new ArrayList<RelazioneDiFlusso>();
+			relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) new ArrayList<RelazioneDiFlusso>();
 		}
 		
-		public Rete(String name, ArrayList<IRelazioneDiFlusso> relazioni) {
-			super(name, relazioni);
-			
+		public Rete(String name, ArrayList<RelazioneDiFlusso> relazioni) {
+			this.name = name;
+			this.relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) relazioni;	
 		}
 
 ///////////////////////////////////////////////////		
@@ -69,9 +69,9 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 
 		public ArrayList<RelazioneDiFlusso> getRelazioni() {
 	        if (relazioni == null) {
-	        	relazioni = new ArrayList<RelazioneDiFlusso>();
+	        	relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) new ArrayList<RelazioneDiFlusso>();
 	        }
-	        return this.relazioni;
+	        return (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)this.relazioni;
 	    }
 		
 
@@ -142,7 +142,7 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 		//ritorna il numero massimo della posizione
 		public void contaPosizioni() {
 			int max=0;
-			for(RelazioneDiFlusso r : relazioni) {
+			for(RelazioneDiFlusso r :  (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni) {
 				if(r.getPosizione()>max)
 					max=r.getPosizione();
 			}
@@ -153,7 +153,7 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 		//ritorna il numero massimo delle transizioni 
 		public void contaTransizioni() {
 			int max=0;
-			for(RelazioneDiFlusso r : relazioni) {
+			for(RelazioneDiFlusso r :  (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni) {
 				if(r.getTransizione()>max)
 					max=r.getTransizione();
 			}
@@ -181,7 +181,7 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 			{
 				for(int j=0; j<numTrans; j++)
 				{
-					for(RelazioneDiFlusso r: relazioni)
+					for(RelazioneDiFlusso r:  (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni)
 					{
 						if(r.getPosizione()==i+1 && r.getTransizione()==j+1 && r.isInOut()==true) 
 							in[i][j]=1; 	
@@ -267,7 +267,7 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 		public void stampaRete() {
 			System.out.println();
 			System.out.println(this.name);
-			for (RelazioneDiFlusso r : relazioni) {
+			for (RelazioneDiFlusso r :  (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni) {
 				System.out.println(r.toString());
 			}
 		}
