@@ -13,30 +13,21 @@ import javax.xml.bind.annotation.XmlType;
 
 import utility.LeggiInput;
 
-@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "relazioni"
-})
-public class Rete extends AbstractRete implements IRelazioneDiFlusso {
+@XmlType(name = "Rete")
+public class Rete extends AbstractRete  {
 
 	    private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
 	    private static final String INSERIMENTO_RELAZIONI = "Vuoi inserire un'altra relazione?";
 		private static final String POSTOTRANS_TRANSPOSTO = "Per aggiungere una coppia posto-transizione premere 'a'\n"
 				+ "Per aggiungere una coppia transizione-posto premere 'b' : ";
-		private static final String POSTO = "Inserisci un intero positivo per il posto: ";
-		private static final String TRANSIZIONE = "Inserisci un intero positivo per la transizione: ";
 		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
 		
 		@XmlTransient
 		int numPos, numTrans;
 		
-		@XmlElementWrapper(name= "relazioni")
-		@XmlElement(name = "relazione", required = true, type=RelazioneDiFlusso.class)
-		ArrayList<IRelazioneDiFlusso> relazioni;
-		
-		@XmlAttribute(name = "name", required = true)
-	    String name;
+//		ArrayList<IRelazioneDiFlusso> relazioni;
+//	    String name;
 		
 		@XmlTransient
 		int [][] in;
@@ -50,15 +41,17 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 			numPos=0;
 			numTrans=0;
 			name=null;
-			relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) new ArrayList<RelazioneDiFlusso>();
+			relazioni = new ArrayList<IRelazioneDiFlusso>();
 		}
-		
+
+		/**
 		public Rete(String name, ArrayList<RelazioneDiFlusso> relazioni) {
 			this.name = name;
 			this.relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) relazioni;	
-		}
+		}**/
 
 ///////////////////////////////////////////////////		
+/**
 		public String getName() {
 			return name;
 		}
@@ -67,13 +60,13 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 			this.name = name;
 		}
 
-		public ArrayList<RelazioneDiFlusso> getRelazioni() {
+		public ArrayList<IRelazioneDiFlusso> getRelazioni() {
 	        if (relazioni == null) {
-	        	relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) new ArrayList<RelazioneDiFlusso>();
+	        	relazioni = new ArrayList<IRelazioneDiFlusso>();
 	        }
-	        return (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)this.relazioni;
+	        return this.relazioni;
 	    }
-		
+**/		
 
 		public void aggiungiRelazione(RelazioneDiFlusso r) {
 			this.getRelazioni().add(r);		
@@ -142,9 +135,11 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 		//ritorna il numero massimo della posizione
 		public void contaPosizioni() {
 			int max=0;
-			for(RelazioneDiFlusso r :  (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni) {
-				if(r.getPosizione()>max)
-					max=r.getPosizione();
+			for(IRelazioneDiFlusso r :  relazioni) {
+				if(r instanceof RelazioneDiFlusso) {
+					if(((RelazioneDiFlusso)r).getPosizione()>max)
+						max=((RelazioneDiFlusso)r).getPosizione();
+				} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 			}
 			numPos=max;
 			//System.out.println("numero posizioni" + max);
@@ -153,9 +148,11 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 		//ritorna il numero massimo delle transizioni 
 		public void contaTransizioni() {
 			int max=0;
-			for(RelazioneDiFlusso r :  (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni) {
-				if(r.getTransizione()>max)
-					max=r.getTransizione();
+			for(IRelazioneDiFlusso r :  relazioni) {
+				if(r instanceof RelazioneDiFlusso) {
+					if(((RelazioneDiFlusso)r).getTransizione()>max)
+						max=((RelazioneDiFlusso)r).getTransizione();
+				} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 			}
 			numTrans=max;
 			//System.out.println("numero transizioni" + max);
@@ -181,12 +178,14 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 			{
 				for(int j=0; j<numTrans; j++)
 				{
-					for(RelazioneDiFlusso r:  (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni)
+					for(IRelazioneDiFlusso r: relazioni)
 					{
-						if(r.getPosizione()==i+1 && r.getTransizione()==j+1 && r.isInOut()==true) 
-							in[i][j]=1; 	
-						else if (r.getPosizione()==i+1 && r.getTransizione()==j+1 && r.isInOut()==false)
-							out[i][j]=1;
+						if(r instanceof IRelazioneDiFlusso) {
+							if(((RelazioneDiFlusso)r).getPosizione()==i+1 && ((RelazioneDiFlusso)r).getTransizione()==j+1 && ((RelazioneDiFlusso)r).isInOut()==true) 
+								in[i][j]=1; 	
+							else if (((RelazioneDiFlusso)r).getPosizione()==i+1 && ((RelazioneDiFlusso)r).getTransizione()==j+1 && ((RelazioneDiFlusso)r).isInOut()==false)
+								out[i][j]=1;
+						} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 					}
 				}
 			}
@@ -220,58 +219,78 @@ public class Rete extends AbstractRete implements IRelazioneDiFlusso {
 		
 		@Override
 		public Rete creaRete() {
-			Rete r = new Rete();
-			r.setName(LeggiInput.leggiStringa(MESS_NOME));
+		//	Rete r = new Rete();
+			this.setName(LeggiInput.leggiStringa(MESS_NOME));
 			do {
-							
 					char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
-							
-					int posto;
-					int transizione;
-					
-					RelazioneDiFlusso rf = null;
+					RelazioneDiFlusso rf = new RelazioneDiFlusso();
 							
 					do {
 							if(aOb == 'a') {
-								posto = LeggiInput.leggiInteroPositivo(POSTO);								
-								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
-								rf = new RelazioneDiFlusso(posto, transizione, true);
+								rf.creaPosto_Trans();
 								break;
 							}
-							
 							else if(aOb == 'b') {
-								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
-								posto = LeggiInput.leggiInteroPositivo(POSTO);
-								rf = new RelazioneDiFlusso(posto, transizione, false);
+								rf.creaTrans_Posto();
 								break;
-							}
-									
+							}		
 							else {
 								aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
 							}
 							
 				   } while(aOb != 'a' || aOb != 'b');
 						
-					if(!((Rete) r).controllaRelazione(rf)) {
-						
-					      ((Rete) r).aggiungiRelazione(rf);
+					if(!(this).controllaRelazione(rf)) {
+					      this.aggiungiRelazione(rf);
 					}
 						
 			} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
 					
-			((Rete) r).inizializzaRete();
-			return (Rete) r;
+			this.inizializzaRete();
+			return this;
 		}
 
 		@Override
 		public void stampaRete() {
 			System.out.println();
 			System.out.println(this.name);
-			for (RelazioneDiFlusso r :  (ArrayList<RelazioneDiFlusso>) (ArrayList<? extends IRelazioneDiFlusso>)relazioni) {
-				System.out.println(r.toString());
+			for (IRelazioneDiFlusso r :  this.relazioni) {
+				if(r instanceof RelazioneDiFlusso) {
+				   System.out.println(((RelazioneDiFlusso)r).toString());
+				} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 			}
 		}
-		
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 0;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + ((relazioni).hashCode());
+			return result;
+		}
+
+	
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			
+			if (getClass() != obj.getClass())
+				return false;
+			Rete other = (Rete) obj;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			if (relazioni == null) {
+				if (other.relazioni != null)
+					return false;
+			} else if (!(relazioni).equals(other.relazioni))
+				return false;
+			return true;
+		}
 		
 }
 

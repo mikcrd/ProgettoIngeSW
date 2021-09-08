@@ -20,7 +20,7 @@ import utility.LeggiInput;
 @XmlType(name = "", propOrder = {
     "reti"
 })
-@XmlRootElement(name = "archivioReti")
+@XmlRootElement(name = "ArchivioReti")
 public class ArchivioReti {
 	
 	private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
@@ -50,9 +50,7 @@ public class ArchivioReti {
 	
 	
 		@XmlElementWrapper(name= "reti")
-//		@XmlAnyElement(lax=true)
-//		@XmlElement(name="rete", required = true)
-		@XmlElementRef
+		@XmlElement(name="rete", required = true)
 		ArrayList <AbstractRete> reti;
 		
 		public ArchivioReti(ArrayList <AbstractRete> arch) {
@@ -60,7 +58,7 @@ public class ArchivioReti {
 		}
 		
 		public ArchivioReti() {
-			super();
+			
 		}
 
 
@@ -78,8 +76,8 @@ public class ArchivioReti {
 					return elem;
 			} 
 			return null;  
-		 }
-		
+		}	
+			
 		public AbstractRete cercaRete()
 		{
 			String net = LeggiInput.leggiStringaNonVuota(MESS_CERCA_RETE);
@@ -103,118 +101,15 @@ public class ArchivioReti {
 		
 		public void aggiungiRete(AbstractRete r) {
 					
-				r.creaRete();
+				r=r.creaRete();
 					
 				if(r.isCorrect() && !isEqual(r)) {
 	 				reti.add(r);
-			//		salvaLista();
+					salvaLista();
 					r.stampaRete();
 				}
 		}
 	
-/**		
-		public Rete creaRete(AbstractRete r) {
-			
-			r = new Rete();
-			r.setName(LeggiInput.leggiStringa(MESS_NOME));
-			do {
-							
-					char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
-							
-					int posto;
-					int transizione;
-					
-					RelazioneDiFlusso rf = null;
-							
-					do {
-							if(aOb == 'a') {
-								posto = LeggiInput.leggiInteroPositivo(POSTO);								
-								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
-								rf = new RelazioneDiFlusso(posto, transizione, true);
-								break;
-							}
-							
-							else if(aOb == 'b') {
-								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
-								posto = LeggiInput.leggiInteroPositivo(POSTO);
-								rf = new RelazioneDiFlusso(posto, transizione, false);
-								break;
-							}
-									
-							else {
-								aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
-							}
-							
-				   } while(aOb != 'a' || aOb != 'b');
-						
-					if(!((Rete) r).controllaRelazione(rf)) {
-						
-					      ((Rete) r).aggiungiRelazione(rf);
-					}
-						
-			} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
-					
-			((Rete) r).inizializzaRete();
-			return (Rete) r;
-       }
-**/		
-
-		public RetePN creaRetePN(AbstractRete pn) {
-			
-			pn = new RetePN();
-			pn.setName(LeggiInput.leggiStringa(MESS_NOME));
-			visualizzaArchivio(); // prima gli faccio vedere l'archivio, poi gli faccio scegliere ...
-			// deve visualizzare solo reti -> vedi xml reti
-			
-			char aOb = LeggiInput.leggiChar(SCEGLI_CREA);
-			
-			do {
-					if(aOb == 'a') {					
-						casoA_ScegliReteCostruisciPN(pn);	
-			    	}
-				
-				   else if(aOb == 'b') {
-					   Rete r = new Rete();
-					   aggiungiRete(r);
-					   RetePN nuova = new RetePN();
-					   casoA_ScegliReteCostruisciPN(nuova);
-				   }
-					
-				   else {
-					   aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
-				   }
-				
-				
-			} while (aOb != 'a' || aOb != 'b');
-			
-			return (RetePN) pn;
-		}
-		
-		
-		public void casoA_ScegliReteCostruisciPN(AbstractRete pn) {
-			
-			Rete r;
-			do{
-				String nomeRete = LeggiInput.leggiStringa(SCEGLI_RETE);
-				r = (Rete) trovaRete(nomeRete); // se sbaglia a scrivere ...
-				if(r == null) {
-					LeggiInput.leggiStringa(MESS_NON_TROVATA);
-				}
-				else{
-					r.stampaRete();
-				}
-				
-	       } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));	
-				
-			for(RelazioneDiFlusso rf: r.getRelazioni())	{
-				rf.toString();
-				int marcatura = LeggiInput.leggiIntero(MARCATURA);
-				int peso = LeggiInput.leggiIntero(PESO);
-				RelazionePN relPN = new RelazionePN(rf, marcatura, peso);
-				((RetePN) pn).aggiungiRelazione(relPN);
-			}
-			
-		}
 		
 		public void salvaLista() 
 		{
@@ -242,7 +137,35 @@ public class ArchivioReti {
 		}
 				
 			
+		public boolean isEqual(AbstractRete daConfrontare) {
+			if(getArchivio().contains(daConfrontare)) {
+				System.out.println(MESS_DOPPIONE); 
+				return true;
+			}
 			
+			for(AbstractRete reti: getArchivio()) {
+				for(IRelazioneDiFlusso relaz: reti.getRelazioni()) {
+					if(reti.getRelazioni().containsAll(daConfrontare.getRelazioni()) 
+							&& !(reti.getName().equals(daConfrontare.getName()))) {
+						
+						return true;
+					}
+					else if(!(reti.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
+							&& (reti.getName().equals(daConfrontare.getName()))) {
+						
+						String nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+						daConfrontare.setName(nuovoNome);
+						return false;
+					}
+					
+				}
+			}
+			return false;
+		}
+		
+		
+		
+/**			
 		public boolean isEqual(AbstractRete daConfrontare) {
 			for(AbstractRete rete: getArchivio()) {
 				if(rete.equals(daConfrontare)) 
@@ -250,5 +173,7 @@ public class ArchivioReti {
 			}
 			return false;
 		}
+		
+	**/
 		
 }

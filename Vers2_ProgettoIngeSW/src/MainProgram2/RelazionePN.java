@@ -8,38 +8,51 @@ import javax.xml.bind.annotation.XmlType;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Relazione", propOrder = { "relazione",
-	    "marcatura",
-	    "peso"
+@XmlType(name = "RelazionePN", propOrder = {
+    "marcatura",
+    "peso"
 })
-public class RelazionePN implements IRelazioneDiFlusso{
-
-	    @XmlElement(name = "relazione", required = true, type=RelazioneDiFlusso.class)
-		RelazioneDiFlusso relazione;
-		
-		@XmlElement(required = true)
-	    @XmlSchemaType(name = "Integer")
+public class RelazionePN extends IRelazioneDiFlusso{
+   
 		int marcatura;
-		
-		@XmlElement(required = true)
-	    @XmlSchemaType(name = "positiveInteger")
 		int peso;
 		
 		//valori di default
 		public RelazionePN() {
-			relazione = null;
+//			relazione = null;
+			posizione = 0;
+			transizione = 0;
+			inOut = true;
 			marcatura = 0;
 			peso = 1;
 		}
 	
 		public RelazionePN(RelazioneDiFlusso relazione, int marcatura, int peso) {
-			super();
-			this.relazione = relazione;
+//			super();
+//			this.relazione = relazione;
+			this.posizione = relazione.getPosizione();
+			this.transizione = relazione.getTransizione();
+			this.inOut = relazione.isInOut();
 			this.marcatura = marcatura;
 			this.peso = peso;
 		}
-	
-		
+
+/**
+		@Override
+		public int getPosizione() {
+			return this.posizione;
+		}
+
+		@Override
+		public int getTransizione() {
+			return this.transizione;
+		}
+
+		@Override
+		public boolean isInOut() {
+			return this.inOut;
+		}
+**/
 		public int getMarcatura() {
 			return marcatura;
 		}
@@ -47,30 +60,59 @@ public class RelazionePN implements IRelazioneDiFlusso{
 		public void setMarcatura(int marcatura) {
 			this.marcatura = marcatura;
 		}
-	
+		
 		public int getPeso() {
 			return peso;
 		}
-	
+		
 		public void setPeso(int peso) {
 			this.peso = peso;
 		}
-	 	
 		
-		
+		public RelazionePN creaRelazione() {
+			return null;
+			
+		}
 		
 		@Override
 		public String toString() {
-			return "RelazionePN [" + relazione + ", marcatura=" + marcatura + ", peso=" + peso + "]";
+			return "RelazionePN ["/** + relazione **/+ ", marcatura=" + marcatura + ", peso=" + peso + "]";
 		}
-	
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + marcatura;
 			result = prime * result + peso;
-			result = prime * result + ((relazione == null) ? 0 : relazione.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			RelazionePN other = (RelazionePN) obj;
+			if (marcatura != other.marcatura)
+				return false;
+			if (peso != other.peso)
+				return false;
+			return true;
+		}
+		
+				
+/**
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + marcatura;
+			result = prime * result + peso;
+//			result = prime * result + ((relazione == null) ? 0 : relazione.hashCode());
 			return result;
 		}
 	
@@ -87,12 +129,13 @@ public class RelazionePN implements IRelazioneDiFlusso{
 				return false;
 			if (peso != other.peso)
 				return false;
-			if (relazione == null) {
+		if (relazione == null) {
 				if (other.relazione != null)
 					return false;
 			} else if (!relazione.equals(other.relazione))
-				return false;
-			return true;
+				return false; 
+			return true; 
 		}
-
+**/
+		
 }
