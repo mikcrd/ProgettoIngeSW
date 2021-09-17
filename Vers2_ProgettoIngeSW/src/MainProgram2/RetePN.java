@@ -107,9 +107,6 @@ public class RetePN extends AbstractRete  {
 			
 			// deve visualizzare solo reti -> vedi xml reti
 				
-			
-
-				
 			return this;
 		}
 			
@@ -134,7 +131,7 @@ public class RetePN extends AbstractRete  {
 		//      } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));
 		}
 		
-		public void assegnaMarcatura(Rete t) {
+		public void assegnaMarcaturaEPesi(Rete t) {
 			for(IRelazioneDiFlusso rf: t.getRelazioni())	{
 				if(rf instanceof RelazioneDiFlusso) {
 					System.out.println(((RelazioneDiFlusso)rf).toString());
