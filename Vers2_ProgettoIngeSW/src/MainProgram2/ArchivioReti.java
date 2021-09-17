@@ -120,7 +120,10 @@ public class ArchivioReti {
 		public void visualizzaRete() {
 			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 			AbstractRete daVisualizzare = this.trovaRete(nome);
-			daVisualizzare.stampaRete();		
+			if (daVisualizzare==null)
+				System.out.println("La rete cercata non è presente nell'archivio");
+			else
+				daVisualizzare.stampaRete();		
 		}
 			
 			

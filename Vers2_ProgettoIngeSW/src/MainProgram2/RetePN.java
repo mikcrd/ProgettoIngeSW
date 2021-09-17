@@ -19,14 +19,14 @@ public class RetePN extends AbstractRete  {
 		private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
 		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
 		private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
-		private static final String SCEGLI_CREA = "Scegli una rete esistente per costruirci sopra una rete di Petri (premi 'a')\n"
-				+ "Oppure crea prima una rete (premi 'b'): ";
+		private static final String SCEGLI_CREA = "Premi a per scegliere una rete da usare per costruire la rete di Petri \n"
+				+ "Premi b per inserire una nuova rete su cui costruire la rete di Petri";
 		private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
 		private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
 		private static final String MARCATURA = "Immetti una marcatura per la relazione corrente: ";
 		private static final String PESO = "Immetti un peso per la relazione corrente: ";
 	
-
+		
 		public RetePN() {
 			name=null;
 			relazioni = new ArrayList<IRelazioneDiFlusso>();
@@ -85,29 +85,30 @@ public class RetePN extends AbstractRete  {
 	    public RetePN creaRete() {
 //			RetePN pn = new RetePN();
 //			return arch.creaRetePN(pn); // risolto con dependency inj
-			
+	    	char aOb;
+	    	do {
+	    		aOb = LeggiInput.leggiChar(SCEGLI_CREA);
+	    		if (aOb=='a') {
+	    			System.out.println("lista reti");
+	    			arch.visualizzaArchivio(); // prima gli faccio vedere l'archivio, poi gli faccio scegliere ...
+	    			
+	    			casoA_ScegliReteCostruisciPN();
+	    			
+	    		}else if(aOb=='b'){
+	    			Rete r1 = new Rete();
+	    			arch.aggiungiRete(r1);
+	    			
+	    		}else {
+	    			System.out.println("immettere a o b per selezionare un'opzione");
+	    		}
+	    	}while (aOb!='a' || aOb!='b');
+	    	
 			this.setName(LeggiInput.leggiStringa(MESS_NOME));
-			arch.visualizzaArchivio(); // prima gli faccio vedere l'archivio, poi gli faccio scegliere ...
+			
 			// deve visualizzare solo reti -> vedi xml reti
 				
-			char aOb = LeggiInput.leggiChar(SCEGLI_CREA);
-				
-			do {
-					if(aOb == 'a') {					
-						casoA_ScegliReteCostruisciPN();	
-				    }
-					
-					  else if(aOb == 'b') {
-					   Rete r = new Rete();
-					   arch.aggiungiRete(r);
-					   casoA_ScegliReteCostruisciPN();
-				   }
-						
-				   else {
-					   aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
-				   }
-						
-			} while (aOb != 'a' || aOb != 'b');
+			
+
 				
 			return this;
 		}
@@ -122,22 +123,30 @@ public class RetePN extends AbstractRete  {
 						LeggiInput.leggiStringa(MESS_NON_TROVATA);
 					}
 					else{
+						this.name=LeggiInput.leggiStringa(MESS_NOME);
 						r.stampaRete();
+						System.out.println("----------------------------------------------");
 					}
-						
-		//      } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));	
 					
-			for(IRelazioneDiFlusso rf: r.getRelazioni())	{
+					
+					
+						
+		//      } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));
+		}
+		
+		public void assegnaMarcatura(Rete t) {
+			for(IRelazioneDiFlusso rf: t.getRelazioni())	{
 				if(rf instanceof RelazioneDiFlusso) {
-					((RelazioneDiFlusso)rf).toString();
-					int marcatura = LeggiInput.leggiIntero(MARCATURA);
+					System.out.println(((RelazioneDiFlusso)rf).toString());
+					//int marcatura = LeggiInput.leggiIntero(MARCATURA);
 					int peso = LeggiInput.leggiIntero(PESO);
-					RelazionePN relPN = new RelazionePN((RelazioneDiFlusso)rf, marcatura, peso);
-					this.aggiungiRelazione(relPN);
+					//RelazionePN relPN = new RelazionePN((RelazioneDiFlusso)rf, marcatura, peso);
+					//this.aggiungiRelazione(relPN);
 				}
-			}			
+			}	
 		}
 	    
+		
 		
 		@Override
 		public void stampaRete() {
