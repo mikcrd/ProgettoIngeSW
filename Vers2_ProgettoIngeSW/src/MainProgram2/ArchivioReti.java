@@ -120,10 +120,7 @@ public class ArchivioReti {
 		public void visualizzaRete() {
 			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 			AbstractRete daVisualizzare = this.trovaRete(nome);
-			if (daVisualizzare==null)
-				System.out.println("La rete cercata non è presente nell'archivio");
-			else
-				daVisualizzare.stampaRete();		
+			daVisualizzare.stampaRete();		
 		}
 			
 			
@@ -150,7 +147,7 @@ public class ArchivioReti {
 				for(IRelazioneDiFlusso relaz: reti.getRelazioni()) {
 					if(reti.getRelazioni().containsAll(daConfrontare.getRelazioni()) 
 							&& !(reti.getName().equals(daConfrontare.getName()))) {
-						
+						System.out.println("la topologia e' uguale a quella di una rete gia' presente in archivio");
 						return true;
 					}
 					else if(!(reti.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
