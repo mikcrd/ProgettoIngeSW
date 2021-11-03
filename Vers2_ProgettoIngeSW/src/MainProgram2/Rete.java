@@ -269,8 +269,38 @@ public class Rete extends AbstractRete  {
 			result = prime * result + ((relazioni).hashCode());
 			return result;
 		}
+		
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (getClass() != obj.getClass())
+				return false;
+			
+			Rete other = (Rete) obj;
+			if (relazioni == null) {
+				if (other.relazioni != null)
+					return false;
+			} else if (relazioni.equals(other.relazioni)) {
+				System.out.println("la topologia e' uguale a quella di una rete gia' presente in archivio");
+				return true;
+			    }
+			
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (name.equals(other.name)) { //rel diverse e nome uguale
+				return false; // -> falso xchè poi cambio nome in ArchivioReti
+			/**	do{
+					String nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+					other.setName(nuovoNome);
+				} while(name.equals(other.name));
+				return false;  **/    //-> faccio questo in ArchivioReti xchè devo controllare su tutti i nomi delle reti nell'archivio
+			    }
+			return false;
+		}
 
-	
+/**	
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -291,6 +321,6 @@ public class Rete extends AbstractRete  {
 				return false;
 			return true;
 		}
-		
+**/		
 }
 

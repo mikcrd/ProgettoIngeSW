@@ -100,15 +100,30 @@ public class ArchivioReti {
 		
 		
 		public void aggiungiRete(AbstractRete r) {
+			//r = new Rete();	
+			//r=r.creaRete();
+		
+			if(r instanceof Rete) {
+				
+				AbstractRete nuova = new Rete(); // altrimenti usiamo la stessa rete per tutta la sessione e controllaRelaz non funziona ..
+				nuova = nuova.creaRete();                                 
 					
-				r=r.creaRete();
-					
-				if(r.isCorrect() && !isEqual(r)) {
-	 				reti.add(r);
+				if(nuova.isCorrect() && !isEqual(nuova)) {
+	 				reti.add(nuova);
 					salvaLista();
-					r.stampaRete();
+					nuova.stampaRete();
 				}
-		}
+			} else {
+					AbstractRete nuova = new RetePN(); // altrimenti usiamo la stessa rete per tutta la sessione e controllaRelaz non funziona ..
+					nuova = nuova.creaRete();                                 
+					
+					if(nuova.isCorrect() && !isEqual(nuova)) {
+		 				reti.add(nuova);
+						salvaLista();
+						nuova.stampaRete();
+					}
+				}
+	}
 	
 		
 		public void salvaLista() 
@@ -120,10 +135,13 @@ public class ArchivioReti {
 		public void visualizzaRete() {
 			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 			AbstractRete daVisualizzare = this.trovaRete(nome);
-			daVisualizzare.stampaRete();		
+			if(daVisualizzare == null) {
+				System.out.println("La rete richiesta non è presente in archivio");
+			}
+			else {daVisualizzare.stampaRete();}	
 		}
 			
-			
+/**			
 		public void visualizzaArchivio()
 		{
 			if(reti != null) {
@@ -135,8 +153,87 @@ public class ArchivioReti {
 				System.out.println(ERRORE_ARCHIVIO_VUOTO);
 			}
 		}
-				
-			
+**/		
+		
+		public void visualizzaNomeReti() {
+			System.out.println("Nomi delle reti presenti: \n");
+			if(reti != null) {
+				for(AbstractRete elem : reti) {
+					if(elem instanceof Rete) {
+						System.out.println(elem.getName());
+					}
+				}
+			}
+		}
+		 
+		
+		public void visualizzaNomeRetiPN() {
+			if(reti != null) {
+				for(AbstractRete elem : reti) {
+					if(elem instanceof RetePN) {
+						System.out.println("Nomi delle reti di Petri presenti: \n");
+						System.out.println(elem.getName());
+					}
+				}
+			}
+		}
+		
+		
+		public void visualizzaSoloRetiArchivio() {
+			if(reti != null) {
+				for(AbstractRete elem : reti) {
+					if(elem instanceof Rete) {
+						elem.stampaRete();
+					}
+				}
+			} else {
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			}
+		}
+		
+		
+		public void visualizzaSoloRetiPNArchivio() {
+			if(reti != null) {
+				for(AbstractRete elem : reti) {
+					if(elem instanceof RetePN) {
+						elem.stampaRete();
+					}
+				}
+			} else {
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			}
+		}
+		
+		
+		public boolean isEqual(AbstractRete daConfrontare) {
+			for(AbstractRete rete: getArchivio()) {
+				if(rete.equals(daConfrontare)) 
+					return true;
+				else if(/**!(rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
+						&&**/ (rete.getName().equals(daConfrontare.getName()))) {
+					String nuovoNome;
+					boolean flag;
+					do {
+							nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+							flag = true;
+							
+							for(AbstractRete retexNomi: getArchivio()) {
+									if(nuovoNome.equals(retexNomi.getName())) {
+								//	System.out.println(MESS_NOME_GIA_PRESENTE);
+									flag = false;	
+									}
+						    }
+					}while(!flag);
+
+					daConfrontare.setName(nuovoNome);
+					return false;
+				}
+			}
+			return false;
+		}
+		
+		
+/**			
 		public boolean isEqual(AbstractRete daConfrontare) {
 			if(getArchivio().contains(daConfrontare)) {
 				System.out.println(MESS_DOPPIONE); 

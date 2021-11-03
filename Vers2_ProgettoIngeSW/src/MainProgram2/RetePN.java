@@ -90,7 +90,7 @@ public class RetePN extends AbstractRete  {
 	    		aOb = LeggiInput.leggiChar(SCEGLI_CREA);
 	    		if (aOb=='a') {
 	    			System.out.println("lista reti");
-	    			arch.visualizzaArchivio(); // prima gli faccio vedere l'archivio, poi gli faccio scegliere ...
+	    			arch.visualizzaSoloRetiArchivio(); // prima gli faccio vedere l'archivio, poi gli faccio scegliere ...
 	    			
 	    			casoA_ScegliReteCostruisciPN();
 	    			
@@ -169,22 +169,28 @@ public class RetePN extends AbstractRete  {
 		public boolean equals(Object obj) {
 			if (this == obj)
 				return true;
-			
 			if (getClass() != obj.getClass())
 				return false;
+			
 			RetePN other = (RetePN) obj;
-			if (name == null) {
-				if (other.name != null)
-					return false;
-			} else if (!name.equals(other.name))
-				return false;
 			if (relazioni == null) {
 				if (other.relazioni != null)
 					return false;
-			} else if (!relazioni.equals(other.relazioni))
-				return false;
-			return true;
+			} else if (relazioni.equals(other.relazioni)) {
+				System.out.println("la topologia e' uguale a quella di una rete gia' presente in archivio");
+				return true;
+			    }
+			
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (name.equals(other.name)) { //rel diverse e nome uguale
+				return false;  //-> xchè poi cambio nome in ArchivioReti
+			}
+			
+			return false;
 		}
+		
 	
 		
 		

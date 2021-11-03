@@ -73,7 +73,9 @@ public class Menu {
 		   		       case 1: archivio.aggiungiRete(r); break;
 		   		       case 2: archivio.visualizzaRete(); break;
 		   		       case 3: archivio.eliminaRete(); break;
-		   		       case 4: archivio.visualizzaArchivio(); break;
+		   		    case 4: if(r instanceof Rete) {
+		   		    	 archivio.visualizzaNomeReti(); break;
+		   		       } else archivio.visualizzaNomeRetiPN(); break;
 		   		       
 		   		   }
 		  		
