@@ -71,6 +71,10 @@ public class Rete extends AbstractRete  {
 		public void aggiungiRelazione(RelazioneDiFlusso r) {
 			this.getRelazioni().add(r);		
 		}
+		
+		public int getPos() {
+			return numPos;
+		}
 /////////////////////////////////////////////////////////		
 		
 		//aggiorna matrice di incidenza 

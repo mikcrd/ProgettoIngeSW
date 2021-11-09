@@ -14,26 +14,25 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class RelazionePN extends IRelazioneDiFlusso{
    
-		int marcatura;
+		
 		int peso;
+		private RelazioneDiFlusso relazione;
 		
 		//valori di default
 		public RelazionePN() {
-//			relazione = null;
+			relazione = null;
 			posizione = 0;
 			transizione = 0;
 			inOut = true;
-			marcatura = 0;
 			peso = 1;
 		}
 	
-		public RelazionePN(RelazioneDiFlusso relazione, int marcatura, int peso) {
+		public RelazionePN(RelazioneDiFlusso relazione, int peso) {
 //			super();
-//			this.relazione = relazione;
+			this.relazione = relazione;
 			this.posizione = relazione.getPosizione();
 			this.transizione = relazione.getTransizione();
 			this.inOut = relazione.isInOut();
-			this.marcatura = marcatura;
 			this.peso = peso;
 		}
 
@@ -53,13 +52,7 @@ public class RelazionePN extends IRelazioneDiFlusso{
 			return this.inOut;
 		}
 **/
-		public int getMarcatura() {
-			return marcatura;
-		}
-	
-		public void setMarcatura(int marcatura) {
-			this.marcatura = marcatura;
-		}
+		
 		
 		public int getPeso() {
 			return peso;
@@ -76,14 +69,13 @@ public class RelazionePN extends IRelazioneDiFlusso{
 		
 		@Override
 		public String toString() {
-			return "RelazionePN ["/** + relazione **/+ ", marcatura=" + marcatura + ", peso=" + peso + "]";
+			return "RelazionePN ["/** + relazione **/+ ", peso=" + peso + "]";
 		}
 
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + marcatura;
 			result = prime * result + peso;
 			return result;
 		}
@@ -97,8 +89,6 @@ public class RelazionePN extends IRelazioneDiFlusso{
 			if (getClass() != obj.getClass())
 				return false;
 			RelazionePN other = (RelazionePN) obj;
-			if (marcatura != other.marcatura)
-				return false;
 			if (peso != other.peso)
 				return false;
 			return true;

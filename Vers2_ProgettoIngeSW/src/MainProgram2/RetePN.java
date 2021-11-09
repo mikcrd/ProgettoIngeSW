@@ -23,9 +23,11 @@ public class RetePN extends AbstractRete  {
 				+ "Premi b per inserire una nuova rete su cui costruire la rete di Petri";
 		private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
 		private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
-		private static final String MARCATURA = "Immetti una marcatura per la relazione corrente: ";
 		private static final String PESO = "Immetti un peso per la relazione corrente: ";
-	
+		private static final String ERR_PESO="il peso deve essere un valore maggiore o uguale a 1";
+		private static final String MARCATURA="inserire il valore di marcatura";
+		
+		int [] marcature;
 		
 		public RetePN() {
 			name=null;
@@ -71,7 +73,7 @@ public class RetePN extends AbstractRete  {
 		 * pesi: da 1 a +infinito
 		 */
 		@Override
-		public boolean isCorrect() {
+		/*public boolean isCorrect() {
            for(IRelazioneDiFlusso rel : getRelazioni()) {
         	   if(rel instanceof RelazionePN) {
 	        	   if(((RelazionePN)rel).getMarcatura() < 0 || ((RelazionePN)rel).getPeso() <= 0)
@@ -80,7 +82,7 @@ public class RetePN extends AbstractRete  {
            }
    
 		   return true;  
-		}
+		}*/
 //dasa
 	    public RetePN creaRete() {
 //			RetePN pn = new RetePN();
@@ -131,7 +133,38 @@ public class RetePN extends AbstractRete  {
 		//      } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));
 		}
 		
-		public void assegnaMarcaturaEPesi(Rete t) {
+		
+		public void assegnaMarcetureEPesi(Rete t) {
+			marcature = new int [t.getPos()];
+			
+			for (int i=0; i<t.getPos(); i++) {
+				marcature[i]= -1;
+				for(IRelazioneDiFlusso rf: t.getRelazioni()) {
+					if(rf instanceof RelazioneDiFlusso) {
+						System.out.println(((RelazioneDiFlusso)rf).toString());
+						int peso;
+						do {
+							peso = LeggiInput.leggiIntero(PESO);
+							if (peso>0) {
+								RelazionePN relPN= new RelazionePN((RelazioneDiFlusso)rf, peso);
+								relazioni.add(relPN);
+							}else
+								System.out.println(ERR_PESO);
+						}while(peso<1);
+					}
+					if (rf.getPosizione()==i && marcature[i]==-1){
+						System.out.println("posizione");
+						LeggiInput.leggiIntero(MARCATURA);
+					
+					}
+				}
+			}
+			
+			
+		}
+		
+		/*public void assegnaMarcaturaEPesi(Rete t) {
+			marcature= new int [t.getPos()];
 			for(IRelazioneDiFlusso rf: t.getRelazioni())	{
 				if(rf instanceof RelazioneDiFlusso) {
 					System.out.println(((RelazioneDiFlusso)rf).toString());
@@ -140,8 +173,11 @@ public class RetePN extends AbstractRete  {
 					//RelazionePN relPN = new RelazionePN((RelazioneDiFlusso)rf, marcatura, peso);
 					//this.aggiungiRelazione(relPN);
 				}
-			}	
-		}
+			}
+			for (int i=0; i<t.getPos(); i++) {
+				
+			}
+		}*/
 	    
 		
 		
@@ -188,6 +224,12 @@ public class RetePN extends AbstractRete  {
 				return false;  //-> xchè poi cambio nome in ArchivioReti
 			}
 			
+			return false;
+		}
+
+		@Override
+		public boolean isCorrect() {
+			// TODO Auto-generated method stub
 			return false;
 		}
 		
