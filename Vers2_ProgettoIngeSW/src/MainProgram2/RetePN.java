@@ -99,6 +99,7 @@ public class RetePN extends AbstractRete  {
 	    		}else if(aOb=='b'){
 	    			Rete r1 = new Rete();
 	    			arch.aggiungiRete(r1);
+	    			casoA_ScegliReteCostruisciPN();
 	    			
 	    		}else {
 	    			System.out.println("immettere a o b per selezionare un'opzione");
@@ -127,7 +128,7 @@ public class RetePN extends AbstractRete  {
 						System.out.println("----------------------------------------------");
 					}
 					
-					
+					this.assegnaMarcetureEPesi(r);
 					
 						
 		//      } while(!LeggiInput.yesOrNo(VUOI_QUESTA_RETE));
