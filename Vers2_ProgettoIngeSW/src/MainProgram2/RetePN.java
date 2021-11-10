@@ -109,7 +109,8 @@ public class RetePN extends AbstractRete  {
 			this.setName(LeggiInput.leggiStringa(MESS_NOME));
 			
 			// deve visualizzare solo reti -> vedi xml reti
-				
+			
+			
 			return this;
 		}
 			
