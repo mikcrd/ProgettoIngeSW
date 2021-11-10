@@ -110,7 +110,7 @@ public class RetePN extends AbstractRete  {
 			
 			// deve visualizzare solo reti -> vedi xml reti
 			
-			
+		
 			return this;
 		}
 			
