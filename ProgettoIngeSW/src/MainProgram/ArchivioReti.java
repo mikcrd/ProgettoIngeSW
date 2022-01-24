@@ -206,6 +206,7 @@ public class ArchivioReti {
 		}
 		
 		public void visualizzaRete() {
+			this.visualizzaArchivio();
 			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 			Rete daVisualizzare = this.trovaRete(nome);
 			if(daVisualizzare != null){
