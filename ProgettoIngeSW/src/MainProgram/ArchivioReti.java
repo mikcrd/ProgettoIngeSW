@@ -151,24 +151,25 @@ public class ArchivioReti {
 			
 		} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
 		
-		re.inizializzaRete();
-		
-		// controlliamo che la rete sia corretta e non sia uguale a una rete già esistenete 
-		if(re.isCorrect() && !isEqual(re)) {
-			System.out.println("La rete è corretta");
-			reti.add(re);
-			salvaLista();
-			re.stampaRete();
-		}else if(re.isCorrect() && isEqual(re)){
-			System.out.println("Rete con la stessa topologia già presente");			
-		}else if (!re.isCorrect()) {
-			System.out.println("La rete non è corretta");
+		salvaRete(re);
+    }	
+
+
+		public void salvaRete(Rete re) {
+			// controlliamo che la rete sia corretta e non sia uguale a una rete già esistenete 
+			re.inizializzaRete();
+			
+			if(re.isCorrect() && !isEqual(re)) {
+				System.out.println("La rete è corretta");
+				reti.add(re);
+				salvaLista();
+				re.stampaRete();
+			}else if(re.isCorrect() && isEqual(re)){
+				System.out.println("Rete con la stessa topologia già presente");			
+			}else if (!re.isCorrect()) {
+				System.out.println("La rete non è corretta");
+			}	
 		}
-		
-	// visualizza rete che è stata appena aggiunta: R.stampaRete();
-		
-	}	
-	
 	
 		public void eliminaRete()
 		{
