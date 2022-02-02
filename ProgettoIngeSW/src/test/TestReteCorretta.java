@@ -4,11 +4,12 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import MainProgram.*;
 
-public class TestRete {
+public class TestReteCorretta {
 
 	Rete R1;
 	ArchivioReti archivio;
@@ -65,7 +66,7 @@ public class TestRete {
 	}
 	
 	// Viene richiesto l'input del nome della rete da eliminare!! Scrivere: "corretta" e poi "s"
-	@Test
+	@Ignore
 	public void testReteCorretta_CanBeDeleted() {
 		archivio.salvaRete(R1);
 		archivio.eliminaRete();

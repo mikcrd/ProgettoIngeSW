@@ -51,6 +51,7 @@ public class Rete {
 	
 	//aggiorna matrice di incidenza 
 	public int [][] matriceIncidenza(){
+		inizializzaRete();
 		inc = new int [numPos][numTrans];
 		
 		for (int i=0; i<numPos; i++) {
@@ -64,6 +65,7 @@ public class Rete {
 	
 	//controlla che non ci siano posti volanti
 	public boolean controllaRighe(int [][] m) {
+		inizializzaRete();
 		boolean neg;
 		boolean pos;
 		
@@ -86,6 +88,7 @@ public class Rete {
 	
 	//controllo che non ci siano transizioni volanti 
 	public boolean controllaColonne(int [][] m) {
+		inizializzaRete();
 		boolean neg;
 		boolean pos;
 		
