@@ -13,7 +13,7 @@ public class ArchivioRetiNew {
 			return false;			
 	}
 	
-	public boolean stessoNome(String n) {
+	public boolean trovaNome(String n) {
 		for (Rete r : archivio) {
 			if (n.equals(r.getName()))
 				return true;
@@ -21,10 +21,14 @@ public class ArchivioRetiNew {
 		return false;
 	}
 	
+	//visualizza archivio (da copiare)
 	
+	//visualizzaRete che prende in ingresso un nome e restituisce a video una rete (usa il metodo trovaRete)
+	
+	//aggiungiRete che è un gran mistero!
 
 	public void eliminaRete(String n) {
-		if (stessoNome(n)) {
+		if (trovaNome(n)) {
 			System.out.println("la rete è stata rimossa con successo");
 		}
 		else 
