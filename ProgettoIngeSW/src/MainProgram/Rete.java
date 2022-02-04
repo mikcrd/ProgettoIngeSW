@@ -69,6 +69,10 @@ public class Rete {
 		boolean neg;
 		boolean pos;
 		
+		if(numPos == 0|| numTrans == 0) {
+			return false;
+		}
+		
 		for (int i=0; i<numPos; i++)
 		{
 			pos=false;
@@ -91,6 +95,10 @@ public class Rete {
 		inizializzaRete();
 		boolean neg;
 		boolean pos;
+		
+		if(numPos == 0|| numTrans == 0) {
+			return false;
+		}
 		
 		for (int i=0; i<numTrans; i++)
 		{
