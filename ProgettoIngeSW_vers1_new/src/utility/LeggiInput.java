@@ -15,7 +15,8 @@ public class LeggiInput {
 		  private final static char RISPOSTA_SI='S';
 		  private final static char RISPOSTA_NO='N';
 	
-		  
+		  private final static char RISPOSTA_A='A';
+		  private final static char RISPOSTA_B='B';
 	
 		  private static Scanner creaScanner ()
 		  {
@@ -197,6 +198,17 @@ public class LeggiInput {
 			  char valoreLetto = leggiUpperChar(mioMessaggio,String.valueOf(RISPOSTA_SI)+String.valueOf(RISPOSTA_NO));
 			  
 			  if (valoreLetto == RISPOSTA_SI)
+				return true;
+			  else
+				return false;
+		  }
+		  
+		  public static boolean aOrb(String messaggio)
+		  {
+			  String mioMessaggio = messaggio + "("+RISPOSTA_A+"/"+RISPOSTA_B+")";
+			  char valoreLetto = leggiUpperChar(mioMessaggio,String.valueOf(RISPOSTA_A)+String.valueOf(RISPOSTA_B));
+			  
+			  if (valoreLetto == RISPOSTA_A)
 				return true;
 			  else
 				return false;
