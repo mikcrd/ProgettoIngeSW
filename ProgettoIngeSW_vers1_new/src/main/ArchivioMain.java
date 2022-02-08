@@ -21,13 +21,32 @@ public class ArchivioMain {
 				case 1:{
 					Rete r = new Rete();
 					boolean continua,relFlusso;
-					String richiestaNome = LeggiInput.leggiStringa(RICHIESTA_NOME);
-					r.setName(richiestaNome);
+					String nome = LeggiInput.leggiStringa(RICHIESTA_NOME);
+					r.setName(nome);
 					do {
-							relFlusso=LeggiInput.aOrb("scegiere a per inserire una relazione posto-transizione \nscegliere b per inerire una relazione transizione-posto:");
+							relFlusso=LeggiInput.aOrb("scegiere a per inserire una relazione posto-transizione \n"
+									+ "scegliere b per inerire una relazione transizione-posto:");
+							int posto, transizione;
+							if(relFlusso) {
+								posto = LeggiInput.leggiIntero("inserire il numero della posizione");
+								transizione = LeggiInput.leggiIntero("inserire il numero della transizione");
+							}else {
+								transizione = LeggiInput.leggiIntero("inserire il numero della transizione");
+								posto = LeggiInput.leggiIntero("inserire il numero della posizione");
+							}
+							RelazioneDiFlusso rel = new RelazioneDiFlusso(posto, transizione,relFlusso);
+							r.aggiungiRelazione(rel);
 							continua = LeggiInput.yesOrNo("si desidera inserire una nuva relaizone di flusso?");
 					}while(continua);
-					RetiNormali.aggiungiRete(r); break;
+					if(r.isCorrect() && !RetiNormali.trovaNome(nome) ) {
+						RetiNormali.aggiungiRete(r);
+					}else if(RetiNormali.trovaNome(nome)) {
+						System.out.println("la rete inserita ha lo stesso nome di una già esistente");
+					}else {
+						System.out.println("la rete inserita non è corretta");
+					}
+					
+					break;
 				}
 				case 2:{
 					String richiestaNome = LeggiInput.leggiStringa(RICHIESTA_NOME);
