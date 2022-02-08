@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ArchivioReti>
     <reti>
-        <rete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Rete" nome="rete">
+        <rete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Rete" nome="corretta">
             <relazioni>
                 <relazione xsi:type="relazioneDiFlusso" inOut="true">
                     <posizione>1</posizione>
@@ -18,6 +18,34 @@
                 <relazione xsi:type="relazioneDiFlusso" inOut="false">
                     <posizione>1</posizione>
                     <transizione>2</transizione>
+                </relazione>
+            </relazioni>
+        </rete>
+        <rete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Rete" nome="prova">
+            <relazioni>
+                <relazione xsi:type="relazioneDiFlusso" inOut="true">
+                    <posizione>1</posizione>
+                    <transizione>1</transizione>
+                </relazione>
+                <relazione xsi:type="relazioneDiFlusso" inOut="false">
+                    <posizione>2</posizione>
+                    <transizione>1</transizione>
+                </relazione>
+                <relazione xsi:type="relazioneDiFlusso" inOut="true">
+                    <posizione>2</posizione>
+                    <transizione>2</transizione>
+                </relazione>
+                <relazione xsi:type="relazioneDiFlusso" inOut="false">
+                    <posizione>3</posizione>
+                    <transizione>2</transizione>
+                </relazione>
+                <relazione xsi:type="relazioneDiFlusso" inOut="true">
+                    <posizione>3</posizione>
+                    <transizione>3</transizione>
+                </relazione>
+                <relazione xsi:type="relazioneDiFlusso" inOut="false">
+                    <posizione>1</posizione>
+                    <transizione>3</transizione>
                 </relazione>
             </relazioni>
         </rete>

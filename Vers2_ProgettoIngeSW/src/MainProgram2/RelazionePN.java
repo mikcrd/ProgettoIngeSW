@@ -10,11 +10,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RelazionePN", propOrder = {
     "marcatura",
-    "peso"
+    "peso",
+    "relazione"
 })
 public class RelazionePN extends IRelazioneDiFlusso{
    
-		
+		int marcatura;
 		int peso;
 		private RelazioneDiFlusso relazione;
 		
@@ -24,6 +25,7 @@ public class RelazionePN extends IRelazioneDiFlusso{
 			posizione = 0;
 			transizione = 0;
 			inOut = true;
+			marcatura = 0;
 			peso = 1;
 		}
 	
@@ -52,7 +54,13 @@ public class RelazionePN extends IRelazioneDiFlusso{
 			return this.inOut;
 		}
 **/
-		
+		public int getMarcatura() {
+			return marcatura;
+		}
+	
+		public void setMarcatura(int marcatura) {
+			this.marcatura = marcatura;
+		}
 		
 		public int getPeso() {
 			return peso;

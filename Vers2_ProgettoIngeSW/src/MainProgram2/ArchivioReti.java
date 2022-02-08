@@ -4,14 +4,7 @@ package MainProgram2;
 import utility.*;
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import utility.LeggiInput;
 
@@ -92,6 +85,7 @@ public class ArchivioReti {
 				boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
 					if (procedi)
 						reti.remove(elemento);
+					    salvaLista();
 			}
 			else {
 				LeggiInput.leggiStringa(MESS_NON_TROVATA);
@@ -100,34 +94,17 @@ public class ArchivioReti {
 		
 		
 		public void aggiungiRete(AbstractRete r) {
-			//r = new Rete();	
-			//r=r.creaRete();
-		
-			if(r instanceof Rete) {
-				
-				AbstractRete nuova = new Rete(); // altrimenti usiamo la stessa rete per tutta la sessione e controllaRelaz non funziona ..
-				nuova = nuova.creaRete();                                 
-					
-				if(nuova.isCorrect() && !isEqual(nuova)) {
-	 				reti.add(nuova);
-					salvaLista();
-					nuova.stampaRete();
-				}
-			} else {
-					AbstractRete nuova = new RetePN(); // altrimenti usiamo la stessa rete per tutta la sessione e controllaRelaz non funziona ..
-					nuova = nuova.creaRete();                                 
-					
-					if(nuova.isCorrect() && !isEqual(nuova)) {
-		 				reti.add(nuova);
-						salvaLista();
-						nuova.stampaRete();
-					}
-				}
-	}
+			r=r.creaRete();                                 		
+			if(r.isCorrect() && !isEqual(r)) {
+				System.out.println("Sto salvando la rete ...");
+				reti.add(r);
+				salvaLista();
+				r.stampaRete();
+			}
+		}
 	
 		
-		public void salvaLista() 
-		{
+		public void salvaLista() {
 			GestioneFile.objToXml(this);
 		}
 			
@@ -140,20 +117,7 @@ public class ArchivioReti {
 			}
 			else {daVisualizzare.stampaRete();}	
 		}
-			
-/**			
-		public void visualizzaArchivio()
-		{
-			if(reti != null) {
-				for(AbstractRete elem : reti) {
-					System.out.println(elem.getName());
-				}
-			}
-			else {
-				System.out.println(ERRORE_ARCHIVIO_VUOTO);
-			}
-		}
-**/		
+
 		
 		public void visualizzaNomeReti() {
 			System.out.println("Nomi delle reti presenti: \n");
@@ -231,46 +195,6 @@ public class ArchivioReti {
 			}
 			return false;
 		}
-		
-		
-/**			
-		public boolean isEqual(AbstractRete daConfrontare) {
-			if(getArchivio().contains(daConfrontare)) {
-				System.out.println(MESS_DOPPIONE); 
-				return true;
-			}
-			
-			for(AbstractRete reti: getArchivio()) {
-				for(IRelazioneDiFlusso relaz: reti.getRelazioni()) {
-					if(reti.getRelazioni().containsAll(daConfrontare.getRelazioni()) 
-							&& !(reti.getName().equals(daConfrontare.getName()))) {
-						System.out.println("la topologia e' uguale a quella di una rete gia' presente in archivio");
-						return true;
-					}
-					else if(!(reti.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
-							&& (reti.getName().equals(daConfrontare.getName()))) {
-						
-						String nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
-						daConfrontare.setName(nuovoNome);
-						return false;
-					}
-					
-				}
-			}
-			return false;
-		}
-		
-		
-		
-/**			
-		public boolean isEqual(AbstractRete daConfrontare) {
-			for(AbstractRete rete: getArchivio()) {
-				if(rete.equals(daConfrontare)) 
-					return true;
-			}
-			return false;
-		}
-		
-	**/
+
 		
 }
