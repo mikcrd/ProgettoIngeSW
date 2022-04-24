@@ -53,6 +53,11 @@ import javax.xml.bind.annotation.*;
 		public void setTransizione(int transizione) {
 			this.transizione = transizione;
 		}
+		
+		public void setInOut(boolean b) {
+			this.inOut=b;
+		}
+		
 		public String toString() {
 			if (inOut)
 				return "posizione " + posizione + " transizione " + transizione;
