@@ -77,13 +77,27 @@ public class ArchivioReti {
 				for(RelazioneDiFlusso relaz: r.getRelazioni()) {
 					if(r.getRelazioni().containsAll(daConfrontare.getRelazioni()) 
 							&& !(r.getName().equals(daConfrontare.getName()))) {
-						
+						System.out.println("Esiste già una rete con la stessa topologia presente nell'archivio: "
+								+ r.getName());
 						return true;
 					}
 					else if(!(r.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
 							&& (r.getName().equals(daConfrontare.getName()))) {
+						boolean flag = false;
+						String nuovoNome;
 						
-						String nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+						do{
+							nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+							for(Rete rname : getArchivio()) {
+								if(rname.getName().equals(nuovoNome)) {
+									flag = false;
+								}
+								else {
+									flag = true;
+								}
+							}
+						} while(flag==false);
+						
 						daConfrontare.setName(nuovoNome);
 						return false;
 					}
@@ -165,7 +179,7 @@ public class ArchivioReti {
 				salvaLista();
 				re.stampaRete();
 			}else if(re.isCorrect() && isEqual(re)){
-				System.out.println("Rete con la stessa topologia già presente");			
+//				System.out.println("Rete con la stessa topologia già presente");			
 			}else if (!re.isCorrect()) {
 				System.out.println("La rete non è corretta");
 			}	
