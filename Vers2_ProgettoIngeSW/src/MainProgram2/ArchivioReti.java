@@ -110,23 +110,30 @@ public class ArchivioReti {
 			
 		
 		public void visualizzaRete() {
-			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
-			AbstractRete daVisualizzare = this.trovaRete(nome);
-			if(daVisualizzare == null) {
-				System.out.println("La rete richiesta non è presente in archivio");
-			}
-			else {daVisualizzare.stampaRete();}	
+			 if(reti != null && !(reti.isEmpty())) { 
+					String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+					AbstractRete daVisualizzare = this.trovaRete(nome);
+					if(daVisualizzare == null) {
+						System.out.println("La rete richiesta non è presente in archivio");
+					}
+					else {
+						daVisualizzare.stampaRete();}	
+			 }else { 
+					System.out.println(ERRORE_ARCHIVIO_VUOTO);
+				}
 		}
 
 		
 		public void visualizzaNomeReti() {
 			System.out.println("Nomi delle reti presenti: \n");
-			if(reti != null) {
+			if(reti != null && !(reti.isEmpty())) {
 				for(AbstractRete elem : reti) {
 					if(elem instanceof Rete) {
 						System.out.println(elem.getName());
 					}
 				}
+			} else { 
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);
 			}
 		}
 		 
