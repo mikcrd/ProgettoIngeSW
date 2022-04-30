@@ -123,50 +123,50 @@ public class ArchivioReti {
 			return null;  
 		 }
 
-	public void aggiungiRete()	{
-		
-		Rete re = new Rete();
-		re.setName(LeggiInput.leggiStringa(MESS_NOME));
-		
-		do {
-				
-				char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
-				
-				int posto;
-				int transizione;
-				
-				RelazioneDiFlusso rf = null;
-				
-				do {
-						if(aOb == 'a') {
-							posto = LeggiInput.leggiInteroPositivo(POSTO);
-							transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
-							rf = new RelazioneDiFlusso(posto, transizione, true);
-							break;
-						}
-						
-						else if(aOb == 'b') {
-							transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
-							posto = LeggiInput.leggiInteroPositivo(POSTO);
-							rf = new RelazioneDiFlusso(posto, transizione, false);
-							break;
-						}
-						
-						else {
-							aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
-						}
-					
-			      } while(aOb != 'a' || aOb != 'b');
+		public void aggiungiRete()	{
 			
-				if(!re.controllaRelazione(rf)) {
-					
-				      re.aggiungiRelazione(rf);
-				}
+			Rete re = new Rete();
+			re.setName(LeggiInput.leggiStringa(MESS_NOME));
 			
-		} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
-		
-		salvaRete(re);
-    }	
+			do {
+					
+					char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
+					
+					int posto;
+					int transizione;
+					
+					RelazioneDiFlusso rf = null;
+					
+					do {
+							if(aOb == 'a') {
+								posto = LeggiInput.leggiInteroPositivo(POSTO);
+								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+								rf = new RelazioneDiFlusso(posto, transizione, true);
+								break;
+							}
+							
+							else if(aOb == 'b') {
+								transizione = LeggiInput.leggiInteroPositivo(TRANSIZIONE);
+								posto = LeggiInput.leggiInteroPositivo(POSTO);
+								rf = new RelazioneDiFlusso(posto, transizione, false);
+								break;
+							}
+							
+							else {
+								aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
+							}
+						
+				      } while(aOb != 'a' || aOb != 'b');
+				
+					if(!re.controllaRelazione(rf)) {
+						
+					      re.aggiungiRelazione(rf);
+					}
+				
+			} while(LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
+			
+			salvaRete(re);
+	    }	
 
 
 		public void salvaRete(Rete re) {
@@ -210,7 +210,7 @@ public class ArchivioReti {
 
 		public void visualizzaArchivio()
 		{
-			if(reti != null) {
+			if(reti != null && !(reti.isEmpty())) {
 				for(Rete elem : reti) {
 					System.out.println(elem.getName());
 				}
@@ -222,14 +222,17 @@ public class ArchivioReti {
 		
 		public void visualizzaRete() {
 			this.visualizzaArchivio(); 
-			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
-			Rete daVisualizzare = this.trovaRete(nome);
-			if(daVisualizzare != null){
-				daVisualizzare.stampaRete();	
-			} 
-			else{  
-				System.out.println(MESS_NON_TROVATA);
-		    }
+            if(reti != null && !(reti.isEmpty())) { 
+				
+				String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+				Rete daVisualizzare = this.trovaRete(nome);
+				if(daVisualizzare != null){
+					daVisualizzare.stampaRete();	
+				} 
+				else{  
+					System.out.println(MESS_NON_TROVATA);
+			    }
+			}
      }
 		
 		
