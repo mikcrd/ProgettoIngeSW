@@ -16,8 +16,7 @@ public class TestReteCasiParticolari {
 	ArchivioReti archivio;
 	
 	@Before
-	public void setUp() throws Exception {
-		R1 = new Rete();		
+	public void setUp() throws Exception {		
 		archivio = new ArchivioReti();	
 	}
 	
@@ -123,16 +122,5 @@ public class TestReteCasiParticolari {
 		archivio.salvaRete(R1);
 		assertThat(archivio.getArchivio()).doesNotContain(R1);  
 	}
-	
-	@Test
-	public void testReteNonInizializzata_ShouldNotBeCorrect() {
-		R1.stampaRete();
-		assertThat(R1.isCorrect()).isFalse(); 
-	}
-	
-	@Test
-	public void testReteNonInizializzata_ShouldNotBeSaved() {
-		archivio.salvaRete(R1);
-		assertThat(archivio.getArchivio()).doesNotContain(R1); 
-	}
+
 }
