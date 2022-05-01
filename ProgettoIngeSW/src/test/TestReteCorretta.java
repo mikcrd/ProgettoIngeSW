@@ -3,6 +3,8 @@ package test;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.*;
 
+import javax.swing.SpringLayout.Constraints;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -65,6 +67,20 @@ public class TestReteCorretta {
 		assertThat(archivio.getArchivio()).doesNotContain(R1);
 	}
 	
+	@Test
+	public void testReteCorretta_CanBeViewed() {
+		/**
+		 * corretta
+			posizione 1 transizione 1
+			transizione 1 posizione 2
+			posizione 2 transizione 2
+			transizione 2 posizione 1
+		 */
+		String str = R1.toString();
+		assertThat(str.contains(R1.getName()));
+		assertThat(str.contains(R1.getRelazioni().toString()));
+	}
+	
 	// Viene richiesto l'input del nome della rete da eliminare!! Scrivere: "corretta" e poi "s"
 	@Ignore
 	public void testReteCorretta_CanBeDeleted() {
@@ -72,5 +88,4 @@ public class TestReteCorretta {
 		archivio.eliminaRete();
 		assertThat(archivio.getArchivio()).doesNotContain(R1);
 	}
-
 }
