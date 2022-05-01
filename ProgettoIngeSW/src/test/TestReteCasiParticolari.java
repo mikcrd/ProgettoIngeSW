@@ -28,7 +28,7 @@ public class TestReteCasiParticolari {
 		R1.aggiungiRelazione(rf1);
 		R1.setName("unRdf11");
 		R1.stampaRete();
-		
+
 		assertThat(R1.isCorrect()).isFalse(); //requisito aggiuntivo
 	}
 	
