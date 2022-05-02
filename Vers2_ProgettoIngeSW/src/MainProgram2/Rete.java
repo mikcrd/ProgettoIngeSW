@@ -79,6 +79,7 @@ public class Rete extends AbstractRete  {
 		
 		//aggiorna matrice di incidenza 
 		public int [][] matriceIncidenza(){
+			inizializzaRete();
 			inc = new int [numPos][numTrans];
 			
 			for (int i=0; i<numPos; i++) {
@@ -92,8 +93,13 @@ public class Rete extends AbstractRete  {
 		
 		//controlla che non ci siano posti volanti
 		public boolean controlloRighe(int [][] m) {
+			inizializzaRete();
 			boolean neg;
 			boolean pos;
+			
+			if(numPos == 0|| numTrans == 0) {
+				return false;
+			}
 			
 			for (int i=0; i<numPos; i++)
 			{
@@ -114,8 +120,13 @@ public class Rete extends AbstractRete  {
 		
 		//controllo che non ci siano transizioni volanti 
 		public boolean controlloColonne(int [][] m) {
+			inizializzaRete();
 			boolean neg;
 			boolean pos;
+			
+			if(numPos == 0|| numTrans == 0) {
+				return false;
+			}
 			
 			for (int i=0; i<numTrans; i++)
 			{
