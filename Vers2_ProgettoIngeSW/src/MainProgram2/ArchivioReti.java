@@ -95,6 +95,12 @@ public class ArchivioReti {
 		
 		public void aggiungiRete(AbstractRete r) {
 			r=r.creaRete();                                 		
+			salvaRete(r);
+		}
+	
+		//mi serve per il testing
+		public void salvaRete(AbstractRete r) {
+			
 			if(r.isCorrect() && !isEqual(r)) {
 				System.out.println("Sto salvando la rete ...");
 				reti.add(r);
@@ -102,7 +108,6 @@ public class ArchivioReti {
 				r.stampaRete();
 			}
 		}
-	
 		
 		public void salvaLista() {
 			GestioneFile.objToXml(this);
