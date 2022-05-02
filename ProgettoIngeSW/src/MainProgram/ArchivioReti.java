@@ -211,6 +211,7 @@ public class ArchivioReti {
 		public void visualizzaArchivio()
 		{
 			if(reti != null && !(reti.isEmpty())) {
+				System.out.println("le reti presenti nell'archivio sono le seguenti:");
 				for(Rete elem : reti) {
 					System.out.println(elem.getName());
 				}

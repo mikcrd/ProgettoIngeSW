@@ -68,4 +68,9 @@ public class ArchivioRetiNew {
 		else 
 			System.out.println("la rete non è presente nell'archivio");
 	}
+	
+	//salva la rete su file xml 
+	private void salvaReteSuFile() {
+		
+	}
 }
