@@ -31,7 +31,7 @@ public class RetePN extends AbstractRete  {
 		
 		public RetePN() {
 			name=null;
-			relazioni = new ArrayList<IRelazioneDiFlusso>();
+			relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 		}
 
 /**		
@@ -141,7 +141,7 @@ public class RetePN extends AbstractRete  {
 			
 			for (int i=0; i<t.getPos(); i++) {
 				marcature[i]= -1;
-				for(IRelazioneDiFlusso rf: t.getRelazioni()) {
+				for(AbstractRelazioneDiFlusso rf: t.getRelazioni()) {
 					if(rf instanceof RelazioneDiFlusso) {
 						System.out.println(((RelazioneDiFlusso)rf).toString());
 						int peso;
@@ -187,7 +187,7 @@ public class RetePN extends AbstractRete  {
 		public void stampaRete() {
 			System.out.println();
 			System.out.println(this.name);
-			for (IRelazioneDiFlusso r : this.relazioni) {
+			for (AbstractRelazioneDiFlusso r : this.relazioni) {
 				if(r instanceof RelazionePN) {
 				   System.out.println(((RelazionePN)r).toString());
 				}

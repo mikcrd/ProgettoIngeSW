@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import utility.LeggiInput;
 
 	
-public class RelazioneDiFlusso extends IRelazioneDiFlusso {
+public class RelazioneDiFlusso extends AbstractRelazioneDiFlusso {
 	
 	private static final String POSTO = "Inserisci un intero positivo per il posto: ";
 	private static final String TRANSIZIONE = "Inserisci un intero positivo per la transizione: ";

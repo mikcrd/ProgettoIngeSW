@@ -35,11 +35,11 @@ public abstract class AbstractRete {
 		
 		@XmlElementWrapper(name="relazioni")
 		@XmlElement(name="relazione", required = true)
-		ArrayList<IRelazioneDiFlusso> relazioni;
+		ArrayList<AbstractRelazioneDiFlusso> relazioni;
 		
 		public AbstractRete() {
 			name=null;
-			relazioni = new ArrayList<IRelazioneDiFlusso>();
+			relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 		}
 		
 		public AbstractRete(ArchivioReti arc) {
@@ -48,7 +48,7 @@ public abstract class AbstractRete {
 		
 		
 
-		public AbstractRete(String name, ArrayList<IRelazioneDiFlusso> relazioni) {
+		public AbstractRete(String name, ArrayList<AbstractRelazioneDiFlusso> relazioni) {
 			super();
 			this.name = name;
 			this.relazioni = relazioni;
@@ -63,9 +63,9 @@ public abstract class AbstractRete {
 			this.name = name;
 		}
 		
-		public List<IRelazioneDiFlusso> getRelazioni() {
+		public List<AbstractRelazioneDiFlusso> getRelazioni() {
 	        if (relazioni == null) {
-	            relazioni = new ArrayList<IRelazioneDiFlusso>();
+	            relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 	        }
 	        return this.relazioni;
 	    }

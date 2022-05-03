@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
     RelazioneDiFlusso.class,
     RelazionePN.class
 })
-public abstract class IRelazioneDiFlusso {
+public abstract class AbstractRelazioneDiFlusso {
 
 	int posizione; 	
 	int transizione;

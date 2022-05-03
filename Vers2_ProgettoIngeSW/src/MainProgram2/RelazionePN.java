@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
     "peso",
     "relazione"
 })
-public class RelazionePN extends IRelazioneDiFlusso{
+public class RelazionePN extends AbstractRelazioneDiFlusso{
    
 		int marcatura;
 		int peso;

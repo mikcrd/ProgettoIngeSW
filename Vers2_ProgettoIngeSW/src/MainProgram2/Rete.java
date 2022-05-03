@@ -41,7 +41,7 @@ public class Rete extends AbstractRete  {
 			numPos=0;
 			numTrans=0;
 			name=null;
-			relazioni = new ArrayList<IRelazioneDiFlusso>();
+			relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 		}
 
 		/**
@@ -148,7 +148,7 @@ public class Rete extends AbstractRete  {
 		//ritorna il numero massimo della posizione
 		public void contaPosizioni() {
 			int max=0;
-			for(IRelazioneDiFlusso r :  relazioni) {
+			for(AbstractRelazioneDiFlusso r :  relazioni) {
 				if(r instanceof RelazioneDiFlusso) {
 					if(((RelazioneDiFlusso)r).getPosizione()>max)
 						max=((RelazioneDiFlusso)r).getPosizione();
@@ -161,7 +161,7 @@ public class Rete extends AbstractRete  {
 		//ritorna il numero massimo delle transizioni 
 		public void contaTransizioni() {
 			int max=0;
-			for(IRelazioneDiFlusso r :  relazioni) {
+			for(AbstractRelazioneDiFlusso r :  relazioni) {
 				if(r instanceof RelazioneDiFlusso) {
 					if(((RelazioneDiFlusso)r).getTransizione()>max)
 						max=((RelazioneDiFlusso)r).getTransizione();
@@ -191,9 +191,9 @@ public class Rete extends AbstractRete  {
 			{
 				for(int j=0; j<numTrans; j++)
 				{
-					for(IRelazioneDiFlusso r: relazioni)
+					for(AbstractRelazioneDiFlusso r: relazioni)
 					{
-						if(r instanceof IRelazioneDiFlusso) {
+						if(r instanceof AbstractRelazioneDiFlusso) {
 							if(((RelazioneDiFlusso)r).getPosizione()==i+1 && ((RelazioneDiFlusso)r).getTransizione()==j+1 && ((RelazioneDiFlusso)r).isInOut()==true) 
 								in[i][j]=1; 	
 							else if (((RelazioneDiFlusso)r).getPosizione()==i+1 && ((RelazioneDiFlusso)r).getTransizione()==j+1 && ((RelazioneDiFlusso)r).isInOut()==false)
@@ -267,7 +267,7 @@ public class Rete extends AbstractRete  {
 		public void stampaRete() {
 			System.out.println();
 			System.out.println(this.name);
-			for (IRelazioneDiFlusso r :  this.relazioni) {
+			for (AbstractRelazioneDiFlusso r :  this.relazioni) {
 				if(r instanceof RelazioneDiFlusso) {
 				   System.out.println(((RelazioneDiFlusso)r).toString());
 				} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
