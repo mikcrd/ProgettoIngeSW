@@ -93,7 +93,6 @@ public class Rete extends AbstractRete  {
 		
 		//controlla che non ci siano posti volanti
 		public boolean controlloRighe(int [][] m) {
-			inizializzaRete();
 			boolean neg;
 			boolean pos;
 			
@@ -120,7 +119,6 @@ public class Rete extends AbstractRete  {
 		
 		//controllo che non ci siano transizioni volanti 
 		public boolean controlloColonne(int [][] m) {
-			inizializzaRete();
 			boolean neg;
 			boolean pos;
 			
