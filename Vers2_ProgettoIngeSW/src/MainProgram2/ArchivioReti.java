@@ -79,6 +79,7 @@ public class ArchivioReti {
 		
 		public void eliminaRete()
 		{
+			this.visualizzaNomeReti();
 			AbstractRete elemento = cercaRete();
 			if (elemento!= null)
 			{
@@ -115,6 +116,7 @@ public class ArchivioReti {
 			
 		
 		public void visualizzaRete() {
+			this.visualizzaNomeReti();
 			 if(reti != null && !(reti.isEmpty())) { 
 					String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 					AbstractRete daVisualizzare = this.trovaRete(nome);
@@ -128,7 +130,7 @@ public class ArchivioReti {
 				}
 		}
 
-		
+		//visualizza i nomi di tutte e sole le reti presenti nell'archivio
 		public void visualizzaNomeReti() {
 			System.out.println("Nomi delle reti presenti: \n");
 			if(reti != null && !(reti.isEmpty())) {
@@ -142,7 +144,7 @@ public class ArchivioReti {
 			}
 		}
 		 
-		
+		//visualizza il nome di tutte e sole le PN nell'archivio
 		public void visualizzaNomeRetiPN() {
 			if(reti != null) {
 				for(AbstractRete elem : reti) {

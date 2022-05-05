@@ -1,4 +1,4 @@
-package MainProgram;
+package mainProgram;
 
 public class MainXml {
 

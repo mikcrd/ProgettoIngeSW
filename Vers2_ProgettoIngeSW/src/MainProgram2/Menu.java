@@ -17,13 +17,12 @@ public class Menu {
 		private static final String TITOLO_RETEP = "ARCHIVIO RETI DI PETRI \n";
 		private static final String[] MENU_RETEP = {"Aggiungi rete di Petri", "Visualizza rete di Petri", 
 				"Elimina rete di Petri", "Visualizza l'archivio reti di Petri"};
+		private static File file = new File("src\\data\\reti_xml.xml");
 		
 		ArchivioReti archivio;
 		String differenziaRete;
 
-		public Menu(ArchivioReti arch) { // dependency injection
-				this.archivio = arch;
-		}
+		
 
 		
 		public void cicloApplicazione() {
@@ -46,6 +45,10 @@ public class Menu {
 
 		public void menuReti(String titolo, String[] scelte, String differenzia) {		
 			MyMenu menu = new MyMenu(titolo,scelte);
+			
+	  		if(file.length() != 0L) {
+	  			archivio = GestioneFile.xmlToObj(file);
+	  		}
 			do{
 		  		   menu.stampaMenu();
 		   		   int cmd = menu.scegli();
@@ -57,7 +60,7 @@ public class Menu {
 			   		    	   			archivio.aggiungiRete(r); break;
 			   		       		}
 			   		       		else if(differenziaRete == "retePn") {
-				   		       		    AbstractRete r = new RetePN();
+				   		       		    AbstractRete r = new RetePN(archivio);
 			   		    	   		    archivio.aggiungiRete(r); break;
 			   		       		}
 			   		     case 2: archivio.visualizzaRete(); break;
