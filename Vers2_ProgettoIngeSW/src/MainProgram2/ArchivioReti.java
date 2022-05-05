@@ -183,10 +183,10 @@ public class ArchivioReti {
 		
 		public boolean isEqual(AbstractRete daConfrontare) {
 			for(AbstractRete rete: getArchivio()) {
-				if(rete.equals(daConfrontare)) 
-					return true;
-				else if(/**!(rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
-						&&**/ (rete.getName().equals(daConfrontare.getName()))) {
+				if(rete.equals(daConfrontare)) {
+					return true; }
+				else if(!(rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
+						&& (rete.getName().equals(daConfrontare.getName()))) {
 					String nuovoNome;
 					boolean flag;
 					do {
@@ -203,6 +203,9 @@ public class ArchivioReti {
 
 					daConfrontare.setName(nuovoNome);
 					return false;
+				}
+				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni()))) {
+					return true;
 				}
 			}
 			return false;
