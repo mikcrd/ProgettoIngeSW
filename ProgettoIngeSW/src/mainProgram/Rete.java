@@ -1,4 +1,4 @@
-package MainProgram;
+package mainProgram;
 
 import java.awt.List;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package MainProgram;
+package mainProgram;
 
 import javax.xml.bind.annotation.*;
 

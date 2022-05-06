@@ -1,4 +1,4 @@
-package MainProgram;
+package mainProgram;
 import java.io.File;
 
 import utility.MyMenu;

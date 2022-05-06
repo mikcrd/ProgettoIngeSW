@@ -6,9 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import MainProgram.ArchivioReti;
-import MainProgram.RelazioneDiFlusso;
-import MainProgram.Rete;
+import mainProgram.*;
 
 public class TestReteNonCorretta {
 
