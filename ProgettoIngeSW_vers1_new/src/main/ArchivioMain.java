@@ -28,6 +28,7 @@ public class ArchivioMain {
 									+ "scegliere b per inerire una relazione transizione-posto:");
 							int posto, transizione;
 							if(relFlusso) {
+								//ciao
 								posto = LeggiInput.leggiIntero("inserire il numero della posizione");
 								transizione = LeggiInput.leggiIntero("inserire il numero della transizione");
 							}else {
