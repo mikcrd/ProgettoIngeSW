@@ -63,7 +63,12 @@ public class Menu {
 				   		       		    AbstractRete r = new RetePN(archivio);
 			   		    	   		    archivio.aggiungiRete(r); break;
 			   		       		}
-			   		     case 2: archivio.visualizzaRete(); break;
+			   		     case 2:if(differenziaRete == "rete") {
+			   		    	 archivio.visualizzaRete(); break;
+			   		     } else if(differenziaRete == "retePn") {
+			   		    	 archivio.visualizzaRetePetri();break;
+			   		     }
+			   		     
 			   		     case 3: archivio.eliminaRete(); break;
 			   		     case 4: if(differenziaRete == "rete") {
 					   		    	    archivio.visualizzaNomeReti(); break;

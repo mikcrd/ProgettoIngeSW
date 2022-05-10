@@ -129,6 +129,21 @@ public class ArchivioReti {
 					System.out.println(ERRORE_ARCHIVIO_VUOTO);
 				}
 		}
+		
+		public void visualizzaRetePetri() {
+			this.visualizzaNomeRetiPN();
+			 if(reti != null && !(reti.isEmpty())) { 
+					String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+					AbstractRete daVisualizzare = this.trovaRete(nome);
+					if(daVisualizzare == null) {
+						System.out.println("La rete richiesta non è presente in archivio");
+					}
+					else {
+						daVisualizzare.stampaRete();}	
+			 }else { 
+					System.out.println(ERRORE_ARCHIVIO_VUOTO);
+				}
+		}
 
 		//visualizza i nomi di tutte e sole le reti presenti nell'archivio
 		public void visualizzaNomeReti() {
