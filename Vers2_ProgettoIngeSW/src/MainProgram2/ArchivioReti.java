@@ -80,7 +80,6 @@ public class ArchivioReti {
 		
 		public void eliminaRete()
 		{
-			this.visualizzaNomeReti();
 			AbstractRete elemento = cercaRete();
 			if (elemento!= null)
 			{

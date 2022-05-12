@@ -69,7 +69,12 @@ public class Menu {
 			   		    	 archivio.visualizzaRetePetri();break;
 			   		     }
 			   		     
-			   		     case 3: archivio.eliminaRete(); break;
+			   		     case 3: if(differenziaRete == "rete") {
+	   		    	 				archivio.visualizzaNomeReti(); 
+	   		     		 		} else if(differenziaRete == "retePn") {
+	   		     		 			archivio.visualizzaNomeRetiPN();
+	   		     		 		}
+	   		     		 		archivio.eliminaRete(); break;
 			   		     case 4: if(differenziaRete == "rete") {
 					   		    	    archivio.visualizzaNomeReti(); break;
 					   		     } else if(differenziaRete == "retePn") { 
