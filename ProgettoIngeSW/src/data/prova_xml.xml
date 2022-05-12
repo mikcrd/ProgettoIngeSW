@@ -1,47 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <archivioReti>
     <reti>
-        <rete name="ciao">
-            <relazione posto-trans="false">
-                <posizione>1</posizione>
-                <transizione>2</transizione>
-            </relazione>
-            <relazione posto-trans="false">
-                <posizione>1</posizione>
-                <transizione>2</transizione>
-            </relazione>
-        </rete>
-        <rete name="rete">
-            <relazione posto-trans="false">
-                <posizione>5</posizione>
-                <transizione>6</transizione>
-            </relazione>
-            <relazione posto-trans="false">
-                <posizione>5</posizione>
-                <transizione>6</transizione>
-            </relazione>
-        </rete>
         <rete name="corretta">
             <relazione posto-trans="true">
                 <posizione>1</posizione>
-                <transizione>2</transizione>
-            </relazione>
-            <relazione posto-trans="false">
-                <posizione>2</posizione>
-                <transizione>2</transizione>
-            </relazione>
-            <relazione posto-trans="true">
-                <posizione>2</posizione>
-                <transizione>1</transizione>
-            </relazione>
-            <relazione posto-trans="false">
-                <posizione>1</posizione>
-                <transizione>1</transizione>
-            </relazione>
-        </rete>
-        <rete name="bis">
-            <relazione posto-trans="true">
-                <posizione>1</posizione>
                 <transizione>1</transizione>
             </relazione>
             <relazione posto-trans="false">
@@ -57,7 +19,7 @@
                 <transizione>2</transizione>
             </relazione>
         </rete>
-        <rete name="ter">
+        <rete name="2corretta">
             <relazione posto-trans="true">
                 <posizione>1</posizione>
                 <transizione>1</transizione>
