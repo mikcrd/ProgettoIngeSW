@@ -29,6 +29,16 @@ public abstract class AbstractRete {
 		
 	    @XmlTransient
 		ArchivioReti arch;
+	    
+	    @XmlTransient
+		int numPos, numTrans;
+	    
+	    @XmlTransient
+		int [][] in;
+		@XmlTransient
+		int [][]out;
+		@XmlTransient
+		int [][] inc;
 		
 		@XmlAttribute(name = "nome")
 		String name;
@@ -36,6 +46,7 @@ public abstract class AbstractRete {
 		@XmlElementWrapper(name="relazioni")
 		@XmlElement(name="relazione", required = true)
 		ArrayList<AbstractRelazioneDiFlusso> relazioni;
+		
 		
 		public AbstractRete() {
 			name=null;

@@ -84,38 +84,58 @@ public class RetePN extends AbstractRete  {
 		   return true;  
 		}*/
 //dasa
-	    public RetePN creaRete() {
-//			RetePN pn = new RetePN();
-//			return arch.creaRetePN(pn); // risolto con dependency inj
-	    	char aOb;
-	    	do {
-	    		aOb = LeggiInput.leggiChar(SCEGLI_CREA);
-	    		if (aOb=='a') {
-	    			System.out.println("lista reti");
-	    			arch.visualizzaSoloRetiArchivio(); // prima gli faccio vedere l'archivio, poi gli faccio scegliere ...
-	    			
-	    			casoA_ScegliReteCostruisciPN();
-	    			
-	    		}else if(aOb=='b'){
-	    			Rete r1 = new Rete();
-	    			arch.aggiungiRete(r1);
-	    			casoA_ScegliReteCostruisciPN();
-	    			
-	    		}else {
-	    			System.out.println("immettere a o b per selezionare un'opzione");
-	    		}
-	    	}while (aOb!='a' || aOb!='b');
-	    	
-			this.setName(LeggiInput.leggiStringa(MESS_NOME));
-			
+		public RetePN creaRete() {
+
 			// deve visualizzare solo reti -> vedi xml reti
+			Rete r;
+			arch.visualizzaSoloRetiArchivio();
+			String nomeRete = LeggiInput.leggiStringa(SCEGLI_RETE);
 			
+			r = (Rete) arch.trovaRete(nomeRete); // se sbaglia a scrivere ...
+			if(r == null) {
+				LeggiInput.leggiStringa(MESS_NON_TROVATA);
+			}
+			else{
+				this.setName(LeggiInput.leggiStringa(MESS_NOME));
+				//r.stampaRete();
+				r.contaPosizioni();
+				//System.out.println(r.getPos());
+				
+				this.inizializzaReteP(r);
+				System.out.println("----------------------------------------------");
+			}
 		
 			return this;
 		}
+		
+		public void aggiungiMarcature(int np) {
+			for(int i=0; i<np; i++) {
+				int j=i;
+				marcature[i]=LeggiInput.leggiIntero(MARCATURA + " per la posizione " + ++j + ": ");
+
+			}
+		}
+		
+		
+		private void inizializzaReteP(Rete re) {
+			this.numPos=re.getPos();
+			marcature = new int [numPos];
+			this.aggiungiMarcature(numPos);
+			this.aggiungiPesiRelazione(re);
+		}
+		
+		public void aggiungiPesiRelazione(Rete re) {
+			
+			for (AbstractRelazioneDiFlusso rel : re.getRelazioni()) {
+				System.out.println();
+				int peso = LeggiInput.leggiInteroPositivo("inserire il peso in questa relazione di flusso [" + rel.toString() + "]: ");
+				RelazionePN pn = new RelazionePN(((RelazioneDiFlusso)rel), peso);
+				this.aggiungiRelazione(pn);
+			}
+		}
 			
 			
-		public void casoA_ScegliReteCostruisciPN() {
+		/* public void casoA_ScegliReteCostruisciPN() {
 			Rete r;
 	//		do{
 					String nomeRete = LeggiInput.leggiStringa(SCEGLI_RETE);
@@ -164,6 +184,7 @@ public class RetePN extends AbstractRete  {
 			
 			
 		}
+		*/
 		
 		/*public void assegnaMarcaturaEPesi(Rete t) {
 			marcature= new int [t.getPos()];
@@ -191,7 +212,12 @@ public class RetePN extends AbstractRete  {
 				if(r instanceof RelazionePN) {
 				   System.out.println(((RelazionePN)r).toString());
 				}
-			}			
+			}
+			System.out.println("Marcature:");
+			for (int i =0; i<marcature.length; i++) {
+				int j=i;
+				System.out.println("Posizione " + ++j + " marcatura " + marcature[i]);
+			}
 		}
 
 		@Override
@@ -232,7 +258,7 @@ public class RetePN extends AbstractRete  {
 		@Override
 		public boolean isCorrect() {
 			// TODO Auto-generated method stub
-			return false;
+			return true;
 		}
 		
 	

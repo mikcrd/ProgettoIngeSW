@@ -23,18 +23,12 @@ public class Rete extends AbstractRete  {
 				+ "Per aggiungere una coppia transizione-posto premere 'b' : ";
 		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
 		
-		@XmlTransient
-		int numPos, numTrans;
+		
 		
 //		ArrayList<IRelazioneDiFlusso> relazioni;
 //	    String name;
 		
-		@XmlTransient
-		int [][] in;
-		@XmlTransient
-		int [][]out;
-		@XmlTransient
-		int [][] inc;
+		
 	
 		
 		public Rete (){
@@ -76,6 +70,9 @@ public class Rete extends AbstractRete  {
 			return numPos;
 		}
 /////////////////////////////////////////////////////////		
+		
+		
+		
 		
 		//aggiorna matrice di incidenza 
 		public int [][] matriceIncidenza(){
