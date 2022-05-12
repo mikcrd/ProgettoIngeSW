@@ -20,6 +20,7 @@ public class ArchivioReti {
 	private final static String MESS_DOPPIONE = "Attenzione: non si puo' inserire una rete  gia' esistente!";
 	private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
 			+ "rete con questo nome. Inserire un altro nome: ";
+	private final static String MESS_STESSA_TOPOLOGIA = "Attenzione: nell'archivio è già presente una rete con la stessa topologia: ";
 	private final static String MESS_CERCA_RETE = "Inserisci il nome della rete: ";
 	private final static String MESS_RIMOZIONE = " : confermi la rimozione di questa rete?";
 	private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
@@ -201,6 +202,7 @@ public class ArchivioReti {
 		public boolean isEqual(AbstractRete daConfrontare) {
 			for(AbstractRete rete: getArchivio()) {
 				if(rete.equals(daConfrontare)) {
+					System.out.println(MESS_DOPPIONE);
 					return true; }
 				else if(!(rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
 						&& (rete.getName().equals(daConfrontare.getName()))) {
@@ -222,6 +224,8 @@ public class ArchivioReti {
 					return false;
 				}
 				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni()))) {
+					System.out.print(MESS_STESSA_TOPOLOGIA);
+					System.out.println(rete.getName());
 					return true;
 				}
 			}
