@@ -161,10 +161,10 @@ public class ArchivioReti {
 		 
 		//visualizza il nome di tutte e sole le PN nell'archivio
 		public void visualizzaNomeRetiPN() {
+			System.out.println("Nomi delle reti di Petri presenti: \n");
 			if(reti != null) {
 				for(AbstractRete elem : reti) {
 					if(elem instanceof RetePN) {
-						System.out.println("Nomi delle reti di Petri presenti: \n");
 						System.out.println(elem.getName());
 					}
 				}
@@ -223,6 +223,12 @@ public class ArchivioReti {
 					return false;
 				}
 				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni()))) {
+					if(rete instanceof RetePN && 
+							daConfrontare instanceof RetePN &&
+							!((RetePN)rete).getMarcature().equals(((RetePN)daConfrontare).getMarcature())) {
+						return false;
+						
+					}
 					System.out.print(MESS_STESSA_TOPOLOGIA);
 					System.out.println(rete.getName());
 					return true;

@@ -1,6 +1,7 @@
 package MainProgram2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -66,7 +67,10 @@ public class RetePN extends AbstractRete  {
 			this.getRelazioni().add(r);		
 		}
 
-
+		public int[] getMarcature() {
+			return marcature;
+		}
+		
 		/**
 		 * Se almeno un peso o una marcatura non sono validi, ritorna falso
 		 * marcature: da 0 a +infinito
@@ -223,9 +227,10 @@ public class RetePN extends AbstractRete  {
 		@Override
 		public int hashCode() {
 			final int prime = 31;
-			int result = 0;
+			int result = 1;
 			result = prime * result + ((name == null) ? 0 : name.hashCode());
 			result = prime * result + ((relazioni == null) ? 0 : relazioni.hashCode());
+			result = prime * result + Arrays.hashCode(marcature);
 			return result;
 		}
 
@@ -237,6 +242,8 @@ public class RetePN extends AbstractRete  {
 				return false;
 			
 			RetePN other = (RetePN) obj;
+			if (!Arrays.equals(marcature, other.marcature))
+				return false;
 			if (relazioni == null) {
 				if (other.relazioni != null)
 					return false;
@@ -251,9 +258,10 @@ public class RetePN extends AbstractRete  {
 			} else if (name.equals(other.name)) { //rel diverse e nome uguale
 				return false;  //-> xchè poi cambio nome in ArchivioReti
 			}
-			
+
 			return false;
 		}
+
 
 		@Override
 		public boolean isCorrect() {
