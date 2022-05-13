@@ -93,14 +93,14 @@ public class RetePN extends AbstractRete  {
 			// deve visualizzare solo reti -> vedi xml reti
 			Rete r;
 			arch.visualizzaSoloRetiArchivio();
-			String nomeRete = LeggiInput.leggiStringa(SCEGLI_RETE);
+			String nomeRete = LeggiInput.leggiStringaNonVuota(SCEGLI_RETE);
 			
 			r = (Rete) arch.trovaRete(nomeRete); // se sbaglia a scrivere ...
 			if(r == null) {
 				LeggiInput.leggiStringa(MESS_NON_TROVATA);
 			}
 			else{
-				this.setName(LeggiInput.leggiStringa(MESS_NOME));
+				this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
 				//r.stampaRete();
 				r.contaPosizioni();
 				//System.out.println(r.getPos());
