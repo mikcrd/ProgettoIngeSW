@@ -230,7 +230,7 @@ public class Rete extends AbstractRete  {
 		@Override
 		public Rete creaRete() {
 		//	Rete r = new Rete();
-			this.setName(LeggiInput.leggiStringa(MESS_NOME));
+			this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
 			do {
 					char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
 					RelazioneDiFlusso rf = new RelazioneDiFlusso();
