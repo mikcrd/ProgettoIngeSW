@@ -5,7 +5,7 @@ import java.io.File;
 import utility.MyMenu;
 
 public class Menu {
-
+        
 		private static final String TITOLO = "MENU PRINCIPALE \n";
 		private static final String[] MENU = {"Vuoi usare le RETI?", "Vuoi usare le RETI DI PETRI?"};
 
