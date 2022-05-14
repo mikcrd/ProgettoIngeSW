@@ -147,11 +147,14 @@ public class ArchivioReti {
 
 		//visualizza i nomi di tutte e sole le reti presenti nell'archivio
 		public void visualizzaNomeReti() {
-			System.out.println("Nomi delle reti presenti: \n");
+			
 			if(reti != null && !(reti.isEmpty())) {
+				System.out.println("Nomi delle reti presenti: \n");
 				for(AbstractRete elem : reti) {
 					if(elem instanceof Rete) {
+						
 						System.out.println(elem.getName());
+						
 					}
 				}
 			} else { 
@@ -173,6 +176,8 @@ public class ArchivioReti {
 		
 		
 		public void visualizzaSoloRetiArchivio() {
+			if (reti.isEmpty()) {
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);}
 			if(reti != null) {
 				for(AbstractRete elem : reti) {
 					if(elem instanceof Rete) {
