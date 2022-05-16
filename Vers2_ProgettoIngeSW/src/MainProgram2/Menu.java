@@ -5,9 +5,9 @@ import java.io.File;
 import utility.MyMenu;
 
 public class Menu {
-        
+
 		private static final String TITOLO = "MENU PRINCIPALE \n";
-		private static final String[] MENU = {"Vuoi usare le RETI?", "Vuoi usare le RETI DI PETRI?"};
+		private static final String[] MENU = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
 
 
 		public static final String TITOLO_RETE = "ARCHIVIO RETI \n";
@@ -17,6 +17,8 @@ public class Menu {
 		private static final String TITOLO_RETEP = "ARCHIVIO RETI DI PETRI \n";
 		private static final String[] MENU_RETEP = {"Aggiungi rete di Petri", "Visualizza rete di Petri", 
 				"Elimina rete di Petri", "Visualizza l'archivio reti di Petri"};
+		
+		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
 		private static File file = new File("src\\data\\reti_xml.xml");
 		
 		ArchivioReti archivio;
@@ -61,20 +63,26 @@ public class Menu {
 			   		       		}
 			   		       		else if(differenziaRete == "retePn") {
 				   		       		    AbstractRete r = new RetePN(archivio);
-			   		    	   		    archivio.aggiungiRete(r); break;
+				   		       		    if(archivio.noRetiInArchivio()) {
+				   		       		    	System.out.println(NO_RETI);
+				   		       		    	break;
+				   		       		    }
+				   		       		    else {archivio.aggiungiRete(r); break;}
 			   		       		}
 			   		     case 2:if(differenziaRete == "rete") {
-			   		    	 archivio.visualizzaRete(); break;
-			   		     } else if(differenziaRete == "retePn") {
-			   		    	 archivio.visualizzaRetePetri();break;
-			   		     }
+			   		    	 		archivio.visualizzaRete(); break;
+			   		     		} else if(differenziaRete == "retePn") {
+			   		     				archivio.visualizzaRetePetri();break;
+			   		     		}
 			   		     
 			   		     case 3: if(differenziaRete == "rete") {
-	   		    	 				archivio.visualizzaNomeReti(); 
-	   		     		 		} else if(differenziaRete == "retePn") {
-	   		     		 			archivio.visualizzaNomeRetiPN();
-	   		     		 		}
-	   		     		 		archivio.eliminaRete(); break;
+			   		    	 			archivio.visualizzaNomeReti();
+			   		    	 			if(archivio.noRetiInArchivio()) break;
+			   		     		 } else if(differenziaRete == "retePn") {
+			   		     			 	archivio.visualizzaNomeRetiPN();
+			   		     			 	if(archivio.noRetiPNInArchivio()) break;
+			   		     		 }
+			   		     		 archivio.eliminaRete(); break;
 			   		     case 4: if(differenziaRete == "rete") {
 					   		    	    archivio.visualizzaNomeReti(); break;
 					   		     } else if(differenziaRete == "retePn") { 

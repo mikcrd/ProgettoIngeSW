@@ -113,48 +113,54 @@ public class ArchivioReti {
 		public void salvaLista() {
 			GestioneFile.objToXml(this);
 		}
-			
+		
+		public boolean noRetiInArchivio() {
+			for(AbstractRete rete: getArchivio()) {
+				if(rete instanceof Rete) return false;
+			}
+			return true;
+		}
+		
+		public boolean noRetiPNInArchivio() {
+			for(AbstractRete rete: getArchivio()) {
+				if(rete instanceof RetePN) return false;
+			}
+			return true;
+		}
 		
 		public void visualizzaRete() {
 			this.visualizzaNomeReti();
-			 if(reti != null && !(reti.isEmpty())) { 
+			 if(reti != null && !(reti.isEmpty()) && !noRetiInArchivio()) { 
 					String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 					AbstractRete daVisualizzare = this.trovaRete(nome);
 					if(daVisualizzare == null) {
-						System.out.println("La rete richiesta non è presente in archivio");
+						System.out.println(MESS_NON_TROVATA);
 					}
 					else {
 						daVisualizzare.stampaRete();}	
-			 }else { 
-					System.out.println(ERRORE_ARCHIVIO_VUOTO);
-				}
+			 }
 		}
 		
 		public void visualizzaRetePetri() {
 			this.visualizzaNomeRetiPN();
-			 if(reti != null && !(reti.isEmpty())) { 
+			 if(reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) { 
 					String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 					AbstractRete daVisualizzare = this.trovaRete(nome);
 					if(daVisualizzare == null) {
-						System.out.println("La rete richiesta non è presente in archivio");
+						System.out.println(MESS_NON_TROVATA);
 					}
 					else {
 						daVisualizzare.stampaRete();}	
-			 }else { 
-					System.out.println(ERRORE_ARCHIVIO_VUOTO);
-				}
+			 }
 		}
 
 		//visualizza i nomi di tutte e sole le reti presenti nell'archivio
 		public void visualizzaNomeReti() {
-			
-			if(reti != null && !(reti.isEmpty())) {
+			if(reti != null && !(reti.isEmpty()) && !noRetiInArchivio()) {
 				System.out.println("Nomi delle reti presenti: \n");
 				for(AbstractRete elem : reti) {
 					if(elem instanceof Rete) {
-						
 						System.out.println(elem.getName());
-						
 					}
 				}
 			} else { 
@@ -164,21 +170,21 @@ public class ArchivioReti {
 		 
 		//visualizza il nome di tutte e sole le PN nell'archivio
 		public void visualizzaNomeRetiPN() {
-			System.out.println("Nomi delle reti di Petri presenti: \n");
-			if(reti != null) {
+			if(reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) {
+				System.out.println("Nomi delle reti di Petri presenti: \n");
 				for(AbstractRete elem : reti) {
 					if(elem instanceof RetePN) {
 						System.out.println(elem.getName());
 					}
 				}
+			} else { 
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);
 			}
 		}
 		
 		
 		public void visualizzaSoloRetiArchivio() {
-			if (reti.isEmpty()) {
-				System.out.println(ERRORE_ARCHIVIO_VUOTO);}
-			if(reti != null) {
+			if(reti != null && !(reti.isEmpty()) && !noRetiInArchivio()) {
 				for(AbstractRete elem : reti) {
 					if(elem instanceof Rete) {
 						elem.stampaRete();
@@ -191,7 +197,7 @@ public class ArchivioReti {
 		
 		
 		public void visualizzaSoloRetiPNArchivio() {
-			if(reti != null) {
+			if(reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) {
 				for(AbstractRete elem : reti) {
 					if(elem instanceof RetePN) {
 						elem.stampaRete();
