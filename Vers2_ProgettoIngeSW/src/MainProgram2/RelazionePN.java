@@ -11,28 +11,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "RelazionePN", propOrder = {
    
     "peso",
-    "relazione"
+ //   "relazione"
 })
 public class RelazionePN extends AbstractRelazioneDiFlusso{
    
 		private static final String DESCRIZIONE = "[%s, peso= %d]"; 
 	
 		int peso;
-		private RelazioneDiFlusso relazione;
+	//	private RelazioneDiFlusso relazione;
 		
 		//valori di default
 		public RelazionePN() {
-			relazione = null;
-			posizione = 0;
-			transizione = 0;
-			inOut = true;
+		//	relazione = null;
+		//	posizione = 0;
+		//	transizione = 0;
+		//	inOut = true;
 	
 			peso = 1;
 		}
 	
 		public RelazionePN(RelazioneDiFlusso relazione, int peso) {
 //			super();
-			this.relazione = relazione;
+	//		this.relazione = relazione;
 			this.posizione = relazione.getPosizione();
 			this.transizione = relazione.getTransizione();
 			this.inOut = relazione.isInOut();
@@ -54,7 +54,7 @@ public class RelazionePN extends AbstractRelazioneDiFlusso{
 		}
 
 		public String toString() {
-			return String.format(DESCRIZIONE, relazione.toString(), getPeso());
+			return String.format(DESCRIZIONE, super.toString(), getPeso());
 		}
 		
 		@Override
