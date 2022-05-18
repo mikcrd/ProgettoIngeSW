@@ -38,13 +38,13 @@ public class testRetePNcorretta {
 		
 	}
 	
-	/*@Test
+	@Test
 	public void testRetePNCorrettaInserimentoInterattivo_ShouldBeSaved() {
 		RetePN pn = new RetePN(archivio);
 		archivio.aggiungiRete(pn); //inserisci i campi di una rete di Petri corretta
 		assertThat(archivio.getArchivio()).contains(pn);
 	}
-	*/
+	
 	
 	@Test
 	public void testRetePNCorretta_ShouldBeSaved() {//non funziona
