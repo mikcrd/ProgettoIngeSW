@@ -34,7 +34,8 @@ public class RetePN extends AbstractRete  {
 			name=null;
 			relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 		}
-
+		
+	
 /**		
 		public RetePN(String name, ArrayList<RelazionePN> relazioni) {
 			this.name = name;
@@ -69,6 +70,14 @@ public class RetePN extends AbstractRete  {
 
 		public int[] getMarcature() {
 			return marcature;
+		}
+		
+		public void inizializzaMarcature(int num) {
+			marcature= new int [num];
+		}
+		
+		public void setMarcatura(int marc, int i) {
+			marcature[i]=marc;
 		}
 		
 		/**
