@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ArchivioReti>
     <reti>
-<<<<<<< HEAD
-=======
         <rete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Rete" nome="corretta">
             <relazioni>
                 <relazione xsi:type="relazioneDiFlusso" inOut="true">
@@ -77,6 +75,5 @@
             <marcature>1</marcature>
             <marcature>1</marcature>
         </rete>
->>>>>>> branch 'master' of https://github.com/mikcrd/ProgettoIngeSW.git
     </reti>
 </ArchivioReti>
