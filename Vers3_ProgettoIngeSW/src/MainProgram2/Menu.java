@@ -5,10 +5,11 @@ import java.io.File;
 import utility.MyMenu;
 
 public class Menu {
-
 		private static final String TITOLO = "MENU PRINCIPALE \n";
-		private static final String[] MENU = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
-
+		private static final String[] MENU = {"Sei un CONFIGURATORE", "Sei un FRUITORE"};
+	
+		private static final String TITOLO_CONF = "MENU CONFIGURATORE \n";
+		private static final String[] MENU_CONF = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
 
 		public static final String TITOLO_RETE = "ARCHIVIO RETI \n";
 		public static final String MENU_RETE[] = {"Aggiungi rete", "Visualizza rete", 
@@ -18,6 +19,9 @@ public class Menu {
 		private static final String[] MENU_RETEP = {"Aggiungi rete di Petri", "Visualizza rete di Petri", 
 				"Elimina rete di Petri", "Visualizza l'archivio reti di Petri"};
 		
+		private static final String TITOLO_FRUI = "MENU FRUITORE \n";
+		private static final String[] MENU_FRUI = {"Simula rete di Petri"};
+		
 		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
 		private static File file = new File("src\\data\\reti_xml.xml");
 		
@@ -25,17 +29,29 @@ public class Menu {
 		String differenziaRete;
 
 		
-
-		
 		public void cicloApplicazione() {
-			MyMenu menu = new MyMenu(TITOLO,MENU);
+			MyMenu menu = new MyMenu(TITOLO, MENU);
+			do{
+					menu.stampaMenu();
+					int cmd = menu.scegli();
+					switch(cmd){
+						case 0:System.exit(0); break;
+						case 1:cicloConfiguratore(); break;
+						case 2:cicloFruitore(); break;
+					}
+			}while(true);
+			
+		}
+		
+		public void cicloConfiguratore() {
+			MyMenu menu = new MyMenu(TITOLO_CONF,MENU_CONF);
 			do{
 					
 		  		   menu.stampaMenu();
 		   		   int cmd = menu.scegli();
 		   		   switch(cmd)
 		   		   {
-				   	    case 0: System.exit(0); break;
+				   	    case 0: cicloApplicazione(); break;
 			   		    case 1: differenziaRete = "rete";
 			   		    	   menuReti(TITOLO_RETE, MENU_RETE, differenziaRete); break;
 			   		    case 2: differenziaRete = "retePn";
@@ -44,7 +60,20 @@ public class Menu {
 		  		}while(true);					
 	    }
 
-
+		public void cicloFruitore() {
+			MyMenu menu = new MyMenu(TITOLO_FRUI, MENU_FRUI);
+			do{
+				   menu.stampaMenu();
+		   		   int cmd = menu.scegli();
+		   		   switch(cmd)
+		   		   {
+				   	    case 0: cicloApplicazione(); break;
+			   		    case 1:  break;
+		   		   }
+			}while(true);
+		
+		}
+		
 		public void menuReti(String titolo, String[] scelte, String differenzia) {		
 			MyMenu menu = new MyMenu(titolo,scelte);
 			
@@ -56,7 +85,7 @@ public class Menu {
 		   		   int cmd = menu.scegli();
 		   		   switch(cmd)
 		   		   {
-				   		case 0: cicloApplicazione(); break;
+				   		case 0: cicloConfiguratore(); break;
 			   		    case 1: if(differenziaRete == "rete") {
 			   		    	   			AbstractRete r = new Rete();
 			   		    	   			archivio.aggiungiRete(r); break;
