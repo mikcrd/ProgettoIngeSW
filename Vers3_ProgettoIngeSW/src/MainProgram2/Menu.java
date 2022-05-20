@@ -68,7 +68,9 @@ public class Menu {
 		   		   switch(cmd)
 		   		   {
 				   	    case 0: cicloApplicazione(); break;
-			   		    case 1:  break;
+			   		    case 1: RetePN petri= (RetePN) archivio.cercaRete();
+			   		    		petri.simulaRete();
+			   		    break;
 		   		   }
 			}while(true);
 		

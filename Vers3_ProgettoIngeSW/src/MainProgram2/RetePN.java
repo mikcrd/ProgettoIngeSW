@@ -72,6 +72,10 @@ public class RetePN extends AbstractRete  {
 			return marcature;
 		}
 		
+		public int getMarcatura(int i) {
+			return marcature [i];
+		}
+		
 		public void inizializzaMarcature(int num) {
 			marcature= new int [num];
 		}
@@ -79,6 +83,8 @@ public class RetePN extends AbstractRete  {
 		public void setMarcatura(int marc, int i) {
 			marcature[i]=marc;
 		}
+		
+		
 		
 		/**
 		 * Se almeno un peso o una marcatura non sono validi, ritorna falso
@@ -96,7 +102,7 @@ public class RetePN extends AbstractRete  {
    
 		   return true;  
 		}*/
-
+//dasa
 		public RetePN creaRete() {
 
 			// deve visualizzare solo reti -> vedi xml reti
@@ -132,6 +138,7 @@ public class RetePN extends AbstractRete  {
 		
 		private void inizializzaReteP(Rete re) {
 			this.numPos=re.getPos();
+			this.numTrans=re.getTrans();
 			marcature = new int [numPos];
 			this.aggiungiMarcature(numPos);
 			this.aggiungiPesiRelazione(re);
@@ -146,27 +153,47 @@ public class RetePN extends AbstractRete  {
 				this.aggiungiRelazione(pn);
 			}
 		}
-			
-			
 		
-		@Override
-		public void stampaRete() {
-			System.out.println();
-			System.out.println(this.name);
-			for (AbstractRelazioneDiFlusso r : this.relazioni) {
-				if(r instanceof RelazionePN) {
-				   System.out.println(((RelazionePN)r).toString());
+		public void simulaRete() {
+			boolean risposta;
+			int numTransAbil;
+			//this = arch.cercaRete();
+			//stamparete()
+			do {	
+				numTransAbil=cercaTransizioniAbilitate();
+				if (numTransAbil==1) 
+				{
+					//scatta transizione
+				}else if(numTransAbil>1)
+				{
+					//utente sceglie quale delle transizioni abilitate fare scattare
+				}else if(numTransAbil==0) {
+					System.out.println("Nessuna transizione abilitata, blocco critico raggiunto");
+				}
+				//stampa rete dopo scatto transizione 
+				
+				risposta=LeggiInput.yesOrNo("vuoi proseguire con la simulazione?");
+				
+			}while (numTransAbil!=0 || risposta);
+			System.out.println("Simulazione terminata");
+		}
+				
+		 
+			
+		public int cercaTransizioniAbilitate() {
+			int contatore=0;
+			for(AbstractRelazioneDiFlusso rel: this.relazioni) {
+				if (rel.inOut=true && ((RelazionePN)rel).getPeso()<=this.getMarcatura(rel.getPosizione()-1) ) {
+					System.out.println("transizione abilitata:" + rel.getTransizione());
+					//incrementa il contatore delle transizioni abilitate 
+					contatore++;
 				}
 			}
-			System.out.println("Marcature:");
-			for (int i =0; i<marcature.length; i++) {
-				int j=i;
-				System.out.println("Posizione " + ++j + " marcatura " + marcature[i]);
-			}
+			
+			return contatore;
 		}
-
 		
-		
+		//metodi Michela
 		public int[] trovaPostiPredecessori(int trans) {
 			int[] pred = new int[numPos];
 			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
@@ -209,8 +236,25 @@ public class RetePN extends AbstractRete  {
 				}
 			}
 		}
+	    
 		
 		
+		@Override
+		public void stampaRete() {
+			System.out.println();
+			System.out.println(this.name);
+			for (AbstractRelazioneDiFlusso r : this.relazioni) {
+				if(r instanceof RelazionePN) {
+				   System.out.println(((RelazionePN)r).toString());
+				}
+			}
+			System.out.println("Marcature:");
+			for (int i =0; i<marcature.length; i++) {
+				int j=i;
+				System.out.println("Posizione " + ++j + " marcatura " + marcature[i]);
+			}
+		}
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
