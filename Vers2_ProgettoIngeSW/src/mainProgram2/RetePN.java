@@ -1,4 +1,4 @@
-package MainProgram2;
+package mainProgram2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -124,7 +124,7 @@ public class RetePN extends AbstractRete  {
 		public void aggiungiMarcature(int np) {
 			for(int i=0; i<np; i++) {
 				int j=i;
-				marcature[i]=LeggiInput.leggiIntero(MARCATURA + " per la posizione " + ++j + ": ");
+				marcature[i]=LeggiInput.leggiInteroNonNegativo(MARCATURA + " per la posizione " + ++j + ": ");
 
 			}
 		}

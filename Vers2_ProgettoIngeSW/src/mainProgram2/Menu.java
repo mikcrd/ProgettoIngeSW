@@ -1,4 +1,4 @@
-package MainProgram2;
+package mainProgram2;
 
 import java.io.File;
 
@@ -7,7 +7,7 @@ import utility.MyMenu;
 public class Menu {
 
 		private static final String TITOLO = "MENU PRINCIPALE \n";
-		private static final String[] MENU = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
+		private static final String[] MENU = {"Vuoi usare le RETI?", "Vuoi usare le RETI DI PETRI?"};
 
 
 		public static final String TITOLO_RETE = "ARCHIVIO RETI \n";

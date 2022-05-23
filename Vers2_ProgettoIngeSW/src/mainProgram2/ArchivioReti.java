@@ -1,4 +1,4 @@
-package MainProgram2;
+package mainProgram2;
 
 
 import utility.*;
