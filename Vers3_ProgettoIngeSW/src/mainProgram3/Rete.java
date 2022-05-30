@@ -1,4 +1,4 @@
-package MainProgram2;
+package mainProgram3;
 
 import java.util.ArrayList;
 
@@ -69,9 +69,75 @@ public class Rete extends AbstractRete  {
 		public int getPos() {
 			return numPos;
 		}
+		
+		public int getTrans() {
+			return numTrans;
+		}
 /////////////////////////////////////////////////////////		
 		
+		//ritorna il numero massimo delle transizioni 
+		public void contaTransizioni() {
+			int max=0;
+			for(AbstractRelazioneDiFlusso r :  relazioni) {
+				//if(r instanceof RelazioneDiFlusso) {
+					if(((RelazioneDiFlusso)r).getTransizione()>max)
+						max=((RelazioneDiFlusso)r).getTransizione();
+				//} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
+			}
+			numTrans=max;
+			//System.out.println("numero transizioni" + max);
+		}
 		
+		//ritorna il numero massimo della posizione
+		public void contaPosizioni() {
+			int max=0;
+			for(AbstractRelazioneDiFlusso r :  relazioni) {
+				//if(r instanceof RelazioneDiFlusso) {
+					if(((RelazioneDiFlusso)r).getPosizione()>max)
+						max=((RelazioneDiFlusso)r).getPosizione();
+				//} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
+			}
+			numPos=max;
+			//System.out.println("numero posizioni" + max);
+		}
+		
+		//stampa le matrici: debug
+		private void stampaMatrice(int [][]m) {
+			for (int i=0; i<numPos; i++) {
+				for(int j=0; j<numTrans; j++) {
+					System.out.printf("%d", m[i][j]);
+				}
+				System.out.println();
+			}
+		}
+		
+		//inizializza tutta la rete 
+		public void inizializzaRete() {
+			contaPosizioni();
+			contaTransizioni();
+			in = new int [numPos][numTrans];
+			out = new int [numPos][numTrans];
+			for (int i=0; i<numPos; i++)
+			{
+				for(int j=0; j<numTrans; j++)
+				{
+					for(AbstractRelazioneDiFlusso r: relazioni)
+					{
+						if(r instanceof AbstractRelazioneDiFlusso) {
+							if(((RelazioneDiFlusso)r).getPosizione()==i+1 && ((RelazioneDiFlusso)r).getTransizione()==j+1 && ((RelazioneDiFlusso)r).isInOut()==true) 
+								in[i][j]=1; 	
+							else if (((RelazioneDiFlusso)r).getPosizione()==i+1 && ((RelazioneDiFlusso)r).getTransizione()==j+1 && ((RelazioneDiFlusso)r).isInOut()==false)
+								out[i][j]=1;
+						} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
+					}
+				}
+			}
+			//debug
+			//stampaMatrice(in);
+			//System.out.println();
+			//stampaMatrice(out);
+
+		}
 		
 		
 		//aggiorna matrice di incidenza 
@@ -142,70 +208,7 @@ public class Rete extends AbstractRete  {
 		}
 		
 		
-		//ritorna il numero massimo della posizione
-		public void contaPosizioni() {
-			int max=0;
-			for(AbstractRelazioneDiFlusso r :  relazioni) {
-				if(r instanceof RelazioneDiFlusso) {
-					if(((RelazioneDiFlusso)r).getPosizione()>max)
-						max=((RelazioneDiFlusso)r).getPosizione();
-				} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
-			}
-			numPos=max;
-			//System.out.println("numero posizioni" + max);
-		}
-		
-		//ritorna il numero massimo delle transizioni 
-		public void contaTransizioni() {
-			int max=0;
-			for(AbstractRelazioneDiFlusso r :  relazioni) {
-				if(r instanceof RelazioneDiFlusso) {
-					if(((RelazioneDiFlusso)r).getTransizione()>max)
-						max=((RelazioneDiFlusso)r).getTransizione();
-				} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
-			}
-			numTrans=max;
-			//System.out.println("numero transizioni" + max);
-		}
-		
-		//stampa le matrici: debug
-		private void stampaMatrice(int [][]m) {
-			for (int i=0; i<numPos; i++) {
-				for(int j=0; j<numTrans; j++) {
-					System.out.printf("%d", m[i][j]);
-				}
-				System.out.println();
-			}
-		}
-		
-		//inizializza tutta la rete 
-		public void inizializzaRete() {
-			contaPosizioni();
-			contaTransizioni();
-			in = new int [numPos][numTrans];
-			out = new int [numPos][numTrans];
-			for (int i=0; i<numPos; i++)
-			{
-				for(int j=0; j<numTrans; j++)
-				{
-					for(AbstractRelazioneDiFlusso r: relazioni)
-					{
-						if(r instanceof AbstractRelazioneDiFlusso) {
-							if(((RelazioneDiFlusso)r).getPosizione()==i+1 && ((RelazioneDiFlusso)r).getTransizione()==j+1 && ((RelazioneDiFlusso)r).isInOut()==true) 
-								in[i][j]=1; 	
-							else if (((RelazioneDiFlusso)r).getPosizione()==i+1 && ((RelazioneDiFlusso)r).getTransizione()==j+1 && ((RelazioneDiFlusso)r).isInOut()==false)
-								out[i][j]=1;
-						} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
-					}
-				}
-			}
-			//debug
-			//stampaMatrice(in);
-			//System.out.println();
-			//stampaMatrice(out);
-
-		}
-		
+	
 
 		@Override
 		public boolean isCorrect() {

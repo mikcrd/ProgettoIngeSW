@@ -1,4 +1,4 @@
-package MainProgram2;
+package mainProgram3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import utility.LeggiInput;
     "relazioni"
 })
 @XmlSeeAlso({
-    RetePN.class,
+    RetePetri.class,
     Rete.class
 })
 public abstract class AbstractRete {
@@ -64,10 +64,6 @@ public abstract class AbstractRete {
 			this.name = name;
 			this.relazioni = relazioni;
 		}
-		
-		public void setNumPos(int numPos) {
-			this.numPos = numPos;
-		}
 
 	
 		public String getName() {
@@ -85,9 +81,11 @@ public abstract class AbstractRete {
 	        return this.relazioni;
 	    }
 		
+		public abstract void contaPosizioni();
 		
-				
-
+		public abstract void contaTransizioni();
+		
+		
 		abstract public boolean isCorrect();
 		
 		abstract public void stampaRete();

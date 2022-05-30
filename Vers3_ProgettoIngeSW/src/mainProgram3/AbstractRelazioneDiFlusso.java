@@ -1,4 +1,4 @@
-package MainProgram2;
+package mainProgram3;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 @XmlSeeAlso({
     RelazioneDiFlusso.class,
-    RelazionePN.class
+    RelazionePetri.class
 })
 public abstract class AbstractRelazioneDiFlusso {
 
@@ -47,6 +47,13 @@ public abstract class AbstractRelazioneDiFlusso {
 		this.inOut = inOut;
 	}
 
+	public String toString() {
+		if (isInOut())
+			return "posto " + posizione + " transizione " + transizione;
+		else 
+			return  "transizione " + transizione + " posto " + posizione;
+	}
+	
 /**
 	public abstract int getPosizione();
 	

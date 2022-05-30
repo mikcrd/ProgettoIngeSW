@@ -1,15 +1,18 @@
-package MainProgram2;
+package mainProgram3;
 
 import java.io.File;
+
+
+
 
 import utility.MyMenu;
 
 public class Menu {
 		private static final String TITOLO = "MENU PRINCIPALE \n";
-		private static final String[] MENU = {"Sei un CONFIGURATORE", "Sei un FRUITORE"};
+		private static final String[] MENU = {"Sei un CONFIGURATORE?", "Sei un FRUITORE?"};
 	
 		private static final String TITOLO_CONF = "MENU CONFIGURATORE \n";
-		private static final String[] MENU_CONF = {"Vuoi usare le RETI", "Vuoi usare le RETI DI PETRI"};
+		private static final String[] MENU_CONF = {"Vuoi usare le RETI?", "Vuoi usare le RETI DI PETRI?"};
 
 		public static final String TITOLO_RETE = "ARCHIVIO RETI \n";
 		public static final String MENU_RETE[] = {"Aggiungi rete", "Visualizza rete", 
@@ -62,13 +65,15 @@ public class Menu {
 
 		public void cicloFruitore() {
 			MyMenu menu = new MyMenu(TITOLO_FRUI, MENU_FRUI);
+			this.SetArchivio();
 			do{
 				   menu.stampaMenu();
 		   		   int cmd = menu.scegli();
 		   		   switch(cmd)
 		   		   {
 				   	    case 0: cicloApplicazione(); break;
-			   		    case 1: RetePN petri= (RetePN) archivio.cercaRete();
+			   		    case 1: archivio.visualizzaNomeRetiPN();
+			   		    		RetePetri petri= (RetePetri) archivio.cercaRete();
 			   		    		petri.simulaRete();
 			   		    break;
 		   		   }
@@ -79,9 +84,7 @@ public class Menu {
 		public void menuReti(String titolo, String[] scelte, String differenzia) {		
 			MyMenu menu = new MyMenu(titolo,scelte);
 			
-	  		if(file.length() != 0L) {
-	  			archivio = GestioneFile.xmlToObj(file);
-	  		}
+	  		this.SetArchivio();
 			do{
 		  		   menu.stampaMenu();
 		   		   int cmd = menu.scegli();
@@ -93,7 +96,7 @@ public class Menu {
 			   		    	   			archivio.aggiungiRete(r); break;
 			   		       		}
 			   		       		else if(differenziaRete == "retePn") {
-				   		       		    AbstractRete r = new RetePN(archivio);
+				   		       		    AbstractRete r = new RetePetri(archivio);
 				   		       		    if(archivio.noRetiInArchivio()) {
 				   		       		    	System.out.println(NO_RETI);
 				   		       		    	break;
@@ -121,7 +124,13 @@ public class Menu {
 					   		     }  
 		   		   }	  		
 		  		}while(true);	
-		}	
+		}
+		
+		public void SetArchivio() {
+			if(file.length() != 0L) {
+	  			archivio = GestioneFile.xmlToObj(file);
+	  		}
+		}
 		
 		
 	}
