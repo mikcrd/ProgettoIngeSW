@@ -128,6 +128,13 @@ public class ArchivioReti {
 			return true;
 		}
 		
+		public boolean noRetiPNPInArchivio() {
+			for(AbstractRete rete: getArchivio()) {
+				if(rete instanceof RetePetriP) return false;
+			}
+			return true;
+		}
+		
 		public void visualizzaRete() {
 			this.visualizzaNomeReti();
 			 if(reti != null && !(reti.isEmpty()) && !noRetiInArchivio()) { 
@@ -144,6 +151,19 @@ public class ArchivioReti {
 		public void visualizzaRetePetri() {
 			this.visualizzaNomeRetiPN();
 			 if(reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) { 
+					String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+					AbstractRete daVisualizzare = this.trovaRete(nome);
+					if(daVisualizzare == null) {
+						System.out.println(MESS_NON_TROVATA);
+					}
+					else {
+						daVisualizzare.stampaRete();}	
+			 }
+		}
+		
+		public void visualizzaRetePetriP() {
+			this.visualizzaNomeRetiPNP();
+			 if(reti != null && !(reti.isEmpty()) && !noRetiPNPInArchivio()) { 
 					String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
 					AbstractRete daVisualizzare = this.trovaRete(nome);
 					if(daVisualizzare == null) {
@@ -182,6 +202,18 @@ public class ArchivioReti {
 			}
 		}
 		
+		public void visualizzaNomeRetiPNP() {
+			if(reti != null && !(reti.isEmpty()) && !noRetiPNPInArchivio()) {
+				System.out.println("Nomi delle reti di Petri presenti: \n");
+				for(AbstractRete elem : reti) {
+					if(elem instanceof RetePetriP) {
+						System.out.println(elem.getName());
+					}
+				}
+			} else { 
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			}
+		}
 		
 		public void visualizzaSoloRetiArchivio() {
 			if(reti != null && !(reti.isEmpty()) && !noRetiInArchivio()) {
@@ -199,7 +231,7 @@ public class ArchivioReti {
 		public void visualizzaSoloRetiPNArchivio() {
 			if(reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) {
 				for(AbstractRete elem : reti) {
-					if(elem instanceof RetePetri) {
+					if(elem instanceof RetePetri && !(elem instanceof RetePetriP)) {
 						elem.stampaRete();
 					}
 				}
@@ -208,6 +240,17 @@ public class ArchivioReti {
 			}
 		}
 		
+		public void visualizzaSoloRetiPNPArchivio() {
+			if(reti != null && !(reti.isEmpty()) && !noRetiPNPInArchivio()) {
+				for(AbstractRete elem : reti) {
+					if(elem instanceof RetePetriP) {
+						elem.stampaRete();
+					}
+				}
+			} else {
+				System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			}
+		}
 		
 		public boolean isEqual(AbstractRete daConfrontare) {
 			for(AbstractRete rete: getArchivio()) {

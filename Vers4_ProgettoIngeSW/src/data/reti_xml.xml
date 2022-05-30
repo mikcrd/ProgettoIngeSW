@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ArchivioReti>
+    <reti>
+        <rete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Rete" nome="rete1">
+            <relazioni>
+                <relazione xsi:type="relazioneDiFlusso" inOut="true">
+                    <posizione>1</posizione>
+                    <transizione>1</transizione>
+                </relazione>
+                <relazione xsi:type="relazioneDiFlusso" inOut="false">
+                    <posizione>2</posizione>
+                    <transizione>1</transizione>
+                </relazione>
+                <relazione xsi:type="relazioneDiFlusso" inOut="true">
+                    <posizione>2</posizione>
+                    <transizione>2</transizione>
+                </relazione>
+                <relazione xsi:type="relazioneDiFlusso" inOut="false">
+                    <posizione>1</posizione>
+                    <transizione>2</transizione>
+                </relazione>
+            </relazioni>
+        </rete>
+        <rete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="RetePetri" nome="petri1">
+            <relazioni>
+                <relazione xsi:type="RelazionePN" inOut="true">
+                    <posizione>1</posizione>
+                    <transizione>1</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="false">
+                    <posizione>2</posizione>
+                    <transizione>1</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="true">
+                    <posizione>2</posizione>
+                    <transizione>2</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="false">
+                    <posizione>1</posizione>
+                    <transizione>2</transizione>
+                    <peso>1</peso>
+                </relazione>
+            </relazioni>
+            <marcature>
+                <marcatura>2</marcatura>
+                <marcatura>0</marcatura>
+            </marcature>
+        </rete>
+        <rete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="RetePetriP" nome="priorita3">
+            <relazioni>
+                <relazione xsi:type="RelazionePN" inOut="true">
+                    <posizione>1</posizione>
+                    <transizione>1</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="false">
+                    <posizione>2</posizione>
+                    <transizione>1</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="true">
+                    <posizione>2</posizione>
+                    <transizione>2</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="false">
+                    <posizione>1</posizione>
+                    <transizione>2</transizione>
+                    <peso>1</peso>
+                </relazione>
+            </relazioni>
+            <marcature>
+                <marcatura>2</marcatura>
+                <marcatura>0</marcatura>
+            </marcature>
+            <priorità>
+                <priorità>3</priorità>
+                <priorità>4</priorità>
+            </priorità>
+        </rete>
+        <rete xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="RetePetriP" nome="priorita5">
+            <relazioni>
+                <relazione xsi:type="RelazionePN" inOut="true">
+                    <posizione>1</posizione>
+                    <transizione>1</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="false">
+                    <posizione>2</posizione>
+                    <transizione>1</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="true">
+                    <posizione>2</posizione>
+                    <transizione>2</transizione>
+                    <peso>1</peso>
+                </relazione>
+                <relazione xsi:type="RelazionePN" inOut="false">
+                    <posizione>1</posizione>
+                    <transizione>2</transizione>
+                    <peso>1</peso>
+                </relazione>
+            </relazioni>
+            <marcature>
+                <marcatura>2</marcatura>
+                <marcatura>0</marcatura>
+            </marcature>
+            <priorità>
+                <priorità>3</priorità>
+                <priorità>5</priorità>
+            </priorità>
+        </rete>
+    </reti>
+</ArchivioReti>

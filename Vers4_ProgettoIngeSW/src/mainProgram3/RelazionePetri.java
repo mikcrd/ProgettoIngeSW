@@ -39,6 +39,14 @@ public class RelazionePetri extends AbstractRelazioneDiFlusso{
 			this.peso = peso;
 		}
 
+		public RelazionePetri(int posizione, int transizione, boolean inOut, int peso) {
+//			super();
+	//		this.relazione = relazione;
+			this.posizione = posizione;
+			this.transizione = transizione;
+			this.inOut = inOut;
+			this.peso = peso;
+		}
 		
 		public int getPeso() {
 			return peso;

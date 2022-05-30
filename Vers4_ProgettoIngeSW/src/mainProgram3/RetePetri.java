@@ -10,25 +10,30 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 import utility.LeggiInput;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RetePN")
+@XmlType(name = "RetePetri", propOrder = {
+	    "marcature"
+	})
+@XmlSeeAlso({
+    RetePetriP.class
+})
 public class RetePetri extends AbstractRete  {
 	
-		private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
-		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
+		private final static String MESS_NOME = "Inserisci il nome della rete di Petri da aggiungere: ";
 		private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
-		private static final String SCEGLI_CREA = "Premi a per scegliere una rete da usare per costruire la rete di Petri \n"
-				+ "Premi b per inserire una nuova rete su cui costruire la rete di Petri";
 		private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
 		private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
 		private static final String PESO = "Immetti un peso per la relazione corrente: ";
 		private static final String ERR_PESO="il peso deve essere un valore maggiore o uguale a 1";
 		private static final String MARCATURA="inserire il valore di marcatura";
 		
+		@XmlElementWrapper(name="marcature")
+		@XmlElement(name="marcatura", required = true)
 		int [] marcature;
 		
 		public RetePetri() {
@@ -46,6 +51,11 @@ public class RetePetri extends AbstractRete  {
 
 		public RetePetri(ArchivioReti arch) { //dependency injection
 			this.arch = arch;	 
+		}
+		
+		
+		public int getTrans() {
+			return numTrans;
 		}
 
 /**
@@ -140,26 +150,20 @@ public class RetePetri extends AbstractRete  {
 		public void contaPosizioni() {
 			int max=0;
 			for(AbstractRelazioneDiFlusso r :  relazioni) {
-			//if(r instanceof RelazioneDiFlusso) {
 				if(((RelazionePetri)r).getPosizione()>max)
 					max=((RelazionePetri)r).getPosizione();
-			//} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 				}
 			numPos=max;
-			//System.out.println("numero posizioni" + max);
 		}
 		
 		//ritorna il numero massimo delle transizioni 
 		public void contaTransizioni() {
 			int max=0;
 			for(AbstractRelazioneDiFlusso r :  relazioni) {
-				//if(r instanceof RelazioneDiFlusso) {
 					if(((RelazionePetri)r).getTransizione()>max)
 						max=((RelazionePetri)r).getTransizione();
-				//} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 			}
 			numTrans=max;
-			//System.out.println("numero transizioni" + max);
 		}
 		
 		private void inizializzaReteP(Rete re) {

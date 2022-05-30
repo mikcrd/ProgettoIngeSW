@@ -42,7 +42,7 @@ public class GestioneFile {
 		ArchivioReti a = null;
 		
 		try {
-			 contextObj = JAXBContext.newInstance(ArchivioReti.class, AbstractRete.class, Rete.class, RetePetri.class, RelazioneDiFlusso.class, RelazionePetri.class);
+			 contextObj = JAXBContext.newInstance(ArchivioReti.class, AbstractRete.class, Rete.class, RetePetri.class, RetePetriP.class, RelazioneDiFlusso.class, RelazionePetri.class);
 			 Unmarshaller jaxbUnmarshaller = contextObj.createUnmarshaller();  
 		     a = (ArchivioReti) jaxbUnmarshaller.unmarshal(file);  
 		     

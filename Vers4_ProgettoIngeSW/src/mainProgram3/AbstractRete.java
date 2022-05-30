@@ -20,6 +20,7 @@ import utility.LeggiInput;
 })
 @XmlSeeAlso({
     RetePetri.class,
+    RetePetriP.class,
     Rete.class
 })
 public abstract class AbstractRete {
@@ -74,7 +75,7 @@ public abstract class AbstractRete {
 			this.name = name;
 		}
 		
-		public List<AbstractRelazioneDiFlusso> getRelazioni() {
+		public ArrayList<AbstractRelazioneDiFlusso> getRelazioni() {
 	        if (relazioni == null) {
 	            relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 	        }

@@ -12,7 +12,7 @@ public class Menu {
 		private static final String[] MENU = {"Sei un CONFIGURATORE?", "Sei un FRUITORE?"};
 	
 		private static final String TITOLO_CONF = "MENU CONFIGURATORE \n";
-		private static final String[] MENU_CONF = {"Vuoi usare le RETI?", "Vuoi usare le RETI DI PETRI?"};
+		private static final String[] MENU_CONF = {"Vuoi usare le RETI?", "Vuoi usare le RETI DI PETRI?", "Vuoi usare le RETI DI PETRI CON PRIORITA'?"};
 
 		public static final String TITOLO_RETE = "ARCHIVIO RETI \n";
 		public static final String MENU_RETE[] = {"Aggiungi rete", "Visualizza rete", 
@@ -22,10 +22,16 @@ public class Menu {
 		private static final String[] MENU_RETEP = {"Aggiungi rete di Petri", "Visualizza rete di Petri", 
 				"Elimina rete di Petri", "Visualizza l'archivio reti di Petri"};
 		
+		private static final String TITOLO_RETEPP = "ARCHIVIO RETI DI PETRI CON PRIORITA'\n";
+		private static final String[] MENU_RETEPP = {"Aggiungi rete di Petri con priorità", "Visualizza rete di Petri con priorità", 
+				"Elimina rete di Petri con priorità", "Visualizza l'archivio reti di Petri con priorità"};
+		
 		private static final String TITOLO_FRUI = "MENU FRUITORE \n";
 		private static final String[] MENU_FRUI = {"Simula rete di Petri"};
 		
 		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
+		private static final String NO_RETI_PETRI = "Attenzione: non ci sono reti di Petri nell'archivio \nAggiungere una rete prima di continuare";
+		
 		private static File file = new File("src\\data\\reti_xml.xml");
 		
 		ArchivioReti archivio;
@@ -59,6 +65,8 @@ public class Menu {
 			   		    	   menuReti(TITOLO_RETE, MENU_RETE, differenziaRete); break;
 			   		    case 2: differenziaRete = "retePn";
 			   		    	   menuReti(TITOLO_RETEP, MENU_RETEP, differenziaRete); break;    
+			   		    case 3: differenziaRete = "retePnP";
+	   		    	           menuReti(TITOLO_RETEPP, MENU_RETEPP, differenziaRete); break;    	   
 		   		   }	
 		  		}while(true);					
 	    }
@@ -103,10 +111,21 @@ public class Menu {
 				   		       		    }
 				   		       		    else {archivio.aggiungiRete(r); break;}
 			   		       		}
+			   		       		else if(differenziaRete == "retePnP") {
+				   		       			AbstractRete r = new RetePetriP(archivio);
+				   		       			if(archivio.noRetiPNInArchivio()) {
+					   		       			System.out.println(NO_RETI_PETRI);
+				   		       		    	break;
+				   		       			}
+				   		       			else {archivio.aggiungiRete(r); break;}	
+			   		       		}
+			   		    
 			   		     case 2:if(differenziaRete == "rete") {
 			   		    	 		archivio.visualizzaRete(); break;
 			   		     		} else if(differenziaRete == "retePn") {
 			   		     				archivio.visualizzaRetePetri();break;
+			   		     		} else if(differenziaRete == "retePnP") {
+		   		     				archivio.visualizzaRetePetriP();break;
 			   		     		}
 			   		     
 			   		     case 3: if(differenziaRete == "rete") {
@@ -115,13 +134,19 @@ public class Menu {
 			   		     		 } else if(differenziaRete == "retePn") {
 			   		     			 	archivio.visualizzaNomeRetiPN();
 			   		     			 	if(archivio.noRetiPNInArchivio()) break;
+			   		     		 } else if(differenziaRete == "retePnP") {
+			   		     			 	archivio.visualizzaNomeRetiPNP();
+			   		     			 	if(archivio.noRetiPNPInArchivio()) break;
 			   		     		 }
 			   		     		 archivio.eliminaRete(); break;
+			   		     		 
 			   		     case 4: if(differenziaRete == "rete") {
 					   		    	    archivio.visualizzaNomeReti(); break;
 					   		     } else if(differenziaRete == "retePn") { 
 					   		    	    archivio.visualizzaNomeRetiPN(); break;
-					   		     }  
+					   		     } else if(differenziaRete == "retePnP") { 
+					   		    	    archivio.visualizzaNomeRetiPNP(); break;
+					   		     }   
 		   		   }	  		
 		  		}while(true);	
 		}
@@ -130,6 +155,7 @@ public class Menu {
 			if(file.length() != 0L) {
 	  			archivio = GestioneFile.xmlToObj(file);
 	  		}
+			else archivio = new ArchivioReti();
 		}
 		
 		
