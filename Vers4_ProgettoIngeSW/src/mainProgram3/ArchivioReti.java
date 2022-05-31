@@ -193,7 +193,7 @@ public class ArchivioReti {
 			if(reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) {
 				System.out.println("Nomi delle reti di Petri presenti: \n");
 				for(AbstractRete elem : reti) {
-					if(elem instanceof RetePetri) {
+					if(elem instanceof RetePetri && !(elem instanceof RetePetriP)) {
 						System.out.println(elem.getName());
 					}
 				}
@@ -256,26 +256,26 @@ public class ArchivioReti {
 			for(AbstractRete rete: getArchivio()) {
 				if(rete.equals(daConfrontare)) {
 					System.out.println(MESS_DOPPIONE);
-					return true; }
-				else if(!(rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) 
+					return true; 
+					}
+				else if((rete.getName().equals(daConfrontare.getName()))) {
+					daConfrontare.setName(changeName());				
+					return isEqual(daConfrontare);
+				}
+				/**
+				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) //per RetiPetri
 						&& (rete.getName().equals(daConfrontare.getName()))) {
-					String nuovoNome;
-					boolean flag;
-					do {
-							nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
-							flag = true;
-							
-							for(AbstractRete retexNomi: getArchivio()) {
-									if(nuovoNome.equals(retexNomi.getName())) {
-								//	System.out.println(MESS_NOME_GIA_PRESENTE);
-									flag = false;	
-									}
-						    }
-					}while(!flag);
-
-					daConfrontare.setName(nuovoNome);
+					daConfrontare.setName(changeName());
 					return false;
 				}
+				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni()))  //per RetiPetriP
+						&& rete instanceof RetePetriP && daConfrontare instanceof RetePetriP
+						&& ((RetePetriP) rete).getMarcature().equals(((RetePetriP) daConfrontare).getMarcature())
+						&& (rete.getName().equals(daConfrontare.getName()))) {
+					daConfrontare.setName(changeName());
+					return false;
+				}
+				**/
 				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni()))
 						&& rete instanceof Rete && daConfrontare instanceof Rete) {
 					System.out.print(MESS_STESSA_TOPOLOGIA);
@@ -284,6 +284,24 @@ public class ArchivioReti {
 				}
 			}
 			return false;
+		}
+
+		
+		public String changeName() {
+			String nuovoNome;
+			boolean flag;
+			do {
+					nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+					flag = true;
+					
+					for(AbstractRete retexNomi: getArchivio()) {
+							if(nuovoNome.equals(retexNomi.getName())) {
+							flag = false;	
+							}
+				    }
+			}while(!flag);
+			
+			return nuovoNome;
 		}
 
 		
