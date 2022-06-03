@@ -1,4 +1,4 @@
-package mainProgram3;
+package mainProgram4;
 
 import java.io.File;
 
@@ -27,7 +27,7 @@ public class Menu {
 				"Elimina rete di Petri con priorità", "Visualizza l'archivio reti di Petri con priorità"};
 		
 		private static final String TITOLO_FRUI = "MENU FRUITORE \n";
-		private static final String[] MENU_FRUI = {"Simula rete di Petri"};
+		private static final String[] MENU_FRUI = {"Simula rete di Petri", "Simula rete di Petri con priorita'"};
 		
 		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
 		private static final String NO_RETI_PETRI = "Attenzione: non ci sono reti di Petri nell'archivio \nAggiungere una rete prima di continuare";
@@ -83,7 +83,12 @@ public class Menu {
 			   		    case 1: archivio.visualizzaNomeRetiPN();
 			   		    		RetePetri petri= (RetePetri) archivio.cercaRete();
 			   		    		petri.simulaRete();
-			   		    break;
+			   		    		break;
+			   		    case 2: archivio.visualizzaNomeRetiPNP();
+			   		    		RetePetriP petrip=(RetePetriP)archivio.cercaRete();
+			   		    		petrip.simulaRete();
+			   		    		break;
+			   		    
 		   		   }
 			}while(true);
 		

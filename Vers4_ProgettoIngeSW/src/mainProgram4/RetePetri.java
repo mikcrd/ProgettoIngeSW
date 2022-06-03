@@ -1,4 +1,4 @@
-package mainProgram3;
+package mainProgram4;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+import mainProgram4.AbstractRelazioneDiFlusso;
+import mainProgram4.RelazionePetri;
 import utility.LeggiInput;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -202,7 +204,7 @@ public class RetePetri extends AbstractRete  {
 					for(int i=0; i<numTrans; i++) {
 						if (abilitate[i]) {
 							//scatta transizione
-							marcature=this.scattaTransizione(i++);
+							this.scattaTransizione(++i);
 							System.out.println("dopo lo scatto della transizione la marcatura e':");
 							this.stampaMarcature();
 							break;
@@ -243,11 +245,9 @@ public class RetePetri extends AbstractRete  {
 		public boolean[]  cercaTransizioniAbilitate() {
 		
 			boolean [] transAbilitate= new boolean [numTrans];
-			int i=0;
 			for(AbstractRelazioneDiFlusso rel: this.relazioni) {
 				if (rel.inOut==true && ((RelazionePetri)rel).getPeso()<=this.getMarcatura(rel.getPosizione()-1) ) {
-					transAbilitate[i]=true;
-					i++;
+					transAbilitate[rel.getPosizione()-1]=true;
 				}
 			}
 			
@@ -281,8 +281,7 @@ public class RetePetri extends AbstractRete  {
 			return succ;	
 		}
 		
-		public int[] scattaTransizione(int trans) {
-			int [] marc = new int[numPos];
+		public void scattaTransizione(int trans) {
 			boolean[] pred = new boolean[numPos];
 			boolean[] succ = new boolean[numPos];
 			pred=this.trovaPostiPredecessori(trans);
@@ -292,14 +291,20 @@ public class RetePetri extends AbstractRete  {
 					int j=i;
 					for(AbstractRelazioneDiFlusso rel: relazioni) {
 						if (rel.isInOut() && rel.getPosizione()==j+1 && rel.getTransizione()==trans) {
-							marc[i]= marc[i] - ((RelazionePetri)rel).getPeso();
-						}else if (rel.isInOut() && rel.getPosizione()==j+1 && rel.getTransizione()==trans) {
-							marc[i]= marc[i] + ((RelazionePetri)rel).getPeso();
+							marcature[i]= marcature[i] - ((RelazionePetri)rel).getPeso();
+						}
+					}
+				}if (succ[i]) {
+					int j=i;
+					for(AbstractRelazioneDiFlusso rel: relazioni) {
+						if (!rel.isInOut() && rel.getPosizione()==j+1 && rel.getTransizione()==trans) {
+							marcature[i]= marcature[i] + ((RelazionePetri)rel).getPeso();
 						}
 					}
 				}
+			
 			}
-			return marc;
+			
 		}
 		/*
 		public int[] scattaTransizione(int trans) {

@@ -1,4 +1,4 @@
-package mainProgram3;
+package mainProgram4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +45,10 @@ public class RetePetriP extends RetePetri{
 			this.relazioni = p.getRelazioni();
 			this.marcature = p.getMarcature();
 			this.priorità = new int[numTrans];;
+		}
+		
+		public int getPriorita(int i) {
+			return priorità[i];
 		}
 		
 		public void aggiungiRelazioni(RetePetri p) {
@@ -107,6 +111,54 @@ public class RetePetriP extends RetePetri{
 			}
 			this.stampaMarcature();
 			stampaPriorità();
+		}
+		
+		public int cercaPrioritaMax() {
+			int i;
+			int max=0;
+			for (i=0; i<numTrans; i++) {
+				if(this.getPriorita(i)>max) {
+					max=this.getPriorita(i);
+				}
+			}
+			return max;
+		}
+		
+		@Override
+		public int contaTransizioniAbilitate() {
+			int contatore=0;
+			int prior= this.cercaPrioritaMax();
+			do {
+				for(AbstractRelazioneDiFlusso rel: this.relazioni) {
+					if (rel.inOut==true && ((RelazionePetri)rel).getPeso()<=this.getMarcatura(rel.getPosizione()-1) && this.getPriorita(rel.getTransizione()-1)==prior ) {
+						System.out.println("transizione abilitata:" + rel.getTransizione());
+						//incrementa il contatore delle transizioni abilitate 
+						contatore++;
+					}
+				}
+				prior=prior-1;
+			}while(contatore==0 && prior>0);
+			return contatore;
+		}
+		
+		
+		
+		@Override
+		public boolean[]  cercaTransizioniAbilitate() {
+			int priorita=this.cercaPrioritaMax();
+			boolean [] transAbilitate= new boolean [numTrans];
+			boolean ok=false;
+			do {
+				for(AbstractRelazioneDiFlusso rel: this.relazioni) {
+					if (rel.inOut==true && ((RelazionePetri)rel).getPeso()<=this.getMarcatura(rel.getPosizione()-1) && this.getPriorita(rel.getTransizione()-1)==priorita ) {
+						transAbilitate[rel.getPosizione()-1]=true;
+						ok=true;
+					}
+				}
+				priorita=priorita-1;
+			}while(!ok && priorita >0);
+			
+			return transAbilitate;
 		}
 
 		@Override
