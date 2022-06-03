@@ -204,7 +204,7 @@ public class ArchivioReti {
 		
 		public void visualizzaNomeRetiPNP() {
 			if(reti != null && !(reti.isEmpty()) && !noRetiPNPInArchivio()) {
-				System.out.println("Nomi delle reti di Petri presenti: \n");
+				System.out.println("Nomi delle reti di Petri con priorità presenti: \n");
 				for(AbstractRete elem : reti) {
 					if(elem instanceof RetePetriP) {
 						System.out.println(elem.getName());
