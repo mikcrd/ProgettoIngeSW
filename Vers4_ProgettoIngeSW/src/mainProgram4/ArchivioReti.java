@@ -123,14 +123,14 @@ public class ArchivioReti {
 		
 		public boolean noRetiPNInArchivio() {
 			for(AbstractRete rete: getArchivio()) {
-				if(rete instanceof RetePetri) return false;
+				if(rete.getClass().getSimpleName().equals("RetePetri")) return false;
 			}
 			return true;
 		}
 		
 		public boolean noRetiPNPInArchivio() {
 			for(AbstractRete rete: getArchivio()) {
-				if(rete instanceof RetePetriP) return false;
+				if(rete.getClass().getSimpleName().equals("RetePetriP")) return false;
 			}
 			return true;
 		}
@@ -204,7 +204,7 @@ public class ArchivioReti {
 		
 		public void visualizzaNomeRetiPNP() {
 			if(reti != null && !(reti.isEmpty()) && !noRetiPNPInArchivio()) {
-				System.out.println("Nomi delle reti di Petri con priorità presenti: \n");
+				System.out.println("Nomi delle reti di Petri presenti: \n");
 				for(AbstractRete elem : reti) {
 					if(elem instanceof RetePetriP) {
 						System.out.println(elem.getName());
