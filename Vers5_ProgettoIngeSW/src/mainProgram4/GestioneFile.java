@@ -1,6 +1,7 @@
 package mainProgram4;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -55,21 +56,21 @@ public class GestioneFile {
 		return a;
 	}
      
-     public static AbstractRete xmlToRete(File file) {
-  		
-  		AbstractRete rete = null;
-  		
+     public static ArrayList <AbstractRete> xmlToRete(File file) {
+   		
+    	 ArchivioReti a = null;
+    	 
   		try {
-  			 contextObj = JAXBContext.newInstance(AbstractRete.class, Rete.class, RetePetri.class, RetePetriP.class, RelazioneDiFlusso.class, RelazionePetri.class);
+  			 contextObj = JAXBContext.newInstance(ArchivioReti.class, Rete.class, RetePetri.class, RetePetriP.class, RelazioneDiFlusso.class, RelazionePetri.class);
   			 Unmarshaller jaxbUnmarshaller = contextObj.createUnmarshaller();  
-  		     rete = (AbstractRete) jaxbUnmarshaller.unmarshal(file);  
+  		     a = (ArchivioReti) jaxbUnmarshaller.unmarshal(file);  
   		     
    
   		} catch (JAXBException e) {
   			e.printStackTrace();
   		}  
   	
-  		return rete;
+  		return a.getArchivio();
   	
   	}
      

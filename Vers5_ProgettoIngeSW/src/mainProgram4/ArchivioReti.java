@@ -116,9 +116,11 @@ public class ArchivioReti {
 		public void salvaReteDaFile() {
 			String path = LeggiInput.leggiStringaNonVuota(MESS_FILE_PATH);
 			File file = new File(path);
-			AbstractRete rete = GestioneFile.xmlToRete(file);
-			if(rete.controlloPerSalvataggioDaFile()) {
-				salvaRete(rete);
+			ArrayList<AbstractRete> retiUtente = GestioneFile.xmlToRete(file);
+			for(AbstractRete rete : retiUtente) {
+				if(rete.controlloPerSalvataggioDaFile()) {
+					salvaRete(rete);
+				}
 			}
 		}
 		
