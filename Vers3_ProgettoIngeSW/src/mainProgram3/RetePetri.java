@@ -162,6 +162,7 @@ public class RetePetri extends AbstractRete  {
 			//System.out.println("numero transizioni" + max);
 		}
 		
+		
 		private void inizializzaReteP(Rete re) {
 			this.numPos=re.getPos();
 			
@@ -169,6 +170,7 @@ public class RetePetri extends AbstractRete  {
 			this.aggiungiMarcature(numPos);
 			this.aggiungiPesiRelazione(re);
 		}
+		
 		
 		public void aggiungiPesiRelazione(Rete re) {
 			
@@ -242,7 +244,7 @@ public class RetePetri extends AbstractRete  {
 			return contatore;
 		}
 		
-		public boolean[]  cercaTransizioniAbilitate() {
+		public boolean []  cercaTransizioniAbilitate() {
 		
 			boolean [] transAbilitate= new boolean [numTrans];
 			for(AbstractRelazioneDiFlusso rel: this.relazioni) {

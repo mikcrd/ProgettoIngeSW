@@ -73,8 +73,11 @@ public class Menu {
 		   		   {
 				   	    case 0: cicloApplicazione(); break;
 			   		    case 1: archivio.visualizzaNomeRetiPN();
+			   		    		if(archivio.noRetiPNInArchivio()) break;
+			   		    		else {
 			   		    		RetePetri petri= (RetePetri) archivio.cercaRete();
 			   		    		petri.simulaRete();
+			   		    		}
 			   		    break;
 		   		   }
 			}while(true);
@@ -129,6 +132,8 @@ public class Menu {
 		public void SetArchivio() {
 			if(file.length() != 0L) {
 	  			archivio = GestioneFile.xmlToObj(file);
+	  		}else {
+	  			archivio=  new ArchivioReti ();
 	  		}
 		}
 		
