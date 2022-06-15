@@ -161,6 +161,9 @@ public class Menu {
 		}
 		
 		public void SetArchivio() {
+			
+			File file = new File("C:\\TEMP\\data\\reti_xml.xml");
+			
 			if(file.length() != 0L) {
 	  			archivio = GestioneFile.xmlToObj(file);
 	  		}

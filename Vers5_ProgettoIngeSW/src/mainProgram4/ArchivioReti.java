@@ -123,7 +123,9 @@ public class ArchivioReti {
 		}
 		
 		public void salvaLista() {
-			GestioneFile.objToXml(this);
+			File file = new File("C:\\TEMP\\data\\reti_xml.xml");
+
+			GestioneFile.objToXml(this, file);
 		}
 		
 		public boolean noRetiInArchivio() {
