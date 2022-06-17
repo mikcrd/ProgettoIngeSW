@@ -1,8 +1,6 @@
-package mainProgram4;
+package mainProgram5;
 
 import java.io.File;
-
-
 
 
 import utility.MyMenu;
@@ -33,6 +31,9 @@ public class Menu {
 		
 		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
 		private static final String NO_RETI_PETRI = "Attenzione: non ci sono reti di Petri nell'archivio \nAggiungere una rete prima di continuare";
+		public static final String RETEP_NON_PRES="Attenzione, la rete di petri selezionata non è presente in archivio";
+		public static final String RETEPP_NON_PRES="Attenzione, la rete di petri con priorità selezionata non è presente in archivio";
+
 		
 		private static File file = new File("src\\data\\reti_xml.xml");
 		
@@ -81,17 +82,33 @@ public class Menu {
 		   		   int cmd = menu.scegli();
 		   		   switch(cmd)
 		   		   {
-				   	    case 0: cicloApplicazione(); break;
-			   		    case 1: archivio.visualizzaNomeRetiPN();
-			   		    		RetePetri petri= (RetePetri) archivio.cercaRete();
-			   		    		petri.simulaRete();
-			   		    		break;
-			   		    case 2: archivio.visualizzaNomeRetiPNP();
-			   		    		RetePetriP petrip=(RetePetriP)archivio.cercaRete();
-			   		    		petrip.simulaRete();
-			   		    		break;
-			   		    
-		   		   }
+
+			   	    case 0: cicloApplicazione(); break;
+		   		    case 1: archivio.visualizzaNomeRetiPN();
+		   		    if(archivio.noRetiPNInArchivio()) break;
+		   		    else {
+		   		    	RetePetri petri= (RetePetri) archivio.cercaRete();
+		   		    	if(petri==null) {
+   		    				System.out.println(RETEP_NON_PRES);
+   		    			}else {
+   		    				petri.simulaRete();
+   		    			}
+		   		    }
+		   		    	
+		   		    		break;
+		   		    case 2: archivio.visualizzaNomeRetiPNP();
+		   		    if(archivio.noRetiPNPInArchivio()) break;
+		   		    else {
+		   		    		RetePetriP petrip=(RetePetriP)archivio.cercaRete();
+		   		    		if(petrip==null) {
+			    				System.out.println(RETEPP_NON_PRES);
+			    			}else {
+			    				petrip.simulaRete();
+			    			}
+		   		    }
+		   		    		break;
+		   		    
+	   		   }
 			}while(true);
 		
 		}
