@@ -3,8 +3,6 @@ package mainProgram5;
 import java.io.File;
 
 
-
-
 import utility.MyMenu;
 
 public class Menu {
@@ -36,8 +34,10 @@ public class Menu {
 		public static final String RETEP_NON_PRES="Attenzione, la rete di petri selezionata non è presente in archivio";
 		public static final String RETEPP_NON_PRES="Attenzione, la rete di petri con priorità selezionata non è presente in archivio";
 
+
 		public static final File file = new File("C:\\TEMP\\data\\reti_xml.xml");
-		
+
+
 		ArchivioReti archivio;
 		String differenziaRete;
 
@@ -109,6 +109,7 @@ public class Menu {
 			   		    		break;
 		
 		   		   }
+
 			}while(true);
 		
 		}
