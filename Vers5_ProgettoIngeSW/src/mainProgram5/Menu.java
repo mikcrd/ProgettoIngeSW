@@ -1,4 +1,4 @@
-package mainProgram4;
+package mainProgram5;
 
 import java.io.File;
 
@@ -33,8 +33,10 @@ public class Menu {
 		
 		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
 		private static final String NO_RETI_PETRI = "Attenzione: non ci sono reti di Petri nell'archivio \nAggiungere una rete prima di continuare";
-		
-		private static File file = new File("src\\data\\reti_xml.xml");
+		public static final String RETEP_NON_PRES="Attenzione, la rete di petri selezionata non è presente in archivio";
+		public static final String RETEPP_NON_PRES="Attenzione, la rete di petri con priorità selezionata non è presente in archivio";
+
+		public static final File file = new File("C:\\TEMP\\data\\reti_xml.xml");
 		
 		ArchivioReti archivio;
 		String differenziaRete;
@@ -81,16 +83,31 @@ public class Menu {
 		   		   int cmd = menu.scegli();
 		   		   switch(cmd)
 		   		   {
-				   	    case 0: cicloApplicazione(); break;
+				   		case 0: cicloApplicazione(); break;
 			   		    case 1: archivio.visualizzaNomeRetiPN();
-			   		    		RetePetri petri= (RetePetri) archivio.cercaRete();
-			   		    		petri.simulaRete();
+			   		    if(archivio.noRetiPNInArchivio()) break;
+			   		    else {
+			   		    	RetePetri petri= (RetePetri) archivio.cercaRete();
+			   		    	if(petri==null) {
+				    				System.out.println(RETEP_NON_PRES);
+				    			}else {
+				    				petri.simulaRete();
+				    			}
+			   		    }
+		
 			   		    		break;
 			   		    case 2: archivio.visualizzaNomeRetiPNP();
+			   		    if(archivio.noRetiPNPInArchivio()) break;
+			   		    else {
 			   		    		RetePetriP petrip=(RetePetriP)archivio.cercaRete();
-			   		    		petrip.simulaRete();
+			   		    		if(petrip==null) {
+				    				System.out.println(RETEPP_NON_PRES);
+				    			}else {
+				    				petrip.simulaRete();
+				    			}
+			   		    }
 			   		    		break;
-			   		    
+		
 		   		   }
 			}while(true);
 		
@@ -161,8 +178,6 @@ public class Menu {
 		}
 		
 		public void SetArchivio() {
-			
-			File file = new File("C:\\TEMP\\data\\reti_xml.xml");
 			
 			if(file.length() != 0L) {
 	  			archivio = GestioneFile.xmlToObj(file);

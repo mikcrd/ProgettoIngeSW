@@ -1,4 +1,4 @@
-package mainProgram4;
+package mainProgram5;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +52,10 @@ public class RetePetriP extends RetePetri{
 		
 		public int getPriorita(int i) {
 			return priorità[i];
+		}
+		
+		public int[] getPriorita() {
+			return priorità;
 		}
 		
 		public void aggiungiRelazioni(RetePetri p) {
@@ -166,6 +170,9 @@ public class RetePetriP extends RetePetri{
 
 		@Override
 		public boolean isCorrect() {
+			for(int priorità : getPriorita()) {
+				if(priorità <= 0) return false; break;
+			}
 			return true;
 		}
 		

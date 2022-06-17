@@ -1,4 +1,4 @@
-package mainProgram4;
+package mainProgram5;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -13,8 +13,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
-import mainProgram4.AbstractRelazioneDiFlusso;
-import mainProgram4.RelazionePetri;
 import utility.LeggiInput;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -107,17 +105,24 @@ public class RetePetri extends AbstractRete  {
 		 * pesi: da 1 a +infinito
 		 */
 		@Override
-		/*public boolean isCorrect() {
-           for(IRelazioneDiFlusso rel : getRelazioni()) {
-        	   if(rel instanceof RelazionePN) {
-	        	   if(((RelazionePN)rel).getMarcatura() < 0 || ((RelazionePN)rel).getPeso() <= 0)
+		  public boolean isCorrect() {
+           for(AbstractRelazioneDiFlusso rel : getRelazioni()) {
+        	   if(rel instanceof RelazionePetri) {
+	        	   if(((RelazionePetri)rel).getPeso() <= 0 || !controlloMarcature())
 	        		   return false; break;
         	   }
            }
-   
 		   return true;  
-		}*/
-//dasa
+		}
+		
+		public boolean controlloMarcature() {
+			for(int marcatura : getMarcature()) {
+				if(marcatura < 0) return false; break;
+			}
+			return true;
+		}
+		
+		
 		public RetePetri creaRete() {
 
 			// deve visualizzare solo reti -> vedi xml reti
@@ -409,16 +414,6 @@ public class RetePetri extends AbstractRete  {
 			return false;
 		}
 
-
-		@Override
-		public boolean isCorrect() {
-			// TODO Auto-generated method stub
-			return true;
-		}
-		
-	
-		
-		
 }
 //NOTA: i metodi hashcode e isEqual di Rete e RetePN sono uguali, considerare di fare una classe astratta?
 

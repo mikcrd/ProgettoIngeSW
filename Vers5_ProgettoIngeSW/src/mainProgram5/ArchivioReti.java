@@ -1,4 +1,4 @@
-package mainProgram4;
+package mainProgram5;
 
 
 import utility.*;
@@ -44,7 +44,7 @@ public class ArchivioReti {
 	private static final String PESO = "Immetti un peso per la relazione corrente: ";
 	private static final String MESS_FILE_PATH = "Immetti il path del file: ";
 
-	
+	public static final File file = new File("C:\\TEMP\\data\\reti_xml.xml");
 	
 		@XmlElementWrapper(name= "reti")
 		@XmlElement(name="rete", required = true)
@@ -125,7 +125,6 @@ public class ArchivioReti {
 		}
 		
 		public void salvaLista() {
-			File file = new File("C:\\TEMP\\data\\reti_xml.xml");
 
 			GestioneFile.objToXml(this, file);
 		}
