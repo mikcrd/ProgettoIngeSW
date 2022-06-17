@@ -26,7 +26,9 @@ public class Menu {
 		private static final String[] MENU_FRUI = {"Simula rete di Petri"};
 		
 		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
-		private static File file = new File("src\\data\\reti_xml.xml");
+		//private static File file = new File("src\\data\\reti_xml.xml");
+		public static final String RETEP_NON_PRES="Attenzione, la rete di petri selezionata non è presente in archivio";
+		private static File file = new File("C:\\TEMP\\data\\reti_xml.xml");
 		
 		ArchivioReti archivio;
 		String differenziaRete;
@@ -75,8 +77,12 @@ public class Menu {
 			   		    case 1: archivio.visualizzaNomeRetiPN();
 			   		    		if(archivio.noRetiPNInArchivio()) break;
 			   		    		else {
-			   		    		RetePetri petri= (RetePetri) archivio.cercaRete();
-			   		    		petri.simulaRete();
+			   		    			RetePetri petri= (RetePetri) archivio.cercaRete();
+			   		    			if(petri==null) {
+			   		    				System.out.println(RETEP_NON_PRES);
+			   		    			}else {
+			   		    				petri.simulaRete();
+			   		    			}
 			   		    		}
 			   		    break;
 		   		   }
