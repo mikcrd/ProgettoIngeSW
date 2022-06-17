@@ -208,8 +208,5 @@ public class RetePetriP extends RetePetri{
 				return false;
 			return true;
 		}
-
-		
-
-		
+	
 }

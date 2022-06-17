@@ -18,7 +18,6 @@ import utility.LeggiInput;
 @XmlRootElement(name = "ArchivioReti")
 public class ArchivioReti {
 	
-	private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
 	private final static String MESS_DOPPIONE = "Attenzione: non si puo' inserire una rete  gia' esistente!";
 	private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
 			+ "rete con questo nome. Inserire un altro nome: ";
@@ -26,23 +25,9 @@ public class ArchivioReti {
 	private final static String MESS_CERCA_RETE = "Inserisci il nome della rete: ";
 	private final static String MESS_RIMOZIONE = " : confermi la rimozione di questa rete?";
 	private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
-	
-	private static final String INSERIMENTO_RELAZIONI = "Vuoi inserire un'altra relazione?";
-	private static final String POSTOTRANS_TRANSPOSTO = "Per aggiungere una coppia posto-transizione premere 'a'\n"
-			+ "Per aggiungere una coppia transizione-posto premere 'b' : ";
-	private static final String POSTO = "Inserisci un intero positivo per il posto: ";
-	private static final String TRANSIZIONE = "Inserisci un intero positivo per la transizione: ";
-	private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
-	private static final String NOME_RETE_VISUALIZZA = "Inserisci il nome della rete da visualizzare: ";
+    private static final String NOME_RETE_VISUALIZZA = "Inserisci il nome della rete da visualizzare: ";
 	private static final String ERRORE_ARCHIVIO_VUOTO = "Attenzione archivio vuoto";
-
-	private static final String SCEGLI_CREA = "Scegli una rete esistente per costruirci sopra una rete di Petri (premi 'a')/n"
-			+ "Oppure crea prima una rete (premi 'b'): ";
-	private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
-	private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
-	private static final String MARCATURA = "Immetti una marcatura per la relazione corrente: ";
-	private static final String PESO = "Immetti un peso per la relazione corrente: ";
-	private static final String MESS_FILE_PATH = "Immetti il path del file: ";
+    private static final String MESS_FILE_PATH = "Immetti il path del file: ";
 
 	public static final File file = new File("C:\\TEMP\\data\\reti_xml.xml");
 	

@@ -42,14 +42,6 @@ public class RetePetri extends AbstractRete  {
 			name=null;
 			relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 		}
-		
-	
-/**		
-		public RetePN(String name, ArrayList<RelazionePN> relazioni) {
-			this.name = name;
-			this.relazioni = relazioni;
-		}
-**/
 
 		public RetePetri(ArchivioReti arch) { //dependency injection
 			this.arch = arch;	 
@@ -60,23 +52,6 @@ public class RetePetri extends AbstractRete  {
 			return numTrans;
 		}
 
-/**
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-	
-		public ArrayList<IRelazioneDiFlusso> getRelazioni() {
-			if (relazioni == null) {
-	        	relazioni = new ArrayList<IRelazioneDiFlusso>();
-	        }
-	        return this.relazioni;
-		}
- **/
 		public void aggiungiRelazione(RelazionePetri r) {
 			this.getRelazioni().add(r);		
 		}
@@ -95,9 +70,7 @@ public class RetePetri extends AbstractRete  {
 		
 		public void setMarcatura(int marc, int i) {
 			marcature[i]=marc;
-		}
-		
-		
+		}	
 		
 		/**
 		 * Se almeno un peso o una marcatura non sono validi, ritorna falso
@@ -313,27 +286,7 @@ public class RetePetri extends AbstractRete  {
 			}
 			
 		}
-		/*
-		public int[] scattaTransizione(int trans) {
-			for(int posizione : trovaPostiPredecessori(trans)) {
-				marcature[posizione] -= getPeso(posizione, trans, true);
-			}
-			for(int posizione : trovaPostiSucessori(trans)) {
-				marcature[posizione] += getPeso(posizione, trans, false);
-			}
-			return marcature;
-		}
-		
-		public int getPeso(int posizione, int transizione, boolean inOut) {
-			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
-				if(relazione.getPosizione()==posizione 
-						&& relazione.getTransizione()==transizione && relazione.isInOut()==inOut) {
-					return ((RelazionePN)relazione).getPeso();
-				}
-			}
-		}
-	    */
-		
+
 		public ArrayList<AbstractRelazioneDiFlusso> estraiRDFdaRP() {
 			ArrayList<AbstractRelazioneDiFlusso> arrayRDF = new ArrayList<AbstractRelazioneDiFlusso>();
 			for(AbstractRelazioneDiFlusso relP : getRelazioni()) {
@@ -415,5 +368,3 @@ public class RetePetri extends AbstractRete  {
 		}
 
 }
-//NOTA: i metodi hashcode e isEqual di Rete e RetePN sono uguali, considerare di fare una classe astratta?
-
