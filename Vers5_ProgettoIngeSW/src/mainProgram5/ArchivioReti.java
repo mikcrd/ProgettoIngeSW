@@ -68,6 +68,20 @@ public class ArchivioReti {
 			return trovaRete(net);
 		}
 		
+		/*@public normal_behavior
+		  @requires reti.contains(elem);
+		  @ensures !reti.contains(elem);
+		  @ensures (\forall AbstractRete e; e != elem; reti.contains(e) <==> \old(reti.contains(e)));
+		  @ensures reti.size() == \old(reti.size())-1;
+		  @
+		  @also
+		  @
+		  @public normal_behavior
+		  @requires !reti.contains(elem);
+		  @ensures (\forall AbstractRete e; reti.contains(e) <==> \old(reti.contains(e)));
+		  @ensures reti.size() == \old(reti.size());
+		  @assignable \nothing;
+		  @*/
 		public void eliminaRete()
 		{
 			AbstractRete elemento = cercaRete();
