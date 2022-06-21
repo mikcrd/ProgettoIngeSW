@@ -26,11 +26,14 @@ public class RetePetriP extends RetePetri{
 				+ "vuole salvare non ha una rete di Petri con la stessa topologia a cui appoggiarsi. "
 				+ "\nCrea prima una rete di Petri con la stessa topologia";
 		
+		/*@invariant priorità != null;
+		  @(\forall int i; 0<=i<numTrans; priorità[i]>0);
+		  @*/
 		
 		@XmlElementWrapper(name="priorit\u00e0")
 		@XmlElement(name="priorit\u00e0", required = true)
 		
-		int [] priorità;
+		/*@spec_public@*/int [] priorità;
 		
 		public RetePetriP(ArchivioReti arch) { //dependency injection
 			this.arch = arch;	 
@@ -86,6 +89,7 @@ public class RetePetriP extends RetePetri{
 			this.aggiungiPriorità(numTrans);
 		}
 	
+		/*@assignable numPos, numTrans, name, relazioni, marcature, priorità;@*/
 		public RetePetriP creaRete() {
 			RetePetri p;
 			arch.visualizzaSoloRetiPNArchivio();

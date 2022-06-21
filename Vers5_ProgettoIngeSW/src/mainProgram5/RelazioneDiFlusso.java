@@ -15,11 +15,6 @@ public class RelazioneDiFlusso extends AbstractRelazioneDiFlusso {
 	private static final String POSTO = "Inserisci un intero positivo per il posto: ";
 	private static final String TRANSIZIONE = "Inserisci un intero positivo per la transizione: ";
 
-	/**
-	int posizione;
-	int transizione;
-	boolean inOut;
-	**/
 	
 	public RelazioneDiFlusso() {
 				
@@ -35,32 +30,8 @@ public class RelazioneDiFlusso extends AbstractRelazioneDiFlusso {
 		this.posizione=posizione;
 		this.transizione=transizione;
 	}
+
 	
-/**		
-	public int getPosizione() {
-		return posizione;
-	}
-
-	public void setPosizione(int posizione) {
-		this.posizione = posizione;
-	}
-
-	public int getTransizione() {
-		return transizione;
-	}
-
-	public void setTransizione(int transizione) {
-		this.transizione = transizione;
-	}
-
-	public boolean isInOut() {
-		return inOut;
-	}
-	
-	public void setInOut(boolean flag) {
-		this.inOut = flag;
-	}
-**/
 	public RelazioneDiFlusso creaPosto_Trans() {
 		setPosizione(LeggiInput.leggiInteroPositivo(POSTO));								
 		setTransizione(LeggiInput.leggiInteroPositivo(TRANSIZIONE));

@@ -53,13 +53,6 @@ public abstract class AbstractRelazioneDiFlusso {
 		else 
 			return  "transizione " + transizione + " posto " + posizione;
 	}
-	
-/**
-	public abstract int getPosizione();
-	
-	public abstract int getTransizione();
 
-	public abstract boolean isInOut();
-**/
 	
 }

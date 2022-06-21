@@ -35,7 +35,7 @@ public class Menu {
 		public static final String RETEPP_NON_PRES="Attenzione, la rete di petri con priorità selezionata non è presente in archivio";
 
 
-		public static final File file = new File("C:\\TEMP\\data\\reti_xml.xml");
+		public static final File file = new File("C:\\data\\reti_xml.xml");
 
 
 		ArchivioReti archivio;

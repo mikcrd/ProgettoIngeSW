@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.*;
-
 import utility.LeggiInput;
 
 
@@ -29,11 +28,14 @@ public class ArchivioReti {
 	private static final String ERRORE_ARCHIVIO_VUOTO = "Attenzione archivio vuoto";
     private static final String MESS_FILE_PATH = "Immetti il path del file: ";
 
-	public static final File file = new File("C:\\TEMP\\data\\reti_xml.xml");
+	public static final File file = new File("C:\\data\\reti_xml.xml");
 	
 		@XmlElementWrapper(name= "reti")
 		@XmlElement(name="rete", required = true)
-		ArrayList <AbstractRete> reti;
+		/*@spec_public@*/ArrayList <AbstractRete> reti;
+		/*@invariant
+		  @reti != null;
+		  @*/
 		
 		public ArchivioReti(ArrayList <AbstractRete> arch) {
 			this.reti = arch;
@@ -87,7 +89,21 @@ public class ArchivioReti {
 			salvaRete(r);
 		}
 	
-		//mi serve per il testing
+		/*@public normal_behavior
+		  @requires r.isCorrect();
+		  @requires !isEqual(r);
+		  @ensures reti.contains(r);
+		  @ensures (\forall AbstractRete e; e != r; reti.contains(e) <==> \old(reti.contains(e)));
+		  @ensures reti.size() == \old(reti.size())+1;
+		  @
+		  @also
+		  @
+		  @public normal_behavior
+		  @requires !r.isCorrect || isEqual(r);
+		  @ensures (\forall AbstractRete e; reti.contains(e) <==> \old(reti.contains(e)));
+		  @ensures reti.size() == \old(reti.size());
+		  @assignable \nothing;
+		  @*/
 		public void salvaRete(AbstractRete r) {
 			
 			if(r.isCorrect() && !isEqual(r)) {
@@ -262,20 +278,6 @@ public class ArchivioReti {
 					daConfrontare.setName(changeName());				
 					return isEqual(daConfrontare);
 				}
-				/**
-				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) //per RetiPetri
-						&& (rete.getName().equals(daConfrontare.getName()))) {
-					daConfrontare.setName(changeName());
-					return false;
-				}
-				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni()))  //per RetiPetriP
-						&& rete instanceof RetePetriP && daConfrontare instanceof RetePetriP
-						&& ((RetePetriP) rete).getMarcature().equals(((RetePetriP) daConfrontare).getMarcature())
-						&& (rete.getName().equals(daConfrontare.getName()))) {
-					daConfrontare.setName(changeName());
-					return false;
-				}
-				**/
 				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni()))
 						&& rete instanceof Rete && daConfrontare instanceof Rete) {
 					System.out.print(MESS_STESSA_TOPOLOGIA);

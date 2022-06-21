@@ -28,11 +28,17 @@ public abstract class AbstractRete {
 		private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
 				+ "rete con questo nome. Inserire un altro nome: ";
 		
+		/*@invariant
+		  @arch != null;
+		  @numPos, numTrans > 0;
+		  @relazioni != null;
+		  @*/
+		
 	    @XmlTransient
-		ArchivioReti arch;
+	    /*@spec_public@*/ArchivioReti arch;
 	    
 	    @XmlTransient
-		int numPos, numTrans;
+	    /*@spec_public@*/int numPos, numTrans;
 	    
 	    @XmlTransient
 		int [][] in;
@@ -42,11 +48,11 @@ public abstract class AbstractRete {
 		int [][] inc;
 		
 		@XmlAttribute(name = "nome")
-		String name;
+		/*@spec_public@*/String name;
 		
 		@XmlElementWrapper(name="relazioni")
 		@XmlElement(name="relazione", required = true)
-		ArrayList<AbstractRelazioneDiFlusso> relazioni;
+		/*@spec_public@*/ArrayList<AbstractRelazioneDiFlusso> relazioni;
 		
 		
 		public AbstractRete() {

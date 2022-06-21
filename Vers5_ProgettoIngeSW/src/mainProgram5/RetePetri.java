@@ -34,9 +34,13 @@ public class RetePetri extends AbstractRete  {
 		private static final String MESS_NORETETOPOLOGIA = "La rete di Petri che si vuole salvare non ha una rete "
 				+ "con la stessa topologia a cui appoggiarsi. \nCrea prima una rete con la stessa topologia";
 		
+		/*@invariant marcature != null;
+		  @(\forall int i; 0<=i<numPos; marcature[i]>=0);
+		  @*/
+		
 		@XmlElementWrapper(name="marcature")
 		@XmlElement(name="marcatura", required = true)
-		int [] marcature;
+		/*@spec_public@*/int [] marcature;
 		
 		public RetePetri() {
 			name=null;
@@ -95,9 +99,8 @@ public class RetePetri extends AbstractRete  {
 			return true;
 		}
 		
-		
+		/*@assignable numPos, numTrans, name, relazioni, marcature;@*/
 		public RetePetri creaRete() {
-
 			// deve visualizzare solo reti -> vedi xml reti
 			Rete r;
 			arch.visualizzaSoloRetiArchivio();
@@ -109,10 +112,7 @@ public class RetePetri extends AbstractRete  {
 			}
 			else{
 				this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
-				//r.stampaRete();
-				r.contaPosizioni();
-				//System.out.println(r.getPos());
-				
+				r.contaPosizioni();				
 				this.inizializzaReteP(r);
 				System.out.println("----------------------------------------------");
 			}
@@ -124,9 +124,9 @@ public class RetePetri extends AbstractRete  {
 			for(int i=0; i<np; i++) {
 				int j=i;
 				marcature[i]=LeggiInput.leggiInteroNonNegativo(MARCATURA + " per la posizione " + ++j + ": ");
-
 			}
 		}
+		
 		
 		//ritorna il numero massimo della posizione
 		public void contaPosizioni() {
@@ -137,6 +137,7 @@ public class RetePetri extends AbstractRete  {
 				}
 			numPos=max;
 		}
+		
 		
 		//ritorna il numero massimo delle transizioni 
 		public void contaTransizioni() {
@@ -157,7 +158,6 @@ public class RetePetri extends AbstractRete  {
 		}
 		
 		public void aggiungiPesiRelazione(Rete re) {
-			
 			for (AbstractRelazioneDiFlusso rel : re.getRelazioni()) {
 				System.out.println();
 				int peso = LeggiInput.leggiInteroPositivo("inserire il peso in questa relazione di flusso [" + rel.toString() + "]: ");
@@ -233,10 +233,8 @@ public class RetePetri extends AbstractRete  {
 			
 			return transAbilitate;
 		}
+	
 		
-		
-		
-		//metodi Michela
 		public boolean [] trovaPostiPredecessori(int trans) {
 			boolean[] pred = new boolean[numPos];
 			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
