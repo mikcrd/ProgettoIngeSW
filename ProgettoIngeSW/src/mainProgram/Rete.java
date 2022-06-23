@@ -65,7 +65,6 @@ public class Rete {
 	
 	//controlla che non ci siano posti volanti
 	public boolean controllaRighe(int [][] m) {
-		inizializzaRete();
 		boolean neg;
 		boolean pos;
 		
@@ -92,7 +91,6 @@ public class Rete {
 	
 	//controllo che non ci siano transizioni volanti 
 	public boolean controllaColonne(int [][] m) {
-		inizializzaRete();
 		boolean neg;
 		boolean pos;
 		

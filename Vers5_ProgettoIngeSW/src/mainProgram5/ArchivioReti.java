@@ -55,7 +55,7 @@ public class ArchivioReti {
 		
 		public AbstractRete trovaRete (String reteRichiesta)
 		{ 
-			for(AbstractRete elem : reti){	  
+			for(AbstractRete elem : getArchivio()){	  
 				if(elem.getName().equalsIgnoreCase(reteRichiesta))
 					return elem;
 			} 
@@ -99,8 +99,9 @@ public class ArchivioReti {
 		
 		
 		public void aggiungiRete(AbstractRete r) {
-			r=r.creaRete();                                 		
-			salvaRete(r);
+			r=r.creaRete();    
+			if(r!=null)
+				salvaRete(r);
 		}
 	
 		/*@public normal_behavior

@@ -35,7 +35,7 @@ public class GestioneFile {
 	
      public static ArchivioReti xmlToObj(File file) {
 		
-		ArchivioReti a = null;
+		ArchivioReti a = new ArchivioReti();
 		
 		try {
 			 contextObj = JAXBContext.newInstance(ArchivioReti.class, AbstractRete.class, Rete.class, RetePetri.class, RetePetriP.class, RelazioneDiFlusso.class, RelazionePetri.class);
@@ -52,7 +52,7 @@ public class GestioneFile {
      
      public static ArrayList <AbstractRete> xmlToRete(File file) {
    		
-    	 ArchivioReti a = null;
+    	 ArchivioReti a = new ArchivioReti();
     	 
   		try {
   			 contextObj = JAXBContext.newInstance(ArchivioReti.class, Rete.class, RetePetri.class, RetePetriP.class, RelazioneDiFlusso.class, RelazionePetri.class);

@@ -45,6 +45,7 @@ public class Menu {
 		public void cicloApplicazione() {
 			MyMenu menu = new MyMenu(TITOLO, MENU);
 			do{
+					this.SetArchivio();
 					menu.stampaMenu();
 					int cmd = menu.scegli();
 					switch(cmd){
@@ -58,6 +59,7 @@ public class Menu {
 		
 		public void cicloConfiguratore() {
 			MyMenu menu = new MyMenu(TITOLO_CONF,MENU_CONF);
+			this.SetArchivio();
 			do{
 					
 		  		   menu.stampaMenu();
@@ -73,9 +75,9 @@ public class Menu {
 	   		    	           menuReti(TITOLO_RETEPP, MENU_RETEPP, differenziaRete); break;    	   
 		   		   }	
 		  		}while(true);					
-	    }
+	    	}
 
-		public void cicloFruitore() {
+			public void cicloFruitore() {
 			MyMenu menu = new MyMenu(TITOLO_FRUI, MENU_FRUI);
 			this.SetArchivio();
 			do{
@@ -179,14 +181,11 @@ public class Menu {
 		}
 		
 		public void SetArchivio() {
-			
 			if(file.length() != 0L) {
 	  			archivio = GestioneFile.xmlToObj(file);
 	  		}
 			else archivio = new ArchivioReti();
-		}
-		
-		
+		}	
 	}
 
 

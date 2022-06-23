@@ -102,21 +102,25 @@ public class RetePetri extends AbstractRete  {
 		/*@assignable numPos, numTrans, name, relazioni, marcature;@*/
 		public RetePetri creaRete() {
 			// deve visualizzare solo reti -> vedi xml reti
-			Rete r;
+			Rete r= new Rete();
 			arch.visualizzaSoloRetiArchivio();
 			String nomeRete = LeggiInput.leggiStringaNonVuota(SCEGLI_RETE);
-			
-			r = (Rete) arch.trovaRete(nomeRete); // se sbaglia a scrivere ...
-			if(r == null) {
-				LeggiInput.leggiStringa(MESS_NON_TROVATA);
+			try {
+				r=(Rete)arch.trovaRete(nomeRete);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(MESS_NON_TROVATA);
+				return null;
 			}
-			else{
+			
+			// se sbaglia a scrivere ...
+			if(r!=null) {
 				this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
 				r.contaPosizioni();				
 				this.inizializzaReteP(r);
 				System.out.println("----------------------------------------------");
 			}
-		
+			
 			return this;
 		}
 		
