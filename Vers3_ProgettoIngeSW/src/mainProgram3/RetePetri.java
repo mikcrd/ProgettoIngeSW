@@ -20,14 +20,8 @@ import utility.LeggiInput;
 public class RetePetri extends AbstractRete  {
 	
 		private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
-		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
 		private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
-		private static final String SCEGLI_CREA = "Premi a per scegliere una rete da usare per costruire la rete di Petri \n"
-				+ "Premi b per inserire una nuova rete su cui costruire la rete di Petri";
 		private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
-		private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
-		private static final String PESO = "Immetti un peso per la relazione corrente: ";
-		private static final String ERR_PESO="il peso deve essere un valore maggiore o uguale a 1";
 		private static final String MARCATURA="inserire il valore di marcatura";
 		
 		int [] marcature;
@@ -37,35 +31,12 @@ public class RetePetri extends AbstractRete  {
 			relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 		}
 		
-	
-/**		
-		public RetePN(String name, ArrayList<RelazionePN> relazioni) {
-			this.name = name;
-			this.relazioni = relazioni;
-		}
-**/
 
 		public RetePetri(ArchivioReti arch) { //dependency injection
 			this.arch = arch;	 
 		}
 
-/**
-		public String getName() {
-			return name;
-		}
 
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-	
-		public ArrayList<IRelazioneDiFlusso> getRelazioni() {
-			if (relazioni == null) {
-	        	relazioni = new ArrayList<IRelazioneDiFlusso>();
-	        }
-	        return this.relazioni;
-		}
- **/
 		public void aggiungiRelazione(RelazionePetri r) {
 			this.getRelazioni().add(r);		
 		}
@@ -86,25 +57,7 @@ public class RetePetri extends AbstractRete  {
 			marcature[i]=marc;
 		}
 		
-		
-		
-		/**
-		 * Se almeno un peso o una marcatura non sono validi, ritorna falso
-		 * marcature: da 0 a +infinito
-		 * pesi: da 1 a +infinito
-		 */
-		@Override
-		/*public boolean isCorrect() {
-           for(IRelazioneDiFlusso rel : getRelazioni()) {
-        	   if(rel instanceof RelazionePN) {
-	        	   if(((RelazionePN)rel).getMarcatura() < 0 || ((RelazionePN)rel).getPeso() <= 0)
-	        		   return false; break;
-        	   }
-           }
-   
-		   return true;  
-		}*/
-//dasa
+
 		public RetePetri creaRete() {
 
 			// deve visualizzare solo reti -> vedi xml reti
@@ -115,7 +68,6 @@ public class RetePetri extends AbstractRete  {
 			try {
 				r=(Rete)arch.trovaRete(nomeRete);
 			} catch (Exception e) {
-				// TODO: handle exception
 				System.out.println(MESS_NON_TROVATA);
 				return null;
 			}
@@ -142,26 +94,20 @@ public class RetePetri extends AbstractRete  {
 		public void contaPosizioni() {
 			int max=0;
 			for(AbstractRelazioneDiFlusso r :  relazioni) {
-			//if(r instanceof RelazioneDiFlusso) {
 				if(((RelazionePetri)r).getPosizione()>max)
 					max=((RelazionePetri)r).getPosizione();
-			//} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 				}
 			numPos=max;
-			//System.out.println("numero posizioni" + max);
 		}
 		
 		//ritorna il numero massimo delle transizioni 
 		public void contaTransizioni() {
 			int max=0;
 			for(AbstractRelazioneDiFlusso r :  relazioni) {
-				//if(r instanceof RelazioneDiFlusso) {
 					if(((RelazionePetri)r).getTransizione()>max)
 						max=((RelazionePetri)r).getTransizione();
-				//} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 			}
 			numTrans=max;
-			//System.out.println("numero transizioni" + max);
 		}
 		
 		
@@ -257,10 +203,8 @@ public class RetePetri extends AbstractRete  {
 			
 			return transAbilitate;
 		}
+				
 		
-		
-		
-		//metodi Michela
 		public boolean [] trovaPostiPredecessori(int trans) {
 			boolean[] pred = new boolean[numPos];
 			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
@@ -311,26 +255,7 @@ public class RetePetri extends AbstractRete  {
 			}
 			
 		}
-		/*
-		public int[] scattaTransizione(int trans) {
-			for(int posizione : trovaPostiPredecessori(trans)) {
-				marcature[posizione] -= getPeso(posizione, trans, true);
-			}
-			for(int posizione : trovaPostiSucessori(trans)) {
-				marcature[posizione] += getPeso(posizione, trans, false);
-			}
-			return marcature;
-		}
 		
-		public int getPeso(int posizione, int transizione, boolean inOut) {
-			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
-				if(relazione.getPosizione()==posizione 
-						&& relazione.getTransizione()==transizione && relazione.isInOut()==inOut) {
-					return ((RelazionePN)relazione).getPeso();
-				}
-			}
-		}
-	    */
 		
 		public void stampaMarcature() {
 			System.out.println("Marcature:");
@@ -398,9 +323,6 @@ public class RetePetri extends AbstractRete  {
 			return true;
 		}
 		
-	
-		
 		
 }
-//NOTA: i metodi hashcode e isEqual di Rete e RetePN sono uguali, considerare di fare una classe astratta?
 

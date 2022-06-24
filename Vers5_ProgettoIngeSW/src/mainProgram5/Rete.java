@@ -189,7 +189,6 @@ public class Rete extends AbstractRete  {
 		/*@assignable in[], out[], name, relazioni;@*/
 		@Override
 		public Rete creaRete() {
-		//	Rete r = new Rete();
 			this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
 			do {
 					char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);

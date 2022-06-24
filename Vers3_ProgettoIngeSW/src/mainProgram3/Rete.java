@@ -24,43 +24,13 @@ public class Rete extends AbstractRete  {
 		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
 		
 		
-		
-//		ArrayList<IRelazioneDiFlusso> relazioni;
-//	    String name;
-		
-		
-	
-		
 		public Rete (){
 			numPos=0;
 			numTrans=0;
 			name=null;
 			relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 		}
-
-		/**
-		public Rete(String name, ArrayList<RelazioneDiFlusso> relazioni) {
-			this.name = name;
-			this.relazioni = (ArrayList<IRelazioneDiFlusso>) (ArrayList<?>) relazioni;	
-		}**/
-
-///////////////////////////////////////////////////		
-/**
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public ArrayList<IRelazioneDiFlusso> getRelazioni() {
-	        if (relazioni == null) {
-	        	relazioni = new ArrayList<IRelazioneDiFlusso>();
-	        }
-	        return this.relazioni;
-	    }
-**/		
+	
 
 		public void aggiungiRelazione(RelazioneDiFlusso r) {
 			this.getRelazioni().add(r);		
@@ -73,32 +43,26 @@ public class Rete extends AbstractRete  {
 		public int getTrans() {
 			return numTrans;
 		}
-/////////////////////////////////////////////////////////		
+	
 		
 		//ritorna il numero massimo delle transizioni 
 		public void contaTransizioni() {
 			int max=0;
 			for(AbstractRelazioneDiFlusso r :  relazioni) {
-				//if(r instanceof RelazioneDiFlusso) {
 					if(((RelazioneDiFlusso)r).getTransizione()>max)
 						max=((RelazioneDiFlusso)r).getTransizione();
-				//} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 			}
 			numTrans=max;
-			//System.out.println("numero transizioni" + max);
 		}
 		
 		//ritorna il numero massimo della posizione
 		public void contaPosizioni() {
 			int max=0;
 			for(AbstractRelazioneDiFlusso r :  relazioni) {
-				//if(r instanceof RelazioneDiFlusso) {
 					if(((RelazioneDiFlusso)r).getPosizione()>max)
 						max=((RelazioneDiFlusso)r).getPosizione();
-				//} else {System.out.println("Debug: in questa rete ci sono relazioniPN");}
 			}
 			numPos=max;
-			//System.out.println("numero posizioni" + max);
 		}
 		
 		//stampa le matrici: debug
@@ -132,11 +96,6 @@ public class Rete extends AbstractRete  {
 					}
 				}
 			}
-			//debug
-			//stampaMatrice(in);
-			//System.out.println();
-			//stampaMatrice(out);
-
 		}
 		
 		
@@ -150,7 +109,6 @@ public class Rete extends AbstractRete  {
 					inc[i][j]=out[i][j] - in[i][j]; 
 				}
 			}
-			//stampaMatrice(inc);
 			return inc;
 		}
 		
@@ -206,9 +164,7 @@ public class Rete extends AbstractRete  {
 			}
 			return true;
 		}
-		
-		
-	
+			
 
 		@Override
 		public boolean isCorrect() {
@@ -232,7 +188,6 @@ public class Rete extends AbstractRete  {
 		
 		@Override
 		public Rete creaRete() {
-		//	Rete r = new Rete();
 			this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
 			do {
 					char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);

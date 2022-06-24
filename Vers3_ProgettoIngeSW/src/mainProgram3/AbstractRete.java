@@ -24,8 +24,6 @@ import utility.LeggiInput;
 })
 public abstract class AbstractRete {
 
-		private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
-				+ "rete con questo nome. Inserire un altro nome: ";
 		
 	    @XmlTransient
 		ArchivioReti arch;
@@ -56,7 +54,6 @@ public abstract class AbstractRete {
 		public AbstractRete(ArchivioReti arc) {
 			this.arch = arc;                           //dependency inj
 		}
-		
 		
 
 		public AbstractRete(String name, ArrayList<AbstractRelazioneDiFlusso> relazioni) {

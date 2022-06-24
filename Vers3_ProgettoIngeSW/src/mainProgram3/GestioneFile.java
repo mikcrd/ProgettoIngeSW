@@ -11,14 +11,8 @@ public class GestioneFile {
     private static char FS = File.separatorChar;
 	
 	private static JAXBContext contextObj;
-//	private static File file = new File("C:\\Users\\michela\\workspace\\ProvaXML\\prova_xml.xml");
 	private static File file = new File("C:\\data\\reti3_xml.xml");	
-/**	
-	public static void salvataggioSuFile(ArchivioReti arch, File file) {
-		objToXml(arch);
-	}
-**/	
-	
+
 	
 	public  static void objToXml(ArchivioReti arch) {
 		
@@ -51,6 +45,5 @@ public class GestioneFile {
 		}  
 	
 		return a;
-	
 	}
 }

@@ -108,7 +108,6 @@ public class RetePetri extends AbstractRete  {
 			try {
 				r=(Rete)arch.trovaRete(nomeRete);
 			} catch (Exception e) {
-				// TODO: handle exception
 				System.out.println(MESS_NON_TROVATA);
 				return null;
 			}
