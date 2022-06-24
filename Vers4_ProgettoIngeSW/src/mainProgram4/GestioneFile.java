@@ -12,7 +12,7 @@ public class GestioneFile {
 	
 	private static JAXBContext contextObj;
 //	private static File file = new File("C:\\Users\\michela\\workspace\\ProvaXML\\prova_xml.xml");
-	private static File file = new File("src\\data\\reti_xml.xml");
+	private static File file = new File("C:\\data\\reti4_xml.xml");
 	
 /**	
 	public static void salvataggioSuFile(ArchivioReti arch, File file) {

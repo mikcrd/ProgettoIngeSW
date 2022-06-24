@@ -198,6 +198,11 @@ public class RetePetri extends AbstractRete  {
 				}else if(numTransAbil>1)
 				{
 					//utente sceglie quale delle transizioni abilitate fare scattare
+					int transUtente=LeggiInput.leggiInteroPositivo("inserire la transizione che si vuole fare scattare");
+					if(abilitate[transUtente-1]) {
+						this.scattaTransizione(transUtente);
+						this.stampaMarcature();
+					}
 				}else if(numTransAbil==0) {
 					System.out.println("Nessuna transizione abilitata, blocco critico raggiunto");
 					break;

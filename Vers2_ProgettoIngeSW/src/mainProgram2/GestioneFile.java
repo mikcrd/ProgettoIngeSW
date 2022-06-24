@@ -12,7 +12,7 @@ public class GestioneFile {
 	
 	private static JAXBContext contextObj;
 //	private static File file = new File("C:\\Users\\michela\\workspace\\ProvaXML\\prova_xml.xml");
-	private static File file = new File("src\\data\\reti_xml.xml");
+	private static File file = new File("C:\\data\\reti2_xml.xml");
 	
 /**	
 	public static void salvataggioSuFile(ArchivioReti arch, File file) {
@@ -42,7 +42,7 @@ public class GestioneFile {
 		ArchivioReti a = null;
 		
 		try {
-			 contextObj = JAXBContext.newInstance(ArchivioReti.class, AbstractRete.class, Rete.class, RetePN.class, RelazioneDiFlusso.class, RelazionePN.class);
+			 contextObj = JAXBContext.newInstance(ArchivioReti.class, AbstractRete.class, Rete.class, RetePetri.class, RelazioneDiFlusso.class, RelazionePetri.class);
 			 Unmarshaller jaxbUnmarshaller = contextObj.createUnmarshaller();  
 		     a = (ArchivioReti) jaxbUnmarshaller.unmarshal(file);  
 		     

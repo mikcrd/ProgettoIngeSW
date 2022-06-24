@@ -19,7 +19,7 @@ public class Menu {
 				"Elimina rete di Petri", "Visualizza l'archivio reti di Petri"};
 		
 		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
-		private static File file = new File("src\\data\\reti_xml.xml");
+		private static File file = new File("C:\\data\\reti2_xml.xml");
 		
 		ArchivioReti archivio;
 		String differenziaRete;
@@ -62,7 +62,7 @@ public class Menu {
 			   		    	   			archivio.aggiungiRete(r); break;
 			   		       		}
 			   		       		else if(differenziaRete == "retePn") {
-				   		       		    AbstractRete r = new RetePN(archivio);
+				   		       		    AbstractRete r = new RetePetri(archivio);
 				   		       		    if(archivio.noRetiInArchivio()) {
 				   		       		    	System.out.println(NO_RETI);
 				   		       		    	break;

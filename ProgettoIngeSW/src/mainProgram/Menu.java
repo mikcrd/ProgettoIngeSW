@@ -5,7 +5,7 @@ import utility.MyMenu;
 
 public class Menu {
 
-	private static File file = new File("src\\data\\prova_xml.xml");
+	private static File file = new File("C:\\data\\reti_xml.xml");
 	
 	public static final String TITOLO = "ARCHIVIO RETI \n";
 	public static final String MENU[] = {"Aggiungi rete", "Visualizza rete", 

@@ -36,7 +36,8 @@ public class Menu {
 		public static final String RETEPP_NON_PRES="Attenzione, la rete di petri con priorità selezionata non è presente in archivio";
 
 		
-		private static File file = new File("src\\data\\reti_xml.xml");
+		//private static File file = new File("src\\data\\reti_xml.xml");
+		private static File file = new File("C:\\data\\reti4_xml.xml");
 		
 		ArchivioReti archivio;
 		String differenziaRete;

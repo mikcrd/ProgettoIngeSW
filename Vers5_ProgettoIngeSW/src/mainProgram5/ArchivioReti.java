@@ -28,7 +28,7 @@ public class ArchivioReti {
 	private static final String ERRORE_ARCHIVIO_VUOTO = "Attenzione archivio vuoto";
     private static final String MESS_FILE_PATH = "Immetti il path del file: ";
 
-	public static final File file = new File("C:\\data\\reti_xml.xml");
+	public static final File file = new File("C:\\data\\reti5_xml.xml");
 	
 		@XmlElementWrapper(name= "reti")
 		@XmlElement(name="rete", required = true)
