@@ -187,17 +187,20 @@ public class ArchivioReti {
 	
 		public void eliminaRete()
 		{
-			Rete elemento = cercaRete();
-			if (elemento!= null)
-			{
-				boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
-				if (procedi) {
-					reti.remove(elemento);
-					salvaLista();
-				}
+			this.visualizzaArchivio(); 
+			if(!(reti.isEmpty())) {
+				Rete elemento = cercaRete();
+				if (elemento!= null)
+				{
+					boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
+					if (procedi) {
+						reti.remove(elemento);
+						salvaLista();
 					}
-			else {
-				System.out.println(MESS_NON_TROVATA);
+						}
+				else {
+					System.out.println(MESS_NON_TROVATA);
+				}
 			}
 		}
 		
