@@ -34,7 +34,7 @@ public class ArchivioReti {
 	
 	@XmlElementWrapper(name= "reti")
 	@XmlElement(name="rete", required = true)
-	ArrayList <Rete> reti;
+	ArrayList <Rete> reti=new ArrayList<Rete>();
 		
 		public ArchivioReti(ArrayList <Rete> arch) {
 			this.reti = arch;

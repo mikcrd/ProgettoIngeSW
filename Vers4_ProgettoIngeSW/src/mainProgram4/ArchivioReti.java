@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.*;
 
+
 import utility.LeggiInput;
 
 
@@ -65,17 +66,21 @@ public class ArchivioReti {
 		
 		public void eliminaRete()
 		{
-			AbstractRete elemento = cercaRete();
-			if (elemento!= null)
-			{
-				boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
-					if (procedi)
-						reti.remove(elemento);
-					    salvaLista();
+			String nome=LeggiInput.leggiStringaNonVuota(MESS_CERCA_RETE);
+			try {
+				AbstractRete elemento = trovaRete(nome);
+				if (elemento!= null)
+				{
+					boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
+						if (procedi)
+							reti.remove(elemento);
+						    salvaLista();
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(MESS_NON_TROVATA);
 			}
-			else {
-				LeggiInput.leggiStringa(MESS_NON_TROVATA);
-			}
+		
 		}
 		
 		
