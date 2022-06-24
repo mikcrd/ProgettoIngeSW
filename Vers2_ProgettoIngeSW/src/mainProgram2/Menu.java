@@ -24,9 +24,7 @@ public class Menu {
 		ArchivioReti archivio;
 		String differenziaRete;
 
-		
-
-		
+				
 		public void cicloApplicazione() {
 			MyMenu menu = new MyMenu(TITOLO,MENU);
 			do{
@@ -50,6 +48,8 @@ public class Menu {
 			
 	  		if(file.length() != 0L) {
 	  			archivio = GestioneFile.xmlToObj(file);
+	  		} else {
+	  			archivio = new ArchivioReti();
 	  		}
 			do{
 		  		   menu.stampaMenu();
@@ -90,8 +90,7 @@ public class Menu {
 					   		     }  
 		   		   }	  		
 		  		}while(true);	
-		}	
-		
+		}			
 		
 	}
 

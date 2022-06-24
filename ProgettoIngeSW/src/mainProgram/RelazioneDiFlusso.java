@@ -91,9 +91,6 @@ import javax.xml.bind.annotation.*;
 			} else if (!transizione.equals(other.transizione))
 				return false;
 			return true;
-		}
-		
-		
-		
+		}		
 		
 }

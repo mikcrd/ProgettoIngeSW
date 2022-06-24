@@ -51,23 +51,9 @@ public class ArchivioReti {
 	        }
 	        return this.reti;
 		}
-
-/**
-		public boolean isEqual(String daConfrontare)
-		{
-			for(Rete arch: getArchivio()) {
-							
-				if(arch.getName().equals(daConfrontare)) {	
-					LeggiInput.leggiStringa(MESS_DOPPIONE);
-					System.out.println("La rete è già presente");
-					return true;
-				}
-			}
-			return false;
-		}
-**/
 		
-		public boolean isEqual(Rete daConfrontare) {
+		
+	public boolean isEqual(Rete daConfrontare) {
 			if(getArchivio().contains(daConfrontare)) {
 				System.out.println(MESS_DOPPIONE); 
 				return true;
