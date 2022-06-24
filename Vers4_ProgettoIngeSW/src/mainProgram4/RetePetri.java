@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+
 import mainProgram4.AbstractRelazioneDiFlusso;
 import mainProgram4.RelazionePetri;
 import utility.LeggiInput;
@@ -119,20 +120,21 @@ public class RetePetri extends AbstractRete  {
 		public RetePetri creaRete() {
 
 			// deve visualizzare solo reti -> vedi xml reti
-			Rete r;
+			Rete r=new Rete();
 			arch.visualizzaSoloRetiArchivio();
 			String nomeRete = LeggiInput.leggiStringaNonVuota(SCEGLI_RETE);
 			
-			r = (Rete) arch.trovaRete(nomeRete); // se sbaglia a scrivere ...
-			if(r == null) {
-				LeggiInput.leggiStringa(MESS_NON_TROVATA);
+			try {
+				r=(Rete)arch.trovaRete(nomeRete);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(MESS_NON_TROVATA);
+				return null;
 			}
-			else{
+			
+			if(r!=null) {
 				this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
-				//r.stampaRete();
-				r.contaPosizioni();
-				//System.out.println(r.getPos());
-				
+				r.contaPosizioni();				
 				this.inizializzaReteP(r);
 				System.out.println("----------------------------------------------");
 			}

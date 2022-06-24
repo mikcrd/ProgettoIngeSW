@@ -123,7 +123,7 @@ public class ArchivioReti {
 		
 		public boolean noRetiPNInArchivio() {
 			for(AbstractRete rete: getArchivio()) {
-				if(rete instanceof RetePN) return false;
+				if(rete instanceof RetePetri) return false;
 			}
 			return true;
 		}
@@ -173,7 +173,7 @@ public class ArchivioReti {
 			if(reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) {
 				System.out.println("Nomi delle reti di Petri presenti: \n");
 				for(AbstractRete elem : reti) {
-					if(elem instanceof RetePN) {
+					if(elem instanceof RetePetri) {
 						System.out.println(elem.getName());
 					}
 				}
@@ -199,7 +199,7 @@ public class ArchivioReti {
 		public void visualizzaSoloRetiPNArchivio() {
 			if(reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) {
 				for(AbstractRete elem : reti) {
-					if(elem instanceof RetePN) {
+					if(elem instanceof RetePetri) {
 						elem.stampaRete();
 					}
 				}

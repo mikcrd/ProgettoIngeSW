@@ -89,7 +89,8 @@ public class Menu {
 			   		    case 1: archivio.visualizzaNomeRetiPN();
 			   		    if(archivio.noRetiPNInArchivio()) break;
 			   		    else {
-			   		    	RetePetri petri= (RetePetri) archivio.cercaRete();
+			   		    	RetePetri petri = new RetePetri();
+			   		    	petri= (RetePetri) archivio.cercaRete();
 			   		    	if(petri==null) {
 				    				System.out.println(RETEP_NON_PRES);
 				    			}else {
@@ -101,7 +102,8 @@ public class Menu {
 			   		    case 2: archivio.visualizzaNomeRetiPNP();
 			   		    if(archivio.noRetiPNPInArchivio()) break;
 			   		    else {
-			   		    		RetePetriP petrip=(RetePetriP)archivio.cercaRete();
+			   		    		RetePetriP petrip=new RetePetriP();
+			   		    		petrip=(RetePetriP)archivio.cercaRete();
 			   		    		if(petrip==null) {
 				    				System.out.println(RETEPP_NON_PRES);
 				    			}else {

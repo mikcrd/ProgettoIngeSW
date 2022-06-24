@@ -15,7 +15,7 @@ import utility.LeggiInput;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RetePN")
-public class RetePN extends AbstractRete  {
+public class RetePetri extends AbstractRete  {
 	
 		private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
 		private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
@@ -30,7 +30,7 @@ public class RetePN extends AbstractRete  {
 		
 		int [] marcature;
 		
-		public RetePN() {
+		public RetePetri() {
 			name=null;
 			relazioni = new ArrayList<AbstractRelazioneDiFlusso>();
 		}
@@ -43,7 +43,7 @@ public class RetePN extends AbstractRete  {
 		}
 **/
 
-		public RetePN(ArchivioReti arch) { //dependency injection
+		public RetePetri(ArchivioReti arch) { //dependency injection
 			this.arch = arch;	 
 		}
 
@@ -64,7 +64,7 @@ public class RetePN extends AbstractRete  {
 	        return this.relazioni;
 		}
  **/
-		public void aggiungiRelazione(RelazionePN r) {
+		public void aggiungiRelazione(RelazionePetri r) {
 			this.getRelazioni().add(r);		
 		}
 
@@ -97,7 +97,7 @@ public class RetePN extends AbstractRete  {
 		   return true;  
 		}*/
 //dasa
-		public RetePN creaRete() {
+		public RetePetri creaRete() {
 
 			// deve visualizzare solo reti -> vedi xml reti
 			Rete r;
@@ -142,7 +142,7 @@ public class RetePN extends AbstractRete  {
 			for (AbstractRelazioneDiFlusso rel : re.getRelazioni()) {
 				System.out.println();
 				int peso = LeggiInput.leggiInteroPositivo("inserire il peso in questa relazione di flusso [" + rel.toString() + "]: ");
-				RelazionePN pn = new RelazionePN(((RelazioneDiFlusso)rel), peso);
+				RelazionePetri pn = new RelazionePetri(((RelazioneDiFlusso)rel), peso);
 				this.aggiungiRelazione(pn);
 			}
 		}
@@ -222,8 +222,8 @@ public class RetePN extends AbstractRete  {
 			System.out.println();
 			System.out.println(this.name);
 			for (AbstractRelazioneDiFlusso r : this.relazioni) {
-				if(r instanceof RelazionePN) {
-				   System.out.println(((RelazionePN)r).toString());
+				if(r instanceof RelazionePetri) {
+				   System.out.println(((RelazionePetri)r).toString());
 				}
 			}
 			System.out.println("Marcature:");
@@ -250,7 +250,7 @@ public class RetePN extends AbstractRete  {
 			if (getClass() != obj.getClass())
 				return false;
 			
-			RetePN other = (RetePN) obj;
+			RetePetri other = (RetePetri) obj;
 			if (!Arrays.equals(marcature, other.marcature))
 				return false;
 			if (relazioni == null) {

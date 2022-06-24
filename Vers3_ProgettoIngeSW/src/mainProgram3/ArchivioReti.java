@@ -95,8 +95,9 @@ public class ArchivioReti {
 		
 		
 		public void aggiungiRete(AbstractRete r) {
-			r=r.creaRete();                                 		
-			salvaRete(r);
+			r=r.creaRete();       
+			if(r!=null)
+				salvaRete(r);
 		}
 	
 		//mi serve per il testing
