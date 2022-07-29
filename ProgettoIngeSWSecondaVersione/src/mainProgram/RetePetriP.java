@@ -16,7 +16,7 @@ import utility.LeggiInput;
 @XmlType(name = "RetePetriP", propOrder = {
 		"priorit\u00e0",
 })
-public class RetePetriP extends RetePetri{
+public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 
 		private static final String PRIORITA ="inserire il valore di priorità";
 		private static final String SCEGLI_RETE_PETRI = "Scegli una delle reti di Petri nell'archivio: ";
@@ -108,16 +108,17 @@ public class RetePetriP extends RetePetri{
 			else {
 				// ...
 				
-				
+				    RetePetriP pp = new RetePetriP(arch);
 					RetePetri p;
 					arch.visualizzaSoloRetiPNArchivio();
 					String nome = LeggiInput.leggiStringaNonVuota(SCEGLI_RETE_PETRI);
 					p = (RetePetri) arch.trovaRete(nome);
 					if(p == null) System.out.println(MESS_NON_TROVATA);
 					else {
-						this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
+						pp.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
 						p.contaTransizioni();
-						this.inizializzaRetePetriP(p);
+						pp.inizializzaRetePetriP(p);
+						return pp;
 					}
 			}
 			return this;

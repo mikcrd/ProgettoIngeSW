@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
 
 
 public class GestioneFile {
@@ -53,10 +53,10 @@ public class GestioneFile {
     	 ArchivioReti a = new ArchivioReti();
     	 
   		try {
-  			 contextObj = JAXBContext.newInstance(ArchivioReti.class, Rete.class, RetePetri.class, RetePetriP.class, RelazioneDiFlusso.class, RelazionePetri.class);
+  			 contextObj = JAXBContext.newInstance(ArchivioReti.class, AbstractRete.class, Rete.class, RetePetri.class, RetePetriP.class, RelazioneDiFlusso.class, RelazionePetri.class);
   			 Unmarshaller jaxbUnmarshaller = contextObj.createUnmarshaller();  
-  		     a = (ArchivioReti) jaxbUnmarshaller.unmarshal(file);  
-  		     
+  		//	 a = (ArchivioReti) ((JAXBElement) jaxbUnmarshaller.unmarshal(file)).getValue();
+  			a = (ArchivioReti) jaxbUnmarshaller.unmarshal(file);  
    
   		} catch (JAXBException e) {
   			e.printStackTrace();

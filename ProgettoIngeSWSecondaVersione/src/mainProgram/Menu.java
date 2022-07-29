@@ -35,7 +35,7 @@ public class Menu {
 		public static final String RETEPP_NON_PRES="Attenzione, la rete di petri con priorità selezionata non è presente in archivio";
 
 	    private static final String MESS_FILE_PATH = "Immetti il path del file: ";
-
+	    private static final String MESS_ERRORE_PATH = "Indirizzo inserito non trovato";
 		public static final File file = new File("C:\\data\\reti5_xml.xml");
 
 
@@ -137,10 +137,15 @@ public class Menu {
 			   		     
 			   		    case 3: archivio.eliminaRete(abs); break;
 			   		     		 
-			   		    case 4: abs.visualizzaElencoParziale();
+			   		    case 4: abs.visualizzaElencoParziale(); break;
 			   		     
-			   		    case 5: String path = LeggiInput.leggiStringaNonVuota(MESS_FILE_PATH);
+			   		    case 5: try {
+			   		    	String path = LeggiInput.leggiStringaNonVuota(MESS_FILE_PATH);
 			   		    	 archivio.salvaReteDaFile(path); break;
+						} catch (Exception e) {
+							 e.printStackTrace();
+						}
+		   		    	 
 		   		   }	  		
 		  		}while(true);	
 		}
