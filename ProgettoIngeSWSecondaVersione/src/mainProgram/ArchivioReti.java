@@ -8,6 +8,7 @@ import java.util.ConcurrentModificationException;
 
 import javax.xml.bind.annotation.*;
 
+import model.AbstractRete;
 import utility.LeggiInput;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -117,10 +118,15 @@ public class ArchivioReti {
 		}
 	}
 
-	public void aggiungiRete(AbstractRete r) {
-		r = r.creaRete();
-		if (r != null)
+	public void aggiungiRete (AbstractRete r) {
+		try {
+			r=r.creaRete();
 			salvaRete(r);
+		}catch(NullPointerException e) {
+			
+		}
+		
+		
 	}
 
 	/*
