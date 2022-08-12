@@ -89,6 +89,10 @@ public abstract class AbstractRete {
 	        return this.relazioni;
 	    }
 		
+		public ArchivioReti getArchivio() {
+			return arch;
+		}
+		
 		public void setArchivio(ArchivioReti arch) {
 			this.arch=arch;
 		}

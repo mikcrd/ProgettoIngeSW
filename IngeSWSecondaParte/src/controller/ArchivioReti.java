@@ -200,6 +200,20 @@ public class ArchivioReti {
 		GestioneFile.objToXml(this, file);
 	}
 
+	public void visualizzaRete(AbstractRete abs) {
+		abs.visualizzaElencoParziale();
+		if (abs.retiInArchivio()) {
+			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+			AbstractRete daVisualizzare = this.trovaRete(nome);
+			if (daVisualizzare == null) {
+				System.out.println(MESS_NON_TROVATA);
+			} else {
+				daVisualizzare.stampaRete();
+			}
+		}
+	}
+
+	/*
 	public boolean noRetiInArchivio() {
 		for (AbstractRete rete : getArchivio()) {
 			if (rete instanceof Rete)
@@ -224,18 +238,6 @@ public class ArchivioReti {
 		return true;
 	}
 
-	public void visualizzaRete(AbstractRete abs) {
-		abs.visualizzaElencoParziale();
-		if (abs.retiInArchivio()) {
-			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
-			AbstractRete daVisualizzare = this.trovaRete(nome);
-			if (daVisualizzare == null) {
-				System.out.println(MESS_NON_TROVATA);
-			} else {
-				daVisualizzare.stampaRete();
-			}
-		}
-	}
 
 	// visualizza i nomi di tutte e sole le reti presenti nell'archivio
 	public void visualizzaNomeReti() {
@@ -313,7 +315,7 @@ public class ArchivioReti {
 			System.out.println(ERRORE_ARCHIVIO_VUOTO);
 		}
 	}
-
+*/
 	public boolean isEqual(AbstractRete daConfrontare) {
 
 		for (AbstractRete rete : getArchivio()) {
