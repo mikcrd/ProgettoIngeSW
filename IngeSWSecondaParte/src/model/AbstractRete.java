@@ -111,11 +111,6 @@ public abstract class AbstractRete {
 		abstract public void stampaRete();
 	
 		
-		
-		abstract public ArrayList<AbstractRelazioneDiFlusso> getTopologiaSottostante();
-		
-		abstract public boolean controlloPerSalvataggioDaFile(AbstractRete rete);
-
 		@Override
 		abstract public int hashCode();
 			

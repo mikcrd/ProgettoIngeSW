@@ -272,16 +272,5 @@ public class Rete extends AbstractRete {
 		return true;
 	}
 
-	@Override
-	public ArrayList<AbstractRelazioneDiFlusso> getTopologiaSottostante() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean controlloPerSalvataggioDaFile(AbstractRete rete) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }

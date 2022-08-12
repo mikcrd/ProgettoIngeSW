@@ -19,7 +19,8 @@ import utility.LeggiInput;
 })
 
 //@XmlTransient
-public class RetePetriP extends RetePetri{
+
+public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 
 		private static final String PRIORITA ="inserire il valore di priorità";
 		private static final String SCEGLI_RETE_PETRI = "Scegli una delle reti di Petri nell'archivio: ";
@@ -214,6 +215,7 @@ public class RetePetriP extends RetePetri{
 			}
 			return true;
 		}
+
 		
 		@Override
 		public ArrayList<AbstractRelazioneDiFlusso> getTopologiaSottostante() {

@@ -27,7 +27,7 @@ import utility.LeggiInput;
 })
 
 //@XmlTransient
-public class RetePetri extends AbstractRete  {
+public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 	
 		private final static String MESS_NOME = "Inserisci il nome della rete di Petri da aggiungere: ";
 		private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
