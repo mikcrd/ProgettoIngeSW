@@ -1,9 +1,4 @@
-package controller;
-
-import model.AbstractRelazioneDiFlusso;
-import model.AbstractRete;
-import model.RelazionePetri;
-import model.RetePetri;
+package model;
 
 public class SimulazioneRetiPetri extends AbstractSimulazione {
 	

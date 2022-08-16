@@ -197,7 +197,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 				this.aggiungiRelazione(pn);
 			}
 		}
-		
+/*		
 		public void simulaRete() {
 			boolean risposta;
 			int numTransAbil;
@@ -321,7 +321,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 			}
 			
 		}
-
+*/
 		
 		@Override
 		public ArrayList<AbstractRelazioneDiFlusso> getTopologiaSottostante() {

@@ -5,33 +5,10 @@ public class Stampa {
 	
 	private static final String ERRORE_ARCHIVIO_VUOTO = "Attenzione archivio vuoto";
 	
-	public static boolean noRetiInArchivio(ArchivioReti archivio) {
-		for (AbstractRete rete : archivio.getArchivio()) {
-			if (rete.getClass().getSimpleName().equals("Rete"))
-				return false;
-		}
-		return true;
-	}
-
-	public static boolean noRetiPNInArchivio(ArchivioReti archivio) {
-		for (AbstractRete rete : archivio.getArchivio()) {
-			if (rete.getClass().getSimpleName().equals("RetePetri"))
-				return false;
-		}
-		return true;
-	}
-
-	public static boolean noRetiPNPInArchivio(ArchivioReti archivio) {
-		for (AbstractRete rete : archivio.getArchivio()) {
-			if (rete.getClass().getSimpleName().equals("RetePetriP"))
-				return false;
-		}
-		return true;
-	}
-	
+		
 	// visualizza i nomi di tutte e sole le reti presenti nell'archivio
 		public static void visualizzaNomeReti(ArchivioReti archivio) {
-			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !noRetiInArchivio(archivio)) {
+			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !archivio.noRetiInArchivio()) {
 				System.out.println("Nomi delle reti presenti: \n");
 				for (AbstractRete elem : archivio.getArchivio()) {
 					if (elem.getClass().getSimpleName().equals("Rete")) {
@@ -45,7 +22,7 @@ public class Stampa {
 
 		// visualizza il nome di tutte e sole le PN nell'archivio
 		public static void visualizzaNomeRetiPN(ArchivioReti archivio) {
-			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !noRetiPNInArchivio(archivio)) {
+			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !archivio.noRetiPNInArchivio()) {
 				System.out.println("Nomi delle reti di Petri presenti: \n");
 				for (AbstractRete elem : archivio.getArchivio()) {
 					if (elem.getClass().getSimpleName().equals("RetePetri")) {
@@ -58,7 +35,7 @@ public class Stampa {
 		}
 
 		public static void visualizzaNomeRetiPNP(ArchivioReti archivio) {
-			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !noRetiPNPInArchivio(archivio)) {
+			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !archivio.noRetiPNPInArchivio()) {
 				System.out.println("Nomi delle reti di Petri presenti: \n");
 				for (AbstractRete elem : archivio.getArchivio()) {
 					if (elem.getClass().getSimpleName().equals("RetePetriP")) {
@@ -71,7 +48,7 @@ public class Stampa {
 		}
 
 		public static void visualizzaSoloRetiArchivio(ArchivioReti archivio) {
-			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !noRetiInArchivio(archivio)) {
+			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !archivio.noRetiInArchivio()) {
 				for (AbstractRete elem : archivio.getArchivio()) {
 					if (elem.getClass().getSimpleName().equals("Rete")) {
 						elem.stampaRete();
@@ -83,7 +60,7 @@ public class Stampa {
 		}
 
 		public static void visualizzaSoloRetiPNArchivio(ArchivioReti archivio) {
-			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !noRetiPNInArchivio(archivio)) {
+			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !archivio.noRetiPNInArchivio()) {
 				for (AbstractRete elem : archivio.getArchivio()) {
 					if (elem.getClass().getSimpleName().equals("RetePetri")) {
 						elem.stampaRete();
@@ -95,7 +72,7 @@ public class Stampa {
 		}
 
 		public static void visualizzaSoloRetiPNPArchivio(ArchivioReti archivio) {
-			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !noRetiPNPInArchivio(archivio)) {
+			if (archivio.getArchivio() != null && !(archivio.getArchivio().isEmpty()) && !archivio.noRetiPNPInArchivio()) {
 				for (AbstractRete elem : archivio.getArchivio()) {
 					if (elem.getClass().getSimpleName().equals("RetePetriP")) {
 						elem.stampaRete();

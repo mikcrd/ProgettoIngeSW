@@ -1,4 +1,4 @@
-package controller;
+package model;
 import model.*;
 
 import javax.swing.plaf.nimbus.AbstractRegionPainter;

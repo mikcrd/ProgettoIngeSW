@@ -159,7 +159,7 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 			this.stampaMarcature();
 			stampaPriorità();
 		}
-		
+/*		
 		public int cercaPrioritaMax() {
 			int i;
 			int max=0;
@@ -207,7 +207,7 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 			
 			return transAbilitate;
 		}
-
+*/
 		@Override
 		public boolean isCorrect() {
 			for(int priorità : getPriorita()) {

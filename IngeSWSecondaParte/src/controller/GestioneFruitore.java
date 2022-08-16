@@ -28,27 +28,29 @@ public class GestioneFruitore {
 	   		   {
 			   		case 0: flag=false; break;
 		   		    case 1: Stampa.visualizzaNomeRetiPN(archivio);
-		   		    if(Stampa.noRetiPNInArchivio(archivio)) break;
+		   		    if(archivio.noRetiPNInArchivio()) break;
 		   		    else {
 		   		    	RetePetri petri = new RetePetri();
 		   		    	petri= (RetePetri) archivio.cercaRete();
 		   		    	if(petri==null) {
 			    				System.out.println(RETEP_NON_PRES);
 			    			}else {
-			    				petri.simulaRete();
+			    				AbstractSimulazione simPetri = new SimulazioneRetiPetri(petri);
+			    				simPetri.simulaRete();
 			    			}
 		   		    }
 	
 		   		    		break;
 		   		    case 2: Stampa.visualizzaNomeRetiPNP(archivio);;
-		   		    if(Stampa.noRetiPNPInArchivio(archivio)) break;
+		   		    if(archivio.noRetiPNPInArchivio()) break;
 		   		    else {
 		   		    		RetePetriP petrip=new RetePetriP();
 		   		    		petrip=(RetePetriP)archivio.cercaRete();
 		   		    		if(petrip==null) {
 			    				System.out.println(RETEPP_NON_PRES);
 			    			}else {
-			    				petrip.simulaRete();
+			    				AbstractSimulazione simPetriP = new SimulazioneRetePetriP(petrip);
+			    				simPetriP.simulaRete();
 			    			}
 		   		    }
 		   		    		break;

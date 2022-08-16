@@ -213,7 +213,7 @@ public class ArchivioReti {
 		}
 	}
 
-	/*
+	
 	public boolean noRetiInArchivio() {
 		for (AbstractRete rete : getArchivio()) {
 			if (rete instanceof Rete)
@@ -238,7 +238,7 @@ public class ArchivioReti {
 		return true;
 	}
 
-
+/*
 	// visualizza i nomi di tutte e sole le reti presenti nell'archivio
 	public void visualizzaNomeReti() {
 		if (reti != null && !(reti.isEmpty()) && !noRetiInArchivio()) {
