@@ -1,22 +1,11 @@
-package utility;
+package view;
 
 import java.util.Scanner;
 
-public class LeggiInput {
+public class InputOutput {
 	
 		private static Scanner lettore = creaScanner();
 		  
-		  private final static String ERRORE_FORMATO = "Attenzione: il dato inserito non e' nel formato corretto";
-		  private final static String ERRORE_MINIMO= "Attenzione: e' richiesto un valore maggiore o uguale a ";
-		  private final static String ERRORE_STRINGA_VUOTA= "Attenzione: non hai inserito alcun carattere";
-		  private final static String ERRORE_MASSIMO= "Attenzione: e' richiesto un valore minore o uguale a ";
-		  private final static String MESSAGGIO_AMMISSIBILI= "Attenzione: i caratteri ammissibili sono: ";
-	
-		  private final static char RISPOSTA_SI='S';
-		  private final static char RISPOSTA_NO='N';
-	
-		  
-	
 		  private static Scanner creaScanner ()
 		  {
 		   Scanner creato = new Scanner(System.in);
@@ -26,7 +15,7 @@ public class LeggiInput {
 		  
 		  public static String leggiStringa (String messaggio)
 		  {
-			  System.out.print(messaggio);
+			  InputOutput.mostraMessaggio(messaggio);
 			  return lettore.next();
 		  }
 		  
@@ -41,7 +30,7 @@ public class LeggiInput {
 			 if (lettura.length() > 0)
 			  finito=true;
 			 else
-			  System.out.println(ERRORE_STRINGA_VUOTA);
+			   InputOutput.mostraMessaggio(Vista.INOUT_ERRORE_STRINGA_VUOTA);
 		   } while (!finito);
 		   
 		   return lettura;
@@ -53,7 +42,7 @@ public class LeggiInput {
 		   char valoreLetto = '\0';
 		   do
 		    {
-		     System.out.print(messaggio);
+			 InputOutput.mostraMessaggio(messaggio);
 		     String lettura = lettore.next();
 		     if (lettura.length() > 0)
 		      {
@@ -62,7 +51,7 @@ public class LeggiInput {
 		      }
 		     else
 		      {
-		       System.out.println(ERRORE_STRINGA_VUOTA);
+		    	 InputOutput.mostraMessaggio(Vista.INOUT_ERRORE_STRINGA_VUOTA);
 		      }
 		    } while (!finito);
 		   return valoreLetto;
@@ -79,7 +68,7 @@ public class LeggiInput {
 		    if (ammissibili.indexOf(valoreLetto) != -1)
 			 finito  = true;
 		    else
-		     System.out.println(MESSAGGIO_AMMISSIBILI + ammissibili);
+		    	InputOutput.mostraMessaggio(Vista.INOUT_MESSAGGIO_AMMISSIBILI + ammissibili);
 		   } while (!finito);
 		   return valoreLetto;
 		  }
@@ -91,7 +80,7 @@ public class LeggiInput {
 		   int valoreLetto = 0;
 		   do
 		    {
-		     System.out.print(messaggio);
+			   InputOutput.mostraMessaggio(messaggio);
 		     if (lettore.hasNextInt())
 		      {
 		       valoreLetto = lettore.nextInt();
@@ -99,7 +88,7 @@ public class LeggiInput {
 		      }
 		     else
 		      {
-		       System.out.println(ERRORE_FORMATO);
+		    	 InputOutput.mostraMessaggio(Vista.INOUT_ERRORE_FORMATO);
 		       String daButtare = lettore.next();
 		      }
 		    } while (!finito);
@@ -127,7 +116,7 @@ public class LeggiInput {
 		     if (valoreLetto >= minimo)
 		      finito = true;
 		     else
-		      System.out.println(ERRORE_MINIMO + minimo);
+		    	 InputOutput.mostraMessaggio(Vista.INOUT_ERRORE_MINIMO + minimo);
 		    } while (!finito);
 		     
 		   return valoreLetto;
@@ -144,9 +133,9 @@ public class LeggiInput {
 		      finito = true;
 		     else
 		      if (valoreLetto < minimo)
-		         System.out.println(ERRORE_MINIMO + minimo);
+		    	  InputOutput.mostraMessaggio(Vista.INOUT_ERRORE_MINIMO + minimo);
 		      else
-		    	 System.out.println(ERRORE_MASSIMO + massimo); 
+		    	  InputOutput.mostraMessaggio(Vista.INOUT_ERRORE_MASSIMO + massimo); 
 		    } while (!finito);
 		     
 		   return valoreLetto;
@@ -159,7 +148,7 @@ public class LeggiInput {
 		   double valoreLetto = 0;
 		   do
 		    {
-		     System.out.print(messaggio);
+			   InputOutput.mostraMessaggio(messaggio);
 		     if (lettore.hasNextDouble())
 		      {
 		       valoreLetto = lettore.nextDouble();
@@ -167,7 +156,7 @@ public class LeggiInput {
 		      }
 		     else
 		      {
-		       System.out.println(ERRORE_FORMATO);
+		    	 InputOutput.mostraMessaggio(Vista.INOUT_ERRORE_FORMATO);
 		       String daButtare = lettore.next();
 		      }
 		    } while (!finito);
@@ -184,7 +173,7 @@ public class LeggiInput {
 		     if (valoreLetto >= minimo)
 		      finito = true;
 		     else
-		      System.out.println(ERRORE_MINIMO + minimo);
+		    	 InputOutput.mostraMessaggio(Vista.INOUT_ERRORE_MINIMO + minimo);
 		    } while (!finito);
 		     
 		   return valoreLetto;
@@ -193,12 +182,18 @@ public class LeggiInput {
 		  
 		  public static boolean yesOrNo(String messaggio)
 		  {
-			  String mioMessaggio = messaggio + "("+RISPOSTA_SI+"/"+RISPOSTA_NO+")";
-			  char valoreLetto = leggiUpperChar(mioMessaggio,String.valueOf(RISPOSTA_SI)+String.valueOf(RISPOSTA_NO));
+			  String mioMessaggio = messaggio + "("+Vista.INOUT_RISPOSTA_SI+"/"+Vista.INOUT_RISPOSTA_NO+")";
+			  char valoreLetto = leggiUpperChar(mioMessaggio,String.valueOf(Vista.INOUT_RISPOSTA_SI)+String.valueOf(Vista.INOUT_RISPOSTA_NO));
 			  
-			  if (valoreLetto == RISPOSTA_SI)
+			  if (valoreLetto == Vista.INOUT_RISPOSTA_SI)
 				return true;
 			  else
 				return false;
+		  }
+		  
+		  
+		  public static void mostraMessaggio(String messaggio)
+		  {
+		        System.out.println(messaggio);
 		  }
 }

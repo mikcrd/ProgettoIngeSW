@@ -1,15 +1,11 @@
 package controller;
 import model.*;
+import view.*;
 
 import java.io.File;
 
-import utility.LeggiInput;
-import utility.MyMenu;
-
 public class Menu {
-		private static final String TITOLO = "MENU PRINCIPALE \n";
-		private static final String[] MENU = {"Sei un CONFIGURATORE?", "Sei un FRUITORE?"};
-	
+		
 	    private static final File file = new File("C:\\data\\reti5_xml.xml");
 
 		ArchivioReti archivio;
@@ -23,7 +19,7 @@ public class Menu {
 		}	
 		
 		public void cicloApplicazione() {
-			MyMenu menu = new MyMenu(TITOLO, MENU);
+			MyMenu menu = new MyMenu(Vista.TITOLO, Vista.MENU);
 			do{
 					this.SetArchivio();
 					menu.stampaMenu();

@@ -1,5 +1,7 @@
 package model;
 import controller.*;
+import view.InputOutput;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -10,8 +12,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
-import utility.LeggiInput;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RetePetriP", propOrder = {
@@ -91,7 +91,7 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 		public void aggiungiPriorità(int nt) {
 			for(int i=0; i<nt; i++) {
 				int j=i;
-				priorità[i]=LeggiInput.leggiInteroPositivo(PRIORITA + " per la transizione " + ++j + ": ");
+				priorità[i]=InputOutput.leggiInteroPositivo(PRIORITA + " per la transizione " + ++j + ": ");
 			}
 		}
 		
@@ -115,11 +115,11 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 				
 					RetePetri p;
 					arch.visualizzaSoloRetiPNArchivio();
-					String nome = LeggiInput.leggiStringaNonVuota(SCEGLI_RETE_PETRI);
+					String nome = InputOutput.leggiStringaNonVuota(SCEGLI_RETE_PETRI);
 					p = (RetePetri) arch.trovaRete(nome);
 					if(p == null) System.out.println(MESS_NON_TROVATA);
 					else {
-						this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
+						this.setName(InputOutput.leggiStringaNonVuota(MESS_NOME));
 						p.contaTransizioni();
 						this.inizializzaRetePetriP(p);
 					}

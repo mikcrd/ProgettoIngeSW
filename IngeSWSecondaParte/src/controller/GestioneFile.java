@@ -15,7 +15,6 @@ import javax.xml.bind.*;
 
 
 public class GestioneFile {
-    private static char FS = File.separatorChar;
 	
 	private static JAXBContext contextObj;
 

@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
-import utility.LeggiInput;
+import view.InputOutput;
 
 	
 public class RelazioneDiFlusso extends AbstractRelazioneDiFlusso {
@@ -33,15 +33,15 @@ public class RelazioneDiFlusso extends AbstractRelazioneDiFlusso {
 
 	
 	public RelazioneDiFlusso creaPosto_Trans() {
-		setPosizione(LeggiInput.leggiInteroPositivo(POSTO));								
-		setTransizione(LeggiInput.leggiInteroPositivo(TRANSIZIONE));
+		setPosizione(InputOutput.leggiInteroPositivo(POSTO));								
+		setTransizione(InputOutput.leggiInteroPositivo(TRANSIZIONE));
 		setInOut(true);
 		return this;		
 	}
 	
 	public RelazioneDiFlusso creaTrans_Posto() {
-		setTransizione(LeggiInput.leggiInteroPositivo(TRANSIZIONE));
-		setPosizione(LeggiInput.leggiInteroPositivo(POSTO));
+		setTransizione(InputOutput.leggiInteroPositivo(TRANSIZIONE));
+		setPosizione(InputOutput.leggiInteroPositivo(POSTO));
 		setInOut(false);
 		return this;
 	}

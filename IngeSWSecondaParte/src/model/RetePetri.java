@@ -1,5 +1,6 @@
 package model;
 import controller.*;
+import view.InputOutput;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -14,8 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
-import utility.LeggiInput;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RetePetri", propOrder = {
@@ -119,7 +118,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 			           // deve visualizzare solo reti -> vedi xml reti
 						Rete r= new Rete();
 						arch.visualizzaSoloRetiArchivio();
-						String nomeRete = LeggiInput.leggiStringaNonVuota(SCEGLI_RETE);
+						String nomeRete = InputOutput.leggiStringaNonVuota(SCEGLI_RETE);
 						try {
 							r=(Rete)arch.trovaRete(nomeRete);
 						} catch (Exception e) {
@@ -129,7 +128,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 						
 						// se sbaglia a scrivere ...
 						if(r!=null) {
-							this.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
+							this.setName(InputOutput.leggiStringaNonVuota(MESS_NOME));
 							r.contaPosizioni();				
 							this.inizializzaReteP(r);
 							System.out.println("----------------------------------------------");
@@ -155,7 +154,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 		public void aggiungiMarcature(int np) {
 			for(int i=0; i<np; i++) {
 				int j=i;
-				marcature[i]=LeggiInput.leggiInteroNonNegativo(MARCATURA + " per la posizione " + ++j + ": ");
+				marcature[i]=InputOutput.leggiInteroNonNegativo(MARCATURA + " per la posizione " + ++j + ": ");
 			}
 		}
 		
@@ -192,7 +191,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 		public void aggiungiPesiRelazione(Rete re) {
 			for (AbstractRelazioneDiFlusso rel : re.getRelazioni()) {
 				System.out.println();
-				int peso = LeggiInput.leggiInteroPositivo("inserire il peso in questa relazione di flusso [" + rel.toString() + "]: ");
+				int peso = InputOutput.leggiInteroPositivo("inserire il peso in questa relazione di flusso [" + rel.toString() + "]: ");
 				RelazionePetri pn = new RelazionePetri(((RelazioneDiFlusso)rel), peso);
 				this.aggiungiRelazione(pn);
 			}

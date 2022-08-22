@@ -1,7 +1,6 @@
 package controller;
 import model.*;
-import model.AbstractRelazioneDiFlusso;
-import utility.*;
+import view.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,23 +8,12 @@ import java.util.ConcurrentModificationException;
 
 import javax.xml.bind.annotation.*;
 
-import utility.LeggiInput;
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "reti" })
 @XmlRootElement(name = "ArchivioReti")
 public class ArchivioReti {
 
-	private final static String MESS_DOPPIONE = "Attenzione: non si puo' inserire una rete  gia' esistente!";
-	private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
-			+ "rete con questo nome. Inserire un altro nome: ";
-	private final static String MESS_STESSA_TOPOLOGIA = "Attenzione: nell'archivio è già presente una rete con la stessa topologia: ";
-	private final static String MESS_CERCA_RETE = "Inserisci il nome della rete: ";
-	private final static String MESS_RIMOZIONE = " : confermi la rimozione di questa rete?";
-	private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
-	private static final String NOME_RETE_VISUALIZZA = "Inserisci il nome della rete da visualizzare: ";
-	private static final String ERRORE_ARCHIVIO_VUOTO = "Attenzione archivio vuoto";
-
+	
 	public static final File file = new File("C:\\data\\reti5_xml.xml");
 
 	@XmlElementWrapper(name = "reti")
@@ -63,7 +51,7 @@ public class ArchivioReti {
 	}
 
 	public AbstractRete cercaRete() {
-		String net = LeggiInput.leggiStringaNonVuota(MESS_CERCA_RETE);
+		String net = InputOutput.leggiStringaNonVuota(Vista.ARCHIVIO_MESS_CERCA_RETE);
 		return trovaRete(net);
 	}
 
@@ -102,18 +90,17 @@ public class ArchivioReti {
 		abs.visualizzaElencoParziale();
 		if (!(abs.retiInArchivio())) {
 		} else {
-			String nome = LeggiInput.leggiStringaNonVuota(MESS_CERCA_RETE);
+			String nome = InputOutput.leggiStringaNonVuota(Vista.ARCHIVIO_MESS_CERCA_RETE);
 			try {
 				AbstractRete elemento = trovaRete(nome);
 				if (elemento != null) {
-					boolean procedi = LeggiInput.yesOrNo(elemento.getName() + MESS_RIMOZIONE);
+					boolean procedi = InputOutput.yesOrNo(elemento.getName() + Vista.ARCHIVIO_MESS_RIMOZIONE);
 					if (procedi)
 						reti.remove(elemento);
 					salvaLista();
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(MESS_NON_TROVATA);
+				InputOutput.mostraMessaggio(Vista.ARCHIVIO_MESS_NON_TROVATA);
 			}
 		}
 	}
@@ -165,7 +152,7 @@ public class ArchivioReti {
 	public void salvaRete(AbstractRete r) {
 
 		if (r.isCorrect() && !isEqual(r)) {
-			System.out.println("Sto salvando la rete ...");
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_DEBUGGING_SALVA_RETE);
 			reti.add(r);
 			salvaLista();
 			r.stampaRete();
@@ -203,10 +190,10 @@ public class ArchivioReti {
 	public void visualizzaRete(AbstractRete abs) {
 		abs.visualizzaElencoParziale();
 		if (abs.retiInArchivio()) {
-			String nome = LeggiInput.leggiStringaNonVuota(NOME_RETE_VISUALIZZA);
+			String nome = InputOutput.leggiStringaNonVuota(Vista.ARCHIVIO_NOME_RETE_VISUALIZZA);
 			AbstractRete daVisualizzare = this.trovaRete(nome);
 			if (daVisualizzare == null) {
-				System.out.println(MESS_NON_TROVATA);
+				InputOutput.mostraMessaggio(Vista.ARCHIVIO_MESS_NON_TROVATA);
 			} else {
 				daVisualizzare.stampaRete();
 			}
@@ -224,7 +211,7 @@ public class ArchivioReti {
 
 	public boolean noRetiPNInArchivio() {
 		for (AbstractRete rete : getArchivio()) {
-			if (rete.getClass().getSimpleName().equals("RetePetri"))
+			if (rete.getClass().getSimpleName().equals(Vista.RETEP))
 				return false;
 		}
 		return true;
@@ -232,51 +219,51 @@ public class ArchivioReti {
 
 	public boolean noRetiPNPInArchivio() {
 		for (AbstractRete rete : getArchivio()) {
-			if (rete.getClass().getSimpleName().equals("RetePetriP"))
+			if (rete.getClass().getSimpleName().equals(Vista.RETEPP))
 				return false;
 		}
 		return true;
 	}
 
-/*
+
 	// visualizza i nomi di tutte e sole le reti presenti nell'archivio
 	public void visualizzaNomeReti() {
 		if (reti != null && !(reti.isEmpty()) && !noRetiInArchivio()) {
-			System.out.println("Nomi delle reti presenti: \n");
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_NOMI_RETI_PRESENTI);
 			for (AbstractRete elem : reti) {
 				if (elem instanceof Rete) {
-					System.out.println(elem.getName());
+					InputOutput.mostraMessaggio(elem.getName());
 				}
 			}
 		} else {
-			System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_ERRORE_ARCHIVIO_VUOTO);
 		}
 	}
 
 	// visualizza il nome di tutte e sole le PN nell'archivio
 	public void visualizzaNomeRetiPN() {
 		if (reti != null && !(reti.isEmpty()) && !noRetiPNInArchivio()) {
-			System.out.println("Nomi delle reti di Petri presenti: \n");
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_NOMI_RETIP_PRESENTI);
 			for (AbstractRete elem : reti) {
 				if (elem instanceof RetePetri && !(elem instanceof RetePetriP)) {
-					System.out.println(elem.getName());
+					InputOutput.mostraMessaggio(elem.getName());
 				}
 			}
 		} else {
-			System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_ERRORE_ARCHIVIO_VUOTO);
 		}
 	}
 
 	public void visualizzaNomeRetiPNP() {
 		if (reti != null && !(reti.isEmpty()) && !noRetiPNPInArchivio()) {
-			System.out.println("Nomi delle reti di Petri presenti: \n");
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_NOMI_RETIPP_PRESENTI);
 			for (AbstractRete elem : reti) {
 				if (elem instanceof RetePetriP) {
-					System.out.println(elem.getName());
+					InputOutput.mostraMessaggio(elem.getName());
 				}
 			}
 		} else {
-			System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_ERRORE_ARCHIVIO_VUOTO);
 		}
 	}
 
@@ -288,7 +275,7 @@ public class ArchivioReti {
 				}
 			}
 		} else {
-			System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_ERRORE_ARCHIVIO_VUOTO);
 		}
 	}
 
@@ -300,7 +287,7 @@ public class ArchivioReti {
 				}
 			}
 		} else {
-			System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_ERRORE_ARCHIVIO_VUOTO);
 		}
 	}
 
@@ -312,24 +299,24 @@ public class ArchivioReti {
 				}
 			}
 		} else {
-			System.out.println(ERRORE_ARCHIVIO_VUOTO);
+			InputOutput.mostraMessaggio(Vista.ARCHIVIO_ERRORE_ARCHIVIO_VUOTO);
 		}
 	}
-*/
+
 	public boolean isEqual(AbstractRete daConfrontare) {
 
 		for (AbstractRete rete : getArchivio()) {
 
 			if (rete.equals(daConfrontare)) {
-				System.out.println(MESS_DOPPIONE);
+				InputOutput.mostraMessaggio(Vista.ARCHIVIO_ISEQUAL_MESS_DOPPIONE);
 				return true;
 			} else if ((rete.getName().equals(daConfrontare.getName()))) {
 				daConfrontare.setName(changeName());
 				return false;
 			} else if ((rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) && rete instanceof Rete
 					&& daConfrontare instanceof Rete) {
-				System.out.print(MESS_STESSA_TOPOLOGIA);
-				System.out.println(rete.getName());
+				InputOutput.mostraMessaggio(Vista.ARCHIVIO_ISEQUAL_MESS_STESSA_TOPOLOGIA);
+				InputOutput.mostraMessaggio(rete.getName());
 				return true;
 			}
 		}
@@ -340,7 +327,7 @@ public class ArchivioReti {
 		String nuovoNome;
 		boolean flag;
 		do {
-			nuovoNome = LeggiInput.leggiStringaNonVuota(MESS_NOME_GIA_PRESENTE);
+			nuovoNome = InputOutput.leggiStringaNonVuota(Vista.ARCHIVIO_ISEQUAL_MESS_NOME_GIA_PRESENTE);
 			flag = true;
 
 			for (AbstractRete retexNomi : getArchivio()) {

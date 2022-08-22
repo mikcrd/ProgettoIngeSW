@@ -1,6 +1,8 @@
 package model;
 
 import controller.*;
+import view.InputOutput;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +15,6 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import utility.LeggiInput;
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractRete", propOrder = {
     "relazioni"
@@ -25,10 +25,7 @@ import utility.LeggiInput;
     Rete.class
 })
 public abstract class AbstractRete {
-
-		private final static String MESS_NOME_GIA_PRESENTE = "Nell'archivio è già presente una "
-				+ "rete con questo nome. Inserire un altro nome: ";
-		
+			
 		/*@invariant
 		  @arch != null;
 		  @numPos, numTrans > 0;

@@ -1,16 +1,10 @@
 package controller;
 import model.*;
-import utility.MyMenu;
 import view.*;
 
 public class GestioneFruitore {
 	
-	private static final String TITOLO_FRUI = "MENU FRUITORE \n";
-	private static final String[] MENU_FRUI = {"Simula rete di Petri", "Simula rete di Petri con priorita'"};
-	public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
-	public static final String RETEP_NON_PRES="Attenzione, la rete di petri selezionata non è presente in archivio";
-	public static final String RETEPP_NON_PRES="Attenzione, la rete di petri con priorità selezionata non è presente in archivio";
-
+    
 	ArchivioReti archivio;
 	
 	public GestioneFruitore(ArchivioReti archivio) {
@@ -19,7 +13,7 @@ public class GestioneFruitore {
 
 
 	public void cicloFruitore() {
-		MyMenu menu = new MyMenu(TITOLO_FRUI, MENU_FRUI);
+		MyMenu menu = new MyMenu(Vista.TITOLO_FRUI, Vista.MENU_FRUI);
 		boolean flag = true;
 		do{
 			   menu.stampaMenu();
@@ -27,13 +21,13 @@ public class GestioneFruitore {
 	   		   switch(cmd)
 	   		   {
 			   		case 0: flag=false; break;
-		   		    case 1: Stampa.visualizzaNomeRetiPN(archivio);
+		   		    case 1: archivio.visualizzaNomeRetiPN();
 		   		    if(archivio.noRetiPNInArchivio()) break;
 		   		    else {
 		   		    	RetePetri petri = new RetePetri();
 		   		    	petri= (RetePetri) archivio.cercaRete();
 		   		    	if(petri==null) {
-			    				System.out.println(RETEP_NON_PRES);
+		   		    		InputOutput.mostraMessaggio(Vista.RETEP_NON_PRES);
 			    			}else {
 			    				AbstractSimulazione simPetri = new SimulazioneRetiPetri(petri);
 			    				simPetri.simulaRete();
@@ -41,13 +35,13 @@ public class GestioneFruitore {
 		   		    }
 	
 		   		    		break;
-		   		    case 2: Stampa.visualizzaNomeRetiPNP(archivio);;
+		   		    case 2: archivio.visualizzaNomeRetiPNP();;
 		   		    if(archivio.noRetiPNPInArchivio()) break;
 		   		    else {
 		   		    		RetePetriP petrip=new RetePetriP();
 		   		    		petrip=(RetePetriP)archivio.cercaRete();
 		   		    		if(petrip==null) {
-			    				System.out.println(RETEPP_NON_PRES);
+		   		    			InputOutput.mostraMessaggio(Vista.RETEPP_NON_PRES);
 			    			}else {
 			    				AbstractSimulazione simPetriP = new SimulazioneRetePetriP(petrip);
 			    				simPetriP.simulaRete();

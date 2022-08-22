@@ -1,4 +1,7 @@
-package model;
+package controller;
+
+import model.*;
+import view.*;
 
 public class SimulazioneRetePetriP extends AbstractSimulazione{
 	
@@ -24,7 +27,7 @@ public class SimulazioneRetePetriP extends AbstractSimulazione{
 		do {
 			for(AbstractRelazioneDiFlusso rel: rete.getRelazioni()) {
 				if (rel.isInOut()==true && ((RelazionePetri)rel).getPeso()<=((RetePetriP)rete).getMarcatura(rel.getPosizione()-1) && ((RetePetriP)rete).getPriorita(rel.getTransizione()-1)==prior ) {
-					System.out.println("transizione abilitata:" + rel.getTransizione());
+					InputOutput.mostraMessaggio(Vista.SIMULAZIONE_TRANSIZIONE_ABILITATA + rel.getTransizione());
 					//incrementa il contatore delle transizioni abilitate 
 					contatore++;
 				}

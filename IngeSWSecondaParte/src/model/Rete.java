@@ -1,6 +1,6 @@
 package model;
 import controller.*;
-
+import view.InputOutput;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,6 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
-import utility.LeggiInput;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Rete")
@@ -189,9 +187,9 @@ public class Rete extends AbstractRete {
 	@Override
 	public Rete creaRete() {
 		Rete r = new Rete(); // altrimenti controllaRelazione mi dà problemi...
-		r.setName(LeggiInput.leggiStringaNonVuota(MESS_NOME));
+		r.setName(InputOutput.leggiStringaNonVuota(MESS_NOME));
 		do {
-			char aOb = LeggiInput.leggiChar(POSTOTRANS_TRANSPOSTO);
+			char aOb = InputOutput.leggiChar(POSTOTRANS_TRANSPOSTO);
 			RelazioneDiFlusso rf = new RelazioneDiFlusso();
 
 			do {
@@ -202,7 +200,7 @@ public class Rete extends AbstractRete {
 					rf.creaTrans_Posto();
 					break;
 				} else {
-					aOb = LeggiInput.leggiChar(ERRORE_SCELTA_AB);
+					aOb = InputOutput.leggiChar(ERRORE_SCELTA_AB);
 				}
 
 			} while (aOb != 'a' || aOb != 'b');
@@ -211,7 +209,7 @@ public class Rete extends AbstractRete {
 				r.aggiungiRelazione(rf);
 			}
 
-		} while (LeggiInput.yesOrNo(INSERIMENTO_RELAZIONI));
+		} while (InputOutput.yesOrNo(INSERIMENTO_RELAZIONI));
 
 		r.inizializzaRete();
 		return r;

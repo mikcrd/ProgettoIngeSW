@@ -1,9 +1,8 @@
-package model;
+package controller;
 import model.*;
+import view.*;
 
 import javax.swing.plaf.nimbus.AbstractRegionPainter;
-
-import utility.LeggiInput;
 
 public abstract class AbstractSimulazione {
 	
@@ -35,7 +34,7 @@ public abstract class AbstractSimulazione {
 					if (abilitate[i]) {
 						//scatta transizione
 						scattaTransizione(++i);
-						System.out.println("dopo lo scatto della transizione la marcatura e':");
+						InputOutput.mostraMessaggio(Vista.SIMULA_MARCATURA_DOPO_SCATTO);
 						((RetePetri) rete).stampaMarcature();
 						break;
 					}
@@ -44,21 +43,21 @@ public abstract class AbstractSimulazione {
 			}else if(numTransAbil>1)
 			{
 				//utente sceglie quale delle transizioni abilitate fare scattare
-				int transUtente=LeggiInput.leggiInteroPositivo("inserire la transizione che si vuole fare scattare");
+				int transUtente=InputOutput.leggiInteroPositivo(Vista.SIMULA_TRANSIZIONE_DA_FAR_SCATTARE);
 				if(abilitate[transUtente-1]) {
 					scattaTransizione(transUtente);
 					((RetePetri) rete).stampaMarcature();
 				}
 			}else if(numTransAbil==0) {
-				System.out.println("Nessuna transizione abilitata, blocco critico raggiunto");
+				InputOutput.mostraMessaggio(Vista.SIMULA_BLOCCO_CRITICO_RAGGIUNTO);
 				break;
 			}
 			//stampa rete dopo scatto transizione 
 			
-			risposta=LeggiInput.yesOrNo("vuoi proseguire con la simulazione?");
+			risposta=InputOutput.yesOrNo(Vista.SIMULA_VUOI_PROSEGUIRE);
 			
 		}while (risposta);
-		System.out.println("Simulazione terminata");
+		InputOutput.mostraMessaggio(Vista.SIMULA_TERMINE_SIMULAZIONE);
 	}
 	
 	public boolean [] trovaPostiPredecessori(int trans) {
