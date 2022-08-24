@@ -100,7 +100,7 @@ public class ArchivioReti {
 					salvaLista();
 				}
 			} catch (Exception e) {
-				InputOutput.mostraMessaggio(Vista.ARCHIVIO_MESS_NON_TROVATA);
+				InputOutput.mostraMessaggio(Vista.MESS_NON_TROVATA);
 			}
 		}
 	}
@@ -193,7 +193,7 @@ public class ArchivioReti {
 			String nome = InputOutput.leggiStringaNonVuota(Vista.ARCHIVIO_NOME_RETE_VISUALIZZA);
 			AbstractRete daVisualizzare = this.trovaRete(nome);
 			if (daVisualizzare == null) {
-				InputOutput.mostraMessaggio(Vista.ARCHIVIO_MESS_NON_TROVATA);
+				InputOutput.mostraMessaggio(Vista.MESS_NON_TROVATA);
 			} else {
 				daVisualizzare.stampaRete();
 			}

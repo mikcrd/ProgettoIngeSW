@@ -22,15 +22,6 @@ import javax.xml.bind.annotation.XmlType;
 
 public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 
-		private static final String PRIORITA ="inserire il valore di priorità";
-		private static final String SCEGLI_RETE_PETRI = "Scegli una delle reti di Petri nell'archivio: ";
-		private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
-		private static final String MESS_NOME = "Inserisci il nome della rete di Petri con priorità da aggiungere: ";
-		private static final String MESS_RETEPETRINOTOPOLOGIA = "La rete di Petri con priorità che si "
-				+ "vuole salvare non ha una rete di Petri con la stessa topologia a cui appoggiarsi. "
-				+ "\nCrea prima una rete di Petri con la stessa topologia";
-		private static final String NO_RETI_PETRI = "Attenzione: non ci sono reti di Petri nell'archivio \nAggiungere una rete prima di continuare";
-
 		
 		/*@invariant priorità != null;
 		  @(\forall int i; 0<=i<numTrans; priorità[i]>0);
@@ -91,7 +82,7 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 		public void aggiungiPriorità(int nt) {
 			for(int i=0; i<nt; i++) {
 				int j=i;
-				priorità[i]=InputOutput.leggiInteroPositivo(PRIORITA + " per la transizione " + ++j + ": ");
+				priorità[i]=Controller.messInserimentoPriorità(++j);
 			}
 		}
 		
@@ -106,20 +97,17 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 		/*@assignable numPos, numTrans, name, relazioni, marcature, priorità;@*/
 		public RetePetriP creaRete() {
 			if(arch.noRetiPNInArchivio()) {
-	       			System.out.println(NO_RETI_PETRI);
+	       			Controller.messErroreAggiungiPrimaUnaReteP();
 	       			return null;
 			}
 			else {
-				// ...
-				
-				
 					RetePetri p;
 					arch.visualizzaSoloRetiPNArchivio();
-					String nome = InputOutput.leggiStringaNonVuota(SCEGLI_RETE_PETRI);
+					String nome = Controller.scegliRetePetriPerCostruireRetePetriP();
 					p = (RetePetri) arch.trovaRete(nome);
-					if(p == null) System.out.println(MESS_NON_TROVATA);
+					if(p == null) Controller.messErroreReteNonTrovata();
 					else {
-						this.setName(InputOutput.leggiStringaNonVuota(MESS_NOME));
+						this.setName(Controller.nomeRetePetriP());
 						p.contaTransizioni();
 						this.inizializzaRetePetriP(p);
 					}
@@ -140,24 +128,17 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 			return false;
 		}
 
+		/*
 		public void stampaPriorità() {
 			System.out.println("Priorità: ");
 			for(int i=0; i<priorità.length; i++) {
 				int j=i;
 				System.out.println("Transizione " + ++j + " priorità " + priorità[i]);
 			}
-		}
+		}*/
 		
 		public void stampaRete() {
-			System.out.println();
-			System.out.println(this.name);
-			for (AbstractRelazioneDiFlusso r : this.relazioni) {
-				if(r instanceof RelazionePetri) {
-				   System.out.println(((RelazionePetri)r).toString());
-				}
-			}
-			this.stampaMarcature();
-			stampaPriorità();
+			Controller.stampaRetePetriPController(this);
 		}
 /*		
 		public int cercaPrioritaMax() {
@@ -229,7 +210,7 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 					&& ((RetePetri) rete).getMarcature().equals(getMarcature())) {
 				return true;
 			}
-			System.out.println(MESS_RETEPETRINOTOPOLOGIA);
+			Controller.messAssenzaRetePetriSuCuiCostruireRetePetriP();
 			return false;
 		}
 

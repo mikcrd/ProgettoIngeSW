@@ -17,11 +17,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Rete")
 public class Rete extends AbstractRete {
 
-	private final static String MESS_NOME = "Inserisci il nome della rete da aggiungere: ";
-	private static final String INSERIMENTO_RELAZIONI = "Vuoi inserire un'altra relazione?";
-	private static final String POSTOTRANS_TRANSPOSTO = "Per aggiungere una coppia posto-transizione premere 'a'\n"
-			+ "Per aggiungere una coppia transizione-posto premere 'b' : ";
-	private static final String ERRORE_SCELTA_AB = "Inserisci solo i caratteri 'a' o 'b' : ";
+	
 
 	public Rete() {
 		numPos = 0;
@@ -167,24 +163,24 @@ public class Rete extends AbstractRete {
 	@Override
 	public boolean isCorrect() {
 		if (controlloColonne(matriceIncidenza()) && controlloRighe(matriceIncidenza())) {
-			System.out.println("La rete è corretta");
+			Controller.messReteCorretta();
 			return true;
 		} else {
-			System.out.println("La rete non è corretta");
+			Controller.messReteNonCorretta();
 			return false;
 		}
 	}
 
 	public boolean controllaRelazione(RelazioneDiFlusso rf) {
 		if (getRelazioni().contains(rf)) {
-			System.out.println("Relazione di flusso già presente");
 			return true;
 		} else
 			return false;
 	}
 
+	
 	/* @assignable in[], out[], name, relazioni;@ */
-	@Override
+/*	@Override
 	public Rete creaRete() {
 		Rete r = new Rete(); // altrimenti controllaRelazione mi dà problemi...
 		r.setName(InputOutput.leggiStringaNonVuota(MESS_NOME));
@@ -213,7 +209,41 @@ public class Rete extends AbstractRete {
 
 		r.inizializzaRete();
 		return r;
+	}*/
+
+	@Override
+	public Rete creaRete() {
+		Rete r = new Rete(); // altrimenti controllaRelazione mi dà problemi...
+		r.setName(Controller.nomeRete());
+		do {
+			char aOb = Controller.sceltaPostoTrans_TransPostoRete();
+			RelazioneDiFlusso rf = new RelazioneDiFlusso();
+	
+			do {
+				if (aOb == 'a') {
+					rf = Controller.creaPosto_Trans();
+					break;
+				} else if (aOb == 'b') {
+					rf = Controller.creaTrans_Posto();
+					break;
+				} else {
+					aOb = Controller.messErroreCharRete();
+				}
+	
+			} while (aOb != 'a' || aOb != 'b');
+	
+			if (!(r).controllaRelazione(rf)) {
+				r.aggiungiRelazione(rf);
+			} else {
+				Controller.messErroreRelazioneGiaPresenteRete();
+			}
+	
+		} while (Controller.termineInserimentoRelazioniRete());
+	
+		r.inizializzaRete();
+		return r;
 	}
+
 
 	@Override
 	public void visualizzaElencoParziale() {
@@ -228,15 +258,9 @@ public class Rete extends AbstractRete {
 		return false;
 	}
 
-	@Override
+	
 	public void stampaRete() {
-		System.out.println();
-		System.out.println(this.name);
-		for (AbstractRelazioneDiFlusso r : this.relazioni) {
-			if (r instanceof RelazioneDiFlusso) {
-				System.out.println(((RelazioneDiFlusso) r).toString());
-			} 
-		}
+		Controller.stampaReteController(this);
 	}
 
 	// cambiato hashcode

@@ -22,7 +22,7 @@ public abstract class AbstractSimulazione {
 		rete.contaPosizioni();
 		boolean [] abilitate = new boolean[((Rete) rete).getTrans()];
 		//stampo le marcature prima dello scatto della transizione
-		((RetePetri) rete).stampaMarcature();
+		Controller.stampaMarcature((RetePetri) rete);
 		do {	
 			numTransAbil=this.contaTransizioniAbilitate();
 			abilitate=this.cercaTransizioniAbilitate();
@@ -35,7 +35,7 @@ public abstract class AbstractSimulazione {
 						//scatta transizione
 						scattaTransizione(++i);
 						InputOutput.mostraMessaggio(Vista.SIMULA_MARCATURA_DOPO_SCATTO);
-						((RetePetri) rete).stampaMarcature();
+						Controller.stampaMarcature((RetePetri) rete);
 						break;
 					}
 				}
@@ -46,7 +46,7 @@ public abstract class AbstractSimulazione {
 				int transUtente=InputOutput.leggiInteroPositivo(Vista.SIMULA_TRANSIZIONE_DA_FAR_SCATTARE);
 				if(abilitate[transUtente-1]) {
 					scattaTransizione(transUtente);
-					((RetePetri) rete).stampaMarcature();
+					Controller.stampaMarcature((RetePetri) rete);
 				}
 			}else if(numTransAbil==0) {
 				InputOutput.mostraMessaggio(Vista.SIMULA_BLOCCO_CRITICO_RAGGIUNTO);

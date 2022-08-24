@@ -10,6 +10,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import model.AbstractRete;
+import view.InputOutput;
 
 import javax.xml.bind.*;
 
@@ -29,8 +30,7 @@ public class GestioneFile {
 			 marshallerObj.marshal(arch, file);
 			 
 		} catch (JAXBException e) {
-			e.printStackTrace();
-		}  
+			InputOutput.mostraMessaggio("Impossibile trovare il file");		}  
 		  
 	}
 	
@@ -45,8 +45,8 @@ public class GestioneFile {
 		     a = (ArchivioReti) jaxbUnmarshaller.unmarshal(file);  
 		     
  
-		} catch (JAXBException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			InputOutput.mostraMessaggio("Impossibile trovare il file");
 		}  
 	
 		return a;
@@ -63,8 +63,7 @@ public class GestioneFile {
   			a = (ArchivioReti) jaxbUnmarshaller.unmarshal(file);  
    
   		} catch (JAXBException e) {
-  			e.printStackTrace();
-  		}  
+  			InputOutput.mostraMessaggio("Impossibile trovare il file");  		}  
   	
   		return a.getArchivio();
   	

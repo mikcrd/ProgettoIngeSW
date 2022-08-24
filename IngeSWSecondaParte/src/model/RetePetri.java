@@ -1,6 +1,7 @@
 package model;
 import controller.*;
 import view.InputOutput;
+import view.Vista;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -28,17 +29,6 @@ import javax.xml.bind.annotation.XmlType;
 //@XmlTransient
 public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 	
-		private final static String MESS_NOME = "Inserisci il nome della rete di Petri da aggiungere: ";
-		private final static String MESS_NON_TROVATA = "Rete richiesta non trovata";
-		private static final String SCEGLI_RETE = "Scegli una delle reti nell'archivio: ";
-		private static final String VUOI_QUESTA_RETE = "Vuoi scegliere questa rete? ";
-		private static final String PESO = "Immetti un peso per la relazione corrente: ";
-		private static final String ERR_PESO="il peso deve essere un valore maggiore o uguale a 1";
-		private static final String MARCATURA="inserire il valore di marcatura";
-		private static final String MESS_NORETETOPOLOGIA = "La rete di Petri che si vuole salvare non ha una rete "
-				+ "con la stessa topologia a cui appoggiarsi. \nCrea prima una rete con la stessa topologia";
-		public static final String NO_RETI = "Attenzione: non ci sono reti nell'archivio \nAggiungere una rete prima di continuare";
-
 		
 		/*@invariant marcature != null;
 		  @(\forall int i; 0<=i<numPos; marcature[i]>=0);
@@ -112,26 +102,26 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 		/*@assignable numPos, numTrans, name, relazioni, marcature;@*/
 		public RetePetri creaRete() {
 			 if(arch.noRetiInArchivio()) {
-       		    	System.out.println(NO_RETI); 
+       		    	Controller.messErroreAggiungiPrimaUnaRete(); 
        		    	return null; }
 			 else {
 			           // deve visualizzare solo reti -> vedi xml reti
 						Rete r= new Rete();
 						arch.visualizzaSoloRetiArchivio();
-						String nomeRete = InputOutput.leggiStringaNonVuota(SCEGLI_RETE);
+						String nomeRete = Controller.scegliRetePerCostruireRetePetri();
 						try {
 							r=(Rete)arch.trovaRete(nomeRete);
 						} catch (Exception e) {
-							System.out.println(MESS_NON_TROVATA);
+							Controller.messErroreReteNonTrovata();
 							return null;
 						}
 						
 						// se sbaglia a scrivere ...
 						if(r!=null) {
-							this.setName(InputOutput.leggiStringaNonVuota(MESS_NOME));
+							this.setName(Controller.nomeRetePetri());
 							r.contaPosizioni();				
 							this.inizializzaReteP(r);
-							System.out.println("----------------------------------------------");
+							Controller.cornice();
 						}
 			      }
 			
@@ -154,7 +144,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 		public void aggiungiMarcature(int np) {
 			for(int i=0; i<np; i++) {
 				int j=i;
-				marcature[i]=InputOutput.leggiInteroNonNegativo(MARCATURA + " per la posizione " + ++j + ": ");
+				marcature[i]=Controller.messInserimentoMarcatura(++j);
 			}
 		}
 		
@@ -191,7 +181,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 		public void aggiungiPesiRelazione(Rete re) {
 			for (AbstractRelazioneDiFlusso rel : re.getRelazioni()) {
 				System.out.println();
-				int peso = InputOutput.leggiInteroPositivo("inserire il peso in questa relazione di flusso [" + rel.toString() + "]: ");
+				int peso = Controller.messInserimentoPeso(rel);
 				RelazionePetri pn = new RelazionePetri(((RelazioneDiFlusso)rel), peso);
 				this.aggiungiRelazione(pn);
 			}
@@ -338,30 +328,23 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 		public boolean controlloPerSalvataggioDaFile(AbstractRete rete) {
 				if(rete.getRelazioni().equals(getTopologiaSottostante())) return true;
 			
-			System.out.println(MESS_NORETETOPOLOGIA);
+			Controller.messAssenzaReteSuCuiCostruireRetePetri();
 			return false;
 		}
 
-	
+/*	
 		public void stampaMarcature() {
 			System.out.println("Marcature:");
 			for (int i =0; i<marcature.length; i++) {
 				int j=i;
 				System.out.println("Posizione " + ++j + " marcatura " + marcature[i]);
 			}
-		}
+		}*/
 		
 		
 		@Override
 		public void stampaRete() {
-			System.out.println();
-			System.out.println(this.name);
-			for (AbstractRelazioneDiFlusso r : this.relazioni) {
-				if(r instanceof RelazionePetri) {
-				   System.out.println(((RelazionePetri)r).toString());
-				}
-			}
-			this.stampaMarcature();
+			Controller.stampaRetePetriController(this);
 		}
 
 		@Override
@@ -388,7 +371,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 				if (other.relazioni != null)
 					return false;
 			} else if (relazioni.equals(other.relazioni)) {
-				System.out.println("la topologia e' uguale a quella di una rete gia' presente in archivio");
+				Controller.messErroreStessaTopologia();
 				return true;
 			    }
 			

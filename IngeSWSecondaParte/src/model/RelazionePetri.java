@@ -59,9 +59,10 @@ public class RelazionePetri extends AbstractRelazioneDiFlusso{
 			return relF;
 		}
 
+		/*
 		public String toString() {
 			return String.format(DESCRIZIONE, super.toString(), getPeso());
-		}
+		}*/
 		
 		@Override
 		public int hashCode() {
