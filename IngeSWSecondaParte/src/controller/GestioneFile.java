@@ -3,7 +3,7 @@ import model.*;
 
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -52,7 +52,7 @@ public class GestioneFile {
 		return a;
 	}
      
-     public static ArrayList <AbstractRete> xmlToRete(File file) {
+     public static List <AbstractRete> xmlToRete(File file) {
    		
     	 ArchivioReti a = new ArchivioReti();
     	 

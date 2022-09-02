@@ -3,8 +3,9 @@ import model.*;
 import view.*;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.ConcurrentModificationException;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.xml.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class ArchivioReti {
 
 	@XmlElementWrapper(name = "reti")
 	@XmlElement(name = "rete", required = true)
-	/* @spec_public@ */ArrayList<AbstractRete> reti;
+	/* @spec_public@ */List<AbstractRete> reti;
 	/*
 	 * @invariant
 	 * 
@@ -27,7 +28,7 @@ public class ArchivioReti {
 	 * @
 	 */
 
-	public ArchivioReti(ArrayList<AbstractRete> arch) {
+	public ArchivioReti(List<AbstractRete> arch) {
 		this.reti = arch;
 	}
 
@@ -35,7 +36,7 @@ public class ArchivioReti {
 		this.reti = new ArrayList<AbstractRete>();
 	}
 
-	public ArrayList<AbstractRete> getArchivio() {
+	public List<AbstractRete> getArchivio() {
 		if (reti == null) {
 			reti = new ArrayList<AbstractRete>();
 		}
@@ -162,9 +163,10 @@ public class ArchivioReti {
 	public void salvaReteDaFile(String path) {
 		File file = new File(path);
 		// if(!file.exists()) {System.out.println("Il file non esiste");}
-		ArrayList<AbstractRete> retiUtente = new ArrayList<AbstractRete>();
+		List<AbstractRete> retiUtente = new ArrayList<AbstractRete>();
 		retiUtente = GestioneFile.xmlToRete(file);
-		ArrayList<AbstractRete> copiaArchivio = (ArrayList<AbstractRete>) getArchivio().clone(); // ConcurrentModificationException
+//		ArrayListList<AbstractRete> copiaArchivio = (ArrayList<AbstractRete>) getArchivio().clone(); // ConcurrentModificationException
+		List<AbstractRete> copiaArchivio = new CopyOnWriteArrayList<>(getArchivio());
 		if (!copiaArchivio.isEmpty()) {
 			for (AbstractRete rete : retiUtente) {
 				for (AbstractRete inArch : copiaArchivio) {

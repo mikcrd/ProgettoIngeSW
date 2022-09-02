@@ -1,11 +1,10 @@
 package model;
-import model.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public interface ICercaTopologiaBase {
 	
-	public ArrayList<AbstractRelazioneDiFlusso> getTopologiaSottostante();
+	public List<AbstractRelazioneDiFlusso> getTopologiaSottostante();
 
 	public boolean controlloPerSalvataggioDaFile(AbstractRete rete);
 }

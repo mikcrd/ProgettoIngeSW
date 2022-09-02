@@ -1,18 +1,12 @@
 package model;
 import controller.*;
-import view.InputOutput;
-import view.Vista;
 
-import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -313,8 +307,8 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 */
 		
 		@Override
-		public ArrayList<AbstractRelazioneDiFlusso> getTopologiaSottostante() {
-			ArrayList<AbstractRelazioneDiFlusso> arrayRDF = new ArrayList<AbstractRelazioneDiFlusso>();
+		public List<AbstractRelazioneDiFlusso> getTopologiaSottostante() {
+			List<AbstractRelazioneDiFlusso> arrayRDF = new ArrayList<AbstractRelazioneDiFlusso>();
 			for(AbstractRelazioneDiFlusso relP : getRelazioni()) {
 				RelazioneDiFlusso relF = new RelazioneDiFlusso(relP.getPosizione(), 
 						relP.getTransizione(), relP.isInOut());

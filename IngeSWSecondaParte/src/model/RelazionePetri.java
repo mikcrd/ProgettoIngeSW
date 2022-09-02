@@ -13,14 +13,11 @@ import javax.xml.bind.annotation.XmlType;
     "peso",
 })
 public class RelazionePetri extends AbstractRelazioneDiFlusso{
-   
-		private static final String DESCRIZIONE = "[%s, peso= %d]"; 
 	
 		int peso;
 		
 		//valori di default
-		public RelazionePetri() {
-		
+		public RelazionePetri() {		
 			peso = 1;
 		}
 	
@@ -46,11 +43,6 @@ public class RelazionePetri extends AbstractRelazioneDiFlusso{
 		
 		public void setPeso(int peso) {
 			this.peso = peso;
-		}
-		
-		public RelazionePetri creaRelazione() {
-			return null;
-			
 		}
 
 		@Override
