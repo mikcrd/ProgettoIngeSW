@@ -94,13 +94,13 @@ public class ArchivioReti {
 			String nome = InputOutput.leggiStringaNonVuota(Vista.ARCHIVIO_MESS_CERCA_RETE);
 			try {
 				AbstractRete elemento = trovaRete(nome);
-				if (elemento != null) {
-					boolean procedi = InputOutput.yesOrNo(elemento.getName() + Vista.ARCHIVIO_MESS_RIMOZIONE);
-					if (procedi)
-						reti.remove(elemento);
-					salvaLista();
-				}
-			} catch (Exception e) {
+				
+				boolean procedi = InputOutput.yesOrNo(elemento.getName() + Vista.ARCHIVIO_MESS_RIMOZIONE);
+				if (procedi)
+				reti.remove(elemento);
+				salvaLista();
+				
+			} catch (NullPointerException e) {
 				InputOutput.mostraMessaggio(Vista.MESS_NON_TROVATA);
 			}
 		}

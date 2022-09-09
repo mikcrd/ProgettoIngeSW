@@ -2,15 +2,16 @@ package controller;
 import model.*;
 import view.*;
 
-import javax.swing.plaf.nimbus.AbstractRegionPainter;
+
 
 public abstract class AbstractSimulazione {
 	
 	AbstractRete rete;
-	int [] marcature=((RetePetri) rete).getMarcature();
+	int [] marcature;
 	
 	public AbstractSimulazione(AbstractRete rete) {
 		this.rete=rete;
+		this.marcature=((RetePetri) rete).getMarcature();
 	}
 	
 
@@ -20,7 +21,7 @@ public abstract class AbstractSimulazione {
 		int numTransAbil;
 		rete.contaTransizioni();
 		rete.contaPosizioni();
-		boolean [] abilitate = new boolean[((Rete) rete).getTrans()];
+		boolean [] abilitate = new boolean[((RetePetri) rete).getTrans()];
 		//stampo le marcature prima dello scatto della transizione
 		Controller.stampaMarcature((RetePetri) rete);
 		do {	
