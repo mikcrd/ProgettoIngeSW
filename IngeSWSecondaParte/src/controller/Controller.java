@@ -39,7 +39,7 @@ public class Controller {
 		InputOutput.mostraMessaggio(Vista.ELENCO_MARCATURE);
 		for (int i =0; i<petri.getMarcature().length; i++) {
 			int j=i;
-			String.format(Vista.DESCRIZIONE_STAMPA_MARCATURE , ++j , petri.getMarcatura(i));
+			InputOutput.mostraMessaggio(String.format(Vista.DESCRIZIONE_STAMPA_MARCATURE , ++j , petri.getMarcatura(i)));
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class Controller {
 		System.out.println(Vista.ELENCO_PRIORITÀ);
 		for(int i=0; i<prior.getPriorita().length; i++) {
 			int j=i;
-			String.format(Vista.DESCRIZIONE_STAMPA_PRIORITA , ++j , prior.getPriorita(i));
+			InputOutput.mostraMessaggio(String.format(Vista.DESCRIZIONE_STAMPA_PRIORITA , ++j , prior.getPriorita(i)));
 		}
 	}
 	
