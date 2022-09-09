@@ -306,21 +306,16 @@ public class ArchivioReti {
 	}
 
 	public boolean isEqual(AbstractRete daConfrontare) {
-
-		for (AbstractRete rete : getArchivio()) {
-
-			if (rete.equals(daConfrontare)) {
-				InputOutput.mostraMessaggio(Vista.ARCHIVIO_ISEQUAL_MESS_DOPPIONE);
-				return true;
-			} else if ((rete.getName().equals(daConfrontare.getName()))) {
-				daConfrontare.setName(changeName());
-				return false;
-			} else if ((rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) && rete instanceof Rete
-					&& daConfrontare instanceof Rete) {
+		for (AbstractRete rete : this.getArchivio()) {
+			 if ((rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) && rete.getClass().equals(daConfrontare.getClass())) {
 				InputOutput.mostraMessaggio(Vista.ARCHIVIO_ISEQUAL_MESS_STESSA_TOPOLOGIA);
 				InputOutput.mostraMessaggio(rete.getName());
 				return true;
 			}
+			else if ((rete.getName().equals(daConfrontare.getName()))) {
+				daConfrontare.setName(changeName());
+				return false;
+			} 
 		}
 		return false;
 	}
