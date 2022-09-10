@@ -302,8 +302,8 @@ public class ArchivioReti {
 					daConfrontare.setName(changeName());				
 					return isEqual(daConfrontare);
 				}
-				else if((rete.getRelazioni().containsAll(daConfrontare.getRelazioni()))
-						&& rete instanceof Rete && daConfrontare instanceof Rete) {
+				else if((rete.stessaTopologia(daConfrontare)))
+						 {
 					System.out.print(MESS_STESSA_TOPOLOGIA);
 					System.out.println(rete.getName());
 					return true;

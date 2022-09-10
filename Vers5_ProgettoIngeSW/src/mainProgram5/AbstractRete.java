@@ -1,8 +1,6 @@
 package mainProgram5;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -12,7 +10,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import utility.LeggiInput;
+
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractRete", propOrder = {
@@ -106,7 +104,7 @@ public abstract class AbstractRete {
 		@Override
 		abstract public int hashCode();
 			
-	
+		abstract public boolean stessaTopologia(AbstractRete abs);
 		@Override
 		abstract public boolean equals(Object obj);
 	

@@ -1,17 +1,16 @@
 package mainProgram5;
 
-import java.rmi.server.UnicastRemoteObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+
 
 import utility.LeggiInput;
 
@@ -246,22 +245,19 @@ public class RetePetri extends AbstractRete  {
 		public boolean [] trovaPostiPredecessori(int trans) {
 			boolean[] pred = new boolean[numPos];
 			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
-				for(int i=0; i<numPos; i++) {
 					if(relazione.getTransizione()==trans && relazione.isInOut()==true) {
-						pred[i] = true;
+						pred[relazione.getPosizione()-1] = true;
 					}
 				}
-			}
+			
 			return pred;	
 		}
 		
 		public boolean [] trovaPostiSucessori(int trans) {
 			boolean[] succ = new boolean[numPos];
 			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
-				for(int i=0; i<numPos; i++) {
 					if(relazione.getTransizione()==trans && relazione.isInOut()==false) {
-						succ[i]=true;
-					}
+						succ[relazione.getPosizione()-1]=true;
 				}
 			}
 			return succ;	
@@ -334,6 +330,24 @@ public class RetePetri extends AbstractRete  {
 				}
 			}
 			this.stampaMarcature();
+		}
+		
+		@Override
+		public boolean stessaTopologia(AbstractRete abs) {
+			
+			if (getClass() != abs.getClass())
+				return false;
+			
+			RetePetri other = (RetePetri) abs;
+			if (!Arrays.equals(marcature, other.marcature))
+				return false;
+			if (relazioni == null) {
+				if (other.relazioni != null)
+					return false;
+			} else if (!relazioni.equals(other.relazioni)) {
+				return false;
+			    }
+			return true;
 		}
 
 		@Override

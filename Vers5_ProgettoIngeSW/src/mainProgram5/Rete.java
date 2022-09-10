@@ -4,12 +4,8 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
 
 import utility.LeggiInput;
 
@@ -248,6 +244,21 @@ public class Rete extends AbstractRete  {
 			result = prime * result + ((name == null) ? 0 : name.hashCode());
 			result = prime * result + ((relazioni).hashCode());
 			return result;
+		}
+		
+		@Override
+		public boolean stessaTopologia(AbstractRete abs) {
+			
+			if (getClass() != abs.getClass())
+				return false;
+			
+			Rete other = (Rete) abs;
+			if (relazioni == null) {
+				if (other.relazioni != null)
+					return false;
+			} else if (!(relazioni).equals(other.relazioni))
+				return false;
+			return true;
 		}
 
 		@Override
