@@ -203,7 +203,7 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 		public boolean controlloPerSalvataggioDaFile(AbstractRete rete) {
 			
 			if(rete instanceof RetePetri && !(rete instanceof RetePetriP) && rete.getRelazioni().equals(this.getTopologiaSottostante())
-					&& ((RetePetri) rete).getMarcature().equals(getMarcature()))
+					&& Arrays.equals(((RetePetri) rete).getMarcature(), this.getMarcature()))
 				return true;
 			
 			//Controller.messAssenzaRetePetriSuCuiCostruireRetePetriP();
