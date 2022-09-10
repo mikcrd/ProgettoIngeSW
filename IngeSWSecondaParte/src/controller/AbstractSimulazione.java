@@ -61,26 +61,48 @@ public abstract class AbstractSimulazione {
 		InputOutput.mostraMessaggio(Vista.SIMULA_TERMINE_SIMULAZIONE);
 	}
 	
-	public boolean [] trovaPostiPredecessori(int trans) {
+	/*public boolean [] trovaPostiPredecessori(int trans) {
 		boolean[] pred = new boolean[rete.getNumTrans()];
-		for(model.AbstractRelazioneDiFlusso relazione : rete.getRelazioni()) {
+		for(AbstractRelazioneDiFlusso relazione : rete.getRelazioni()) {
 			for(int i=0; i<rete.getNumPos(); i++) {
-				if(relazione.getTransizione()==trans && relazione.isInOut()==true) {
+				if(relazione.getTransizione()==trans && relazione.isInOut()==true ) {
 					pred[i] = true;
 				}
 			}
 		}
 		return pred;	
+	}*/
+	
+	public boolean [] trovaPostiPredecessori(int trans) {
+		boolean[] pred = new boolean[rete.getNumTrans()];
+		for(AbstractRelazioneDiFlusso relazione : rete.getRelazioni()) {
+			if(relazione.getTransizione()==trans && relazione.isInOut()==true ) {
+				pred[relazione.getPosizione()-1] = true;
+
+			}
+		}
+		return pred;	
 	}
 	
-	public boolean [] trovaPostiSucessori(int trans) {
+	/*public boolean [] trovaPostiSucessori(int trans) {
 		boolean[] succ = new boolean[rete.getNumPos()];
-		for(model.AbstractRelazioneDiFlusso relazione : rete.getRelazioni()) {
+		for(AbstractRelazioneDiFlusso relazione : rete.getRelazioni()) {
 			for(int i=0; i<rete.getNumPos(); i++) {
 				if(relazione.getTransizione()==trans && relazione.isInOut()==false) {
 					succ[i]=true;
 				}
 			}
+		}
+		return succ;	
+	}*/
+	
+	public boolean [] trovaPostiSucessori(int trans) {
+		boolean[] succ = new boolean[rete.getNumPos()];
+		for(AbstractRelazioneDiFlusso relazione : rete.getRelazioni()) {
+			if(relazione.getTransizione()==trans && relazione.isInOut()==false) {
+				succ[relazione.getPosizione()-1]=true;
+			}
+			
 		}
 		return succ;	
 	}
@@ -93,14 +115,14 @@ public abstract class AbstractSimulazione {
 		for(int i=0; i<rete.getNumPos(); i++){
 			if (pred[i]) {
 				int j=i;
-				for(model.AbstractRelazioneDiFlusso rel: rete.getRelazioni()) {
+				for(AbstractRelazioneDiFlusso rel: rete.getRelazioni()) {
 					if (rel.isInOut() && rel.getPosizione()==j+1 && rel.getTransizione()==trans) {
 						marcature[i]= marcature[i] - ((RelazionePetri)rel).getPeso();
 					}
 				}
 			}if (succ[i]) {
 				int j=i;
-				for(model.AbstractRelazioneDiFlusso rel: rete.getRelazioni()) {
+				for(AbstractRelazioneDiFlusso rel: rete.getRelazioni()) {
 					if (!rel.isInOut() && rel.getPosizione()==j+1 && rel.getTransizione()==trans) {
 						marcature[i]= marcature[i] + ((RelazionePetri)rel).getPeso();
 					}

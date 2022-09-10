@@ -55,7 +55,7 @@ public class GestioneConfiguratore {
 		   		    	String p = InputOutput.leggiStringaNonVuota(Vista.MESS_FILE_PATH);
 		   		    	archivio.salvaReteDaFile(path + p); break;
 					} catch (Exception e) {
-						 e.printStackTrace();
+						 InputOutput.mostraMessaggio(Vista.MESS_ERRORE_PATH);
 					}
 	   		    	 
 	   		   }	  		

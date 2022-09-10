@@ -203,14 +203,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 					return false;
 				}
 
-/*	
-		public void stampaMarcature() {
-			System.out.println("Marcature:");
-			for (int i =0; i<marcature.length; i++) {
-				int j=i;
-				System.out.println("Posizione " + ++j + " marcatura " + marcature[i]);
-			}
-		}*/
+
 		
 				@Override
 				public boolean stessaTopologia(AbstractRete abs) {

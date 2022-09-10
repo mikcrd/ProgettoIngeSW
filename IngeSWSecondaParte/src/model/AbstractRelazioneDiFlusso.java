@@ -49,13 +49,7 @@ public abstract class AbstractRelazioneDiFlusso {
 	
 	public abstract AbstractRelazioneDiFlusso getRelazioneSottostante();
 
-	/*
-	public String toString() {
-		if (isInOut())
-			return "posto " + posizione + " transizione " + transizione;
-		else 
-			return  "transizione " + transizione + " posto " + posizione;
-	}*/
+	
 
 	
 }

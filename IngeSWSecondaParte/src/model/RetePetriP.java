@@ -44,7 +44,14 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 			this.relazioni = p.getRelazioni();
 			this.marcature = p.getMarcature();
 			this.priorità = new int[numTrans];
-			this.arch = p.getArchivio();
+		}
+		
+		public RetePetriP(RetePetri p, ArchivioReti arch) {
+			this.name = null;
+			this.relazioni = p.getRelazioni();
+			this.marcature = p.getMarcature();
+			this.priorità = new int[numTrans];
+			this.arch=arch;
 		}
 		
 		public int getPriorita(int i) {
@@ -125,14 +132,7 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 			return false;
 		}
 
-		/*
-		public void stampaPriorità() {
-			System.out.println("Priorità: ");
-			for(int i=0; i<priorità.length; i++) {
-				int j=i;
-				System.out.println("Transizione " + ++j + " priorità " + priorità[i]);
-			}
-		}*/
+
 		
 		@Override
 		public boolean stessaTopologia(AbstractRete abs) {
@@ -159,55 +159,7 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 		public void stampaRete() {
 			Controller.stampaRetePetriPController(this);
 		}
-/*		
-		public int cercaPrioritaMax() {
-			int i;
-			int max=0;
-			for (i=0; i<numTrans; i++) {
-				if(this.getPriorita(i)>max) {
-					max=this.getPriorita(i);
-				}
-			}
-			return max;
-		}
-		
-		@Override
-		public int contaTransizioniAbilitate() {
-			int contatore=0;
-			int prior= this.cercaPrioritaMax();
-			do {
-				for(AbstractRelazioneDiFlusso rel: this.relazioni) {
-					if (rel.inOut==true && ((RelazionePetri)rel).getPeso()<=this.getMarcatura(rel.getPosizione()-1) && this.getPriorita(rel.getTransizione()-1)==prior ) {
-						System.out.println("transizione abilitata:" + rel.getTransizione());
-						//incrementa il contatore delle transizioni abilitate 
-						contatore++;
-					}
-				}
-				prior=prior-1;
-			}while(contatore==0 && prior>0);
-			return contatore;
-		}
-		
-		
-		
-		@Override
-		public boolean[]  cercaTransizioniAbilitate() {
-			int priorita=this.cercaPrioritaMax();
-			boolean [] transAbilitate= new boolean [numTrans];
-			boolean ok=false;
-			do {
-				for(AbstractRelazioneDiFlusso rel: this.relazioni) {
-					if (rel.inOut==true && ((RelazionePetri)rel).getPeso()<=this.getMarcatura(rel.getPosizione()-1) && this.getPriorita(rel.getTransizione()-1)==priorita ) {
-						transAbilitate[rel.getPosizione()-1]=true;
-						ok=true;
-					}
-				}
-				priorita=priorita-1;
-			}while(!ok && priorita >0);
-			
-			return transAbilitate;
-		}
-*/
+
 		@Override
 		public boolean isCorrect() {
 			for(int priorità : getPriorita()) {

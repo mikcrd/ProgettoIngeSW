@@ -172,39 +172,7 @@ public class Rete extends AbstractRete {
 			return false;
 	}
 
-	
 	/* @assignable in[], out[], name, relazioni;@ */
-/*	@Override
-	public Rete creaRete() {
-		Rete r = new Rete(); // altrimenti controllaRelazione mi dà problemi...
-		r.setName(InputOutput.leggiStringaNonVuota(MESS_NOME));
-		do {
-			char aOb = InputOutput.leggiChar(POSTOTRANS_TRANSPOSTO);
-			RelazioneDiFlusso rf = new RelazioneDiFlusso();
-
-			do {
-				if (aOb == 'a') {
-					rf.creaPosto_Trans();
-					break;
-				} else if (aOb == 'b') {
-					rf.creaTrans_Posto();
-					break;
-				} else {
-					aOb = InputOutput.leggiChar(ERRORE_SCELTA_AB);
-				}
-
-			} while (aOb != 'a' || aOb != 'b');
-
-			if (!(r).controllaRelazione(rf)) {
-				r.aggiungiRelazione(rf);
-			}
-
-		} while (InputOutput.yesOrNo(INSERIMENTO_RELAZIONI));
-
-		r.inizializzaRete();
-		return r;
-	}*/
-
 	@Override
 	public Rete creaRete() {
 		Rete r = new Rete(); // altrimenti controllaRelazione mi dà problemi...

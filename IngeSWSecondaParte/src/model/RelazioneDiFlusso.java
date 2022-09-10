@@ -27,36 +27,13 @@ public class RelazioneDiFlusso extends AbstractRelazioneDiFlusso {
 		this.posizione=posizione;
 		this.transizione=transizione;
 	}
-
-/**	
-	public RelazioneDiFlusso creaPosto_Trans() {
-		setPosizione(InputOutput.leggiInteroPositivo(Vista.RDF_POSTO));								
-		setTransizione(InputOutput.leggiInteroPositivo(Vista.RDF_TRANSIZIONE));
-		setInOut(true);
-		return this;		
-	}
-	
-	public RelazioneDiFlusso creaTrans_Posto() {
-		setTransizione(InputOutput.leggiInteroPositivo(RDF_TRANSIZIONE));
-		setPosizione(InputOutput.leggiInteroPositivo(RDF_POSTO));
-		setInOut(false);
-		return this;
-	}
-**/
 	
 	@Override
 	public AbstractRelazioneDiFlusso getRelazioneSottostante() {
 		return this;
 	}
 
-/*
-	public String toString() {
-		if (isInOut())
-			return "posto " + posizione + " transizione " + transizione;
-		else 
-			return  "transizione " + transizione + " posto " + posizione;
-	}
-*/
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

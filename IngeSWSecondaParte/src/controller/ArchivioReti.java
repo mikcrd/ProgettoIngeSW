@@ -159,31 +159,6 @@ public class ArchivioReti {
 		}
 	}
 
-	/*public void salvaReteDaFile(String path) {
-		File file = new File(path);
-		// if(!file.exists()) {System.out.println("Il file non esiste");}
-		List<AbstractRete> retiUtente = new ArrayList<AbstractRete>();
-		retiUtente = GestioneFile.xmlToRete(file);
-		boolean [] daSalvare=new boolean[retiUtente.size()];
-//		ArrayListList<AbstractRete> copiaArchivio = (ArrayList<AbstractRete>) getArchivio().clone(); // ConcurrentModificationException
-		List<AbstractRete> copiaArchivio = new CopyOnWriteArrayList<>(getArchivio());
-		if (!copiaArchivio.isEmpty()) {
-			for (AbstractRete rete : retiUtente) {
-				for (AbstractRete inArch : copiaArchivio) {
-					if (rete instanceof ICercaTopologiaBase && ((ICercaTopologiaBase)rete).controlloPerSalvataggioDaFile(inArch)) {
-						//salvaRete(rete);
-						daSalvare[rete.]=true;
-					} else {salvaRete(rete);} //se la rete è di tipo Rete non c'è bisogno di fare controlli
-				}
-			}
-		} else {
-			for (AbstractRete rete : retiUtente) {
-				if(!(rete instanceof ICercaTopologiaBase))
-				salvaRete(rete); //se l'archivio è vuoto posso mettere solo reti
-			}
-		}
-
-	}*/
 	
 	public void salvaReteDaFile(String path) {
 		File f =new File(path);

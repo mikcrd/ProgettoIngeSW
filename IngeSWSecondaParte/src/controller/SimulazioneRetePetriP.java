@@ -46,7 +46,7 @@ public class SimulazioneRetePetriP extends AbstractSimulazione{
 		boolean ok=false;
 		do {
 			for(AbstractRelazioneDiFlusso rel: rete.getRelazioni()) {
-				if (rel.isInOut()==true && ((RelazionePetri)rel).getPeso()<= ((RelazionePetri)rel).getPosizione()-1 &&((RelazionePetri)rel).getTransizione()-1==priorita ) {
+				if (rel.isInOut()==true && ((RelazionePetri)rel).getPeso()<=((RetePetriP)rete).getMarcatura(rel.getPosizione()-1) && ((RetePetriP)rete).getPriorita(rel.getTransizione()-1)==priorita) {
 					transAbilitate[rel.getPosizione()-1]=true;
 					ok=true;
 				}
