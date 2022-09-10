@@ -180,131 +180,7 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 				this.aggiungiRelazione(pn);
 			}
 		}
-/*		
-		public void simulaRete() {
-			boolean risposta;
-			int numTransAbil;
-			this.contaTransizioni();
-			this.contaPosizioni();
-			boolean [] abilitate = new boolean[numTrans];
-			//stampo le marcature prima dello scatto della transizione
-			this.stampaMarcature();
-			do {	
-				numTransAbil=this.contaTransizioniAbilitate();
-				abilitate=this.cercaTransizioniAbilitate();
-				if (numTransAbil==1) 
-				{
-					
-					//cerco con il ciclo nel vettore di booleani la transizione abilitata e la faccio scattare
-					for(int i=0; i<numTrans; i++) {
-						if (abilitate[i]) {
-							//scatta transizione
-							this.scattaTransizione(++i);
-							System.out.println("dopo lo scatto della transizione la marcatura e':");
-							this.stampaMarcature();
-							break;
-						}
-					}
-				
-				}else if(numTransAbil>1)
-				{
-					//utente sceglie quale delle transizioni abilitate fare scattare
-					int transUtente=LeggiInput.leggiInteroPositivo("inserire la transizione che si vuole fare scattare");
-					if(abilitate[transUtente-1]) {
-						this.scattaTransizione(transUtente);
-						this.stampaMarcature();
-					}
-				}else if(numTransAbil==0) {
-					System.out.println("Nessuna transizione abilitata, blocco critico raggiunto");
-					break;
-				}
-				//stampa rete dopo scatto transizione 
-				
-				risposta=LeggiInput.yesOrNo("vuoi proseguire con la simulazione?");
-				
-			}while (risposta);
-			System.out.println("Simulazione terminata");
-		}
-				
-		 
-			
-		public int contaTransizioniAbilitate() {
-			int contatore=0;
-			for(AbstractRelazioneDiFlusso rel: this.relazioni) {
-				if (rel.inOut==true && ((RelazionePetri)rel).getPeso()<=this.getMarcatura(rel.getPosizione()-1) ) {
-					System.out.println("transizione abilitata:" + rel.getTransizione());
-					//incrementa il contatore delle transizioni abilitate 
-					contatore++;
-					
-				}
-			}
-			
-			return contatore;
-		}
-		
-		public boolean[]  cercaTransizioniAbilitate() {
-		
-			boolean [] transAbilitate= new boolean [numTrans];
-			for(AbstractRelazioneDiFlusso rel: this.relazioni) {
-				if (rel.inOut==true && ((RelazionePetri)rel).getPeso()<=this.getMarcatura(rel.getPosizione()-1) ) {
-					transAbilitate[rel.getPosizione()-1]=true;
-				}
-			}
-			
-			return transAbilitate;
-		}
-	
-		
-		public boolean [] trovaPostiPredecessori(int trans) {
-			boolean[] pred = new boolean[numPos];
-			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
-				for(int i=0; i<numPos; i++) {
-					if(relazione.getTransizione()==trans && relazione.isInOut()==true) {
-						pred[i] = true;
-					}
-				}
-			}
-			return pred;	
-		}
-		
-		public boolean [] trovaPostiSucessori(int trans) {
-			boolean[] succ = new boolean[numPos];
-			for(AbstractRelazioneDiFlusso relazione : getRelazioni()) {
-				for(int i=0; i<numPos; i++) {
-					if(relazione.getTransizione()==trans && relazione.isInOut()==false) {
-						succ[i]=true;
-					}
-				}
-			}
-			return succ;	
-		}
-		
-		public void scattaTransizione(int trans) {
-			boolean[] pred = new boolean[numPos];
-			boolean[] succ = new boolean[numPos];
-			pred=this.trovaPostiPredecessori(trans);
-			succ=this.trovaPostiSucessori(trans);
-			for(int i=0; i<numPos; i++){
-				if (pred[i]) {
-					int j=i;
-					for(AbstractRelazioneDiFlusso rel: relazioni) {
-						if (rel.isInOut() && rel.getPosizione()==j+1 && rel.getTransizione()==trans) {
-							marcature[i]= marcature[i] - ((RelazionePetri)rel).getPeso();
-						}
-					}
-				}if (succ[i]) {
-					int j=i;
-					for(AbstractRelazioneDiFlusso rel: relazioni) {
-						if (!rel.isInOut() && rel.getPosizione()==j+1 && rel.getTransizione()==trans) {
-							marcature[i]= marcature[i] + ((RelazionePetri)rel).getPeso();
-						}
-					}
-				}
-			
-			}
-			
-		}
-*/
+
 		
 		@Override
 		public List<AbstractRelazioneDiFlusso> getTopologiaSottostante() {
@@ -317,14 +193,15 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 			return arrayRDF;
 		}
 
+		
 		//la rete di Petri da file deve basarsi su una rete già presente nell'archivio
-		@Override
-		public boolean controlloPerSalvataggioDaFile(AbstractRete rete) {
-				if(rete.getRelazioni().equals(getTopologiaSottostante())) return true;
-			
-			Controller.messAssenzaReteSuCuiCostruireRetePetri();
-			return false;
-		}
+				@Override
+				public boolean controlloPerSalvataggioDaFile(AbstractRete rete) {
+					if(rete.getRelazioni().equals(getTopologiaSottostante()))
+						return true;
+					//Controller.messAssenzaReteSuCuiCostruireRetePetri();
+					return false;
+				}
 
 /*	
 		public void stampaMarcature() {

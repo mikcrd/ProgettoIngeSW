@@ -196,17 +196,17 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 		
 		@Override
 		public List<AbstractRelazioneDiFlusso> getTopologiaSottostante() {
-			return getRelazioni();
+			return this.getRelazioni();
 		}
 
 		@Override
 		public boolean controlloPerSalvataggioDaFile(AbstractRete rete) {
 			
-			if(rete instanceof RetePetri&& !(rete instanceof RetePetriP) && rete.getRelazioni().equals(getTopologiaSottostante())
-					&& ((RetePetri) rete).getMarcature().equals(getMarcature())) {
+			if(rete instanceof RetePetri && !(rete instanceof RetePetriP) && rete.getRelazioni().equals(this.getTopologiaSottostante())
+					&& ((RetePetri) rete).getMarcature().equals(getMarcature()))
 				return true;
-			}
-			Controller.messAssenzaRetePetriSuCuiCostruireRetePetriP();
+			
+			//Controller.messAssenzaRetePetriSuCuiCostruireRetePetriP();
 			return false;
 		}
 

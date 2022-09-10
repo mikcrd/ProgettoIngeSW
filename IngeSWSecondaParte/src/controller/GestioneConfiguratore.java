@@ -1,8 +1,11 @@
 package controller;
+import java.io.File;
+
 import model.*;
 import view.*;
 
 public class GestioneConfiguratore {
+	public static String path="C:\\data\\";
   
 	ArchivioReti archivio;
 	
@@ -49,8 +52,8 @@ public class GestioneConfiguratore {
 		   		    case 4: abs.visualizzaElencoParziale(); break;
 		   		     
 		   		    case 5: try {
-		   		    	String path = InputOutput.leggiStringaNonVuota(Vista.MESS_FILE_PATH);
-		   		    	 archivio.salvaReteDaFile(path); break;
+		   		    	String p = InputOutput.leggiStringaNonVuota(Vista.MESS_FILE_PATH);
+		   		    	archivio.salvaReteDaFile(path + p); break;
 					} catch (Exception e) {
 						 e.printStackTrace();
 					}

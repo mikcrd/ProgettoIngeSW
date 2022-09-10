@@ -4,7 +4,6 @@ import view.*;
 
 import java.io.File;
 import java.util.*;
-import java.util.ConcurrentModificationException;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.xml.bind.annotation.*;
@@ -160,18 +159,20 @@ public class ArchivioReti {
 		}
 	}
 
-	public void salvaReteDaFile(String path) {
+	/*public void salvaReteDaFile(String path) {
 		File file = new File(path);
 		// if(!file.exists()) {System.out.println("Il file non esiste");}
 		List<AbstractRete> retiUtente = new ArrayList<AbstractRete>();
 		retiUtente = GestioneFile.xmlToRete(file);
+		boolean [] daSalvare=new boolean[retiUtente.size()];
 //		ArrayListList<AbstractRete> copiaArchivio = (ArrayList<AbstractRete>) getArchivio().clone(); // ConcurrentModificationException
 		List<AbstractRete> copiaArchivio = new CopyOnWriteArrayList<>(getArchivio());
 		if (!copiaArchivio.isEmpty()) {
 			for (AbstractRete rete : retiUtente) {
 				for (AbstractRete inArch : copiaArchivio) {
 					if (rete instanceof ICercaTopologiaBase && ((ICercaTopologiaBase)rete).controlloPerSalvataggioDaFile(inArch)) {
-						salvaRete(rete);
+						//salvaRete(rete);
+						daSalvare[rete.]=true;
 					} else {salvaRete(rete);} //se la rete è di tipo Rete non c'è bisogno di fare controlli
 				}
 			}
@@ -182,7 +183,48 @@ public class ArchivioReti {
 			}
 		}
 
+	}*/
+	
+	public void salvaReteDaFile(String path) {
+		File f =new File(path);
+		List <AbstractRete> daFile = new ArrayList<AbstractRete>();
+		daFile=GestioneFile.xmlToRete(f);
+		boolean[] controllo = new boolean[daFile.size()];
+		int i=0;
+		
+		if(!reti.isEmpty()) {
+			for(AbstractRete rete : daFile) {
+				for(AbstractRete arch : reti) {
+					if(rete instanceof ICercaTopologiaBase && ((ICercaTopologiaBase) rete).controlloPerSalvataggioDaFile(arch)) {
+						controllo[i]=true;
+					}else if(rete instanceof Rete) {
+						controllo[i]=true;
+					}
+					
+				}
+				i++;
+			}
+		}else {
+			for (AbstractRete rete : daFile) {
+				if(!(rete instanceof ICercaTopologiaBase))
+					controllo[i]=true;
+				i++;
+			}
+		}
+		
+		i=0;
+		for(AbstractRete r:daFile) {
+			//System.out.println(controllo[i]);
+			if(controllo[i]==true)
+				salvaRete(r);
+			else
+				System.out.println("non è stato possibile salvare la rete desiderata");
+			i++;
+		}
+		
 	}
+	
+	
 
 	public void salvaLista() {
 
