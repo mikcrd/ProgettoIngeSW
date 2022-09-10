@@ -349,7 +349,7 @@ public class ArchivioReti {
 
 	public boolean isEqual(AbstractRete daConfrontare) {
 		for (AbstractRete rete : this.getArchivio()) {
-			 if ((rete.getRelazioni().containsAll(daConfrontare.getRelazioni())) && rete.getClass().equals(daConfrontare.getClass())) {
+			 if ((rete.stessaTopologia(daConfrontare))) {
 				InputOutput.mostraMessaggio(Vista.ARCHIVIO_ISEQUAL_MESS_STESSA_TOPOLOGIA);
 				InputOutput.mostraMessaggio(rete.getName());
 				return true;

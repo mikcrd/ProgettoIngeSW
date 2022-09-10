@@ -252,6 +252,19 @@ public class Rete extends AbstractRete {
 		return false;
 	}
 
+	public boolean stessaTopologia(AbstractRete abs) {
+		
+		if (getClass() != abs.getClass())
+			return false;
+		
+		Rete other = (Rete) abs;
+		if (relazioni == null) {
+			if (other.relazioni != null)
+				return false;
+		} else if (!(relazioni).equals(other.relazioni))
+			return false;
+		return true;
+	}
 	
 	public void stampaRete() {
 		Controller.stampaReteController(this);

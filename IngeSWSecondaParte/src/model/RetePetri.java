@@ -212,6 +212,25 @@ public class RetePetri extends AbstractRete implements ICercaTopologiaBase {
 			}
 		}*/
 		
+				@Override
+				public boolean stessaTopologia(AbstractRete abs) {
+					
+					if (getClass() != abs.getClass())
+						return false;
+					
+					RetePetri other = (RetePetri) abs;
+					if (!Arrays.equals(marcature, other.marcature))
+						return false;
+					if (relazioni == null) {
+						if (other.relazioni != null)
+							return false;
+					} else if (!relazioni.equals(other.relazioni)) {
+						return false;
+					    }
+					return true;
+				}
+		
+				
 		
 		@Override
 		public void stampaRete() {

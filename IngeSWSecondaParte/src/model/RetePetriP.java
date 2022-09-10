@@ -43,7 +43,8 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 			this.name = null;
 			this.relazioni = p.getRelazioni();
 			this.marcature = p.getMarcature();
-			this.priorità = new int[numTrans];;
+			this.priorità = new int[numTrans];
+			this.arch = p.getArchivio();
 		}
 		
 		public int getPriorita(int i) {
@@ -132,6 +133,28 @@ public class RetePetriP extends RetePetri implements ICercaTopologiaBase {
 				System.out.println("Transizione " + ++j + " priorità " + priorità[i]);
 			}
 		}*/
+		
+		@Override
+		public boolean stessaTopologia(AbstractRete abs) {
+			
+			if (abs == null)
+				return false;
+			if (getClass() != abs.getClass())
+				return false;
+			
+			RetePetriP other = (RetePetriP) abs;
+			if (!Arrays.equals(priorità, other.priorità))
+				return false;
+			if (!Arrays.equals(marcature, other.marcature))
+				return false;
+			if (relazioni == null) {
+				if (other.relazioni != null)
+					return false;
+			} else if (!relazioni.equals(other.relazioni)) {
+				return false;
+			    }
+			return true;
+		}
 		
 		public void stampaRete() {
 			Controller.stampaRetePetriPController(this);

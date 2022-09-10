@@ -1,10 +1,8 @@
 package model;
 
 import controller.*;
-import view.InputOutput;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -123,6 +121,8 @@ public abstract class AbstractRete {
 
 		abstract public boolean retiInArchivio();
 
+		abstract public boolean stessaTopologia(AbstractRete abs);
+		
 		public abstract AbstractRete creaRete();
 	
 			
