@@ -11,6 +11,7 @@ import javax.xml.bind.Unmarshaller;
 
 public class GestioneFile {
     private static char FS = File.separatorChar;
+    private static String FILE_NON_TROVATO="file non trovato";
 	
 	private static JAXBContext contextObj;
 
@@ -59,7 +60,7 @@ public class GestioneFile {
   		     
    
   		} catch (JAXBException e) {
-  			e.printStackTrace();
+  			System.out.println(FILE_NON_TROVATO);
   		}  
   	
   		return a.getArchivio();
