@@ -286,7 +286,7 @@ public class ArchivioReti {
 		}
 	}
 
-	public void visualizzaSoloRetiArchivio() {
+/*	public void visualizzaSoloRetiArchivio() {
 		if (reti != null && !(reti.isEmpty()) && !noRetiInArchivio()) {
 			for (AbstractRete elem : reti) {
 				if (elem instanceof Rete) {
@@ -320,7 +320,7 @@ public class ArchivioReti {
 		} else {
 			InputOutput.mostraMessaggio(Vista.ARCHIVIO_ERRORE_ARCHIVIO_VUOTO);
 		}
-	}
+	}*/
 
 	public boolean isEqual(AbstractRete daConfrontare) {
 		for (AbstractRete rete : this.getArchivio()) {

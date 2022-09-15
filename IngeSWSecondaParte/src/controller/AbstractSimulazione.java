@@ -61,17 +61,7 @@ public abstract class AbstractSimulazione {
 		InputOutput.mostraMessaggio(Vista.SIMULA_TERMINE_SIMULAZIONE);
 	}
 	
-	/*public boolean [] trovaPostiPredecessori(int trans) {
-		boolean[] pred = new boolean[rete.getNumTrans()];
-		for(AbstractRelazioneDiFlusso relazione : rete.getRelazioni()) {
-			for(int i=0; i<rete.getNumPos(); i++) {
-				if(relazione.getTransizione()==trans && relazione.isInOut()==true ) {
-					pred[i] = true;
-				}
-			}
-		}
-		return pred;	
-	}*/
+	
 	
 	public boolean [] trovaPostiPredecessori(int trans) {
 		boolean[] pred = new boolean[rete.getNumTrans()];
@@ -84,17 +74,7 @@ public abstract class AbstractSimulazione {
 		return pred;	
 	}
 	
-	/*public boolean [] trovaPostiSucessori(int trans) {
-		boolean[] succ = new boolean[rete.getNumPos()];
-		for(AbstractRelazioneDiFlusso relazione : rete.getRelazioni()) {
-			for(int i=0; i<rete.getNumPos(); i++) {
-				if(relazione.getTransizione()==trans && relazione.isInOut()==false) {
-					succ[i]=true;
-				}
-			}
-		}
-		return succ;	
-	}*/
+
 	
 	public boolean [] trovaPostiSucessori(int trans) {
 		boolean[] succ = new boolean[rete.getNumPos()];
